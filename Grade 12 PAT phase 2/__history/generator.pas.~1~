@@ -25,7 +25,7 @@ implementation
 const hashcharacters:string=('1234567890qwertyuioplkjhgfdsazxcvbnmQAZXSWEDCVFRTGBNHYUJMKILOP');
 {$R *.dfm}
 var arrvalues:array[1..8836] of string;
-    iloop,iloop2,iloop3,location:integer;
+    iloop,iloop2,location:integer;
     value:string;
 procedure TForm1.Button1Click(Sender: TObject);
 begin
@@ -35,16 +35,7 @@ begin
       showmessage(value);
       arrvalues[iloop]:=value;
  end;
- showmessage('Hi');
-  for iloop2 := 1 to 8836 - 1 do
-    for iloop3 := 1 to 8836 - 1 do
-      if arrvalue[iloop2]=arrvalue[iloop3] then
-        begin
-          value:=copy(hashcharacters,random(62),1)+copy(hashcharacters,random(62),1)+copy(hashcharacters,random(62),1)+copy(hashcharacters,random(62),1)+copy(hashcharacters,random(62),1)+copy(hashcharacters,random(62),1)+copy(hashcharacters,random(62),1)+copy(hashcharacters,random(62),1);
-          arrvalues[iloop3]:=value
-        end;
-
-
+ showmessage('Hi')
 end;
 
 procedure TForm1.FormActivate(Sender: TObject);
