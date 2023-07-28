@@ -1,8 +1,8 @@
-program Project1;
+program hashgenerator;
 
 uses
   Forms,
-  generator in '..\..\..\RAD Studio\Projects\generator.pas' {Form1};
+  generator in 'generator.pas' {Form1};
 
 {$R *.res}
 
