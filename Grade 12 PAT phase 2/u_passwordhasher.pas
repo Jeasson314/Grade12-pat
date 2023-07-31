@@ -1500,24 +1500,19 @@ const
     'EACNWzq1', '07D9UJ4X', 'ZAzTZOis', 'aDplMJiX', 'wMuvm1Gv', 'n5hBSCe9',
     'R0QABChD', 'Xi9kYgqG');
 
-type
-  Tpassword = class(Tobject)
-  private
-
-  public
-    function hash(fpassword: string): string;
-  end;
+function hash(fpassword: string): string;
 
 implementation
 
 { Tpassword }
 
-function Tpassword.hash(fpassword: string): string;
+function hash(fpassword: string): string;
 var
   chrPassword: char;
   iFirst, iSecond, iRemainder: integer;
   sOrginal_password, sFinal_password: string;
 begin
+  sOrginal_password := fpassword;
   repeat
     chrPassword := sOrginal_password[1];
     iFirst := ord(chrPassword) - 32;
