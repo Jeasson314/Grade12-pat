@@ -3,7 +3,7 @@ object Form1: TForm1
   Top = 0
   Caption = 'Form1'
   ClientHeight = 201
-  ClientWidth = 447
+  ClientWidth = 241
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -23,9 +23,9 @@ object Form1: TForm1
   object Label2: TLabel
     Left = 64
     Top = 107
-    Width = 46
+    Width = 50
     Height = 13
-    Caption = 'password'
+    Caption = 'password:'
   end
   object TEdit
     Left = 64
@@ -43,19 +43,19 @@ object Form1: TForm1
     TabOrder = 1
   end
   object btnSignin: TButton
-    Left = 64
-    Top = 168
-    Width = 75
-    Height = 25
+    Left = 8
+    Top = 152
+    Width = 102
+    Height = 41
     Caption = 'Sign in'
     TabOrder = 2
     OnClick = btnSigninClick
   end
   object Button1: TButton
-    Left = 216
-    Top = 168
-    Width = 75
-    Height = 25
+    Left = 116
+    Top = 152
+    Width = 117
+    Height = 41
     Caption = 'Sign up'
     TabOrder = 3
   end

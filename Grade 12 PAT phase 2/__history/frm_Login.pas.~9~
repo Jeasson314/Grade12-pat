@@ -29,7 +29,7 @@ implementation
 procedure TForm1.btnSigninClick(Sender: TObject);
 var sHashed_password,sUsername:string;
 begin
-showmessage((hash(edtPassword.Text)));
+(hash(edtPassword.Text));
 end;
 
 end.
