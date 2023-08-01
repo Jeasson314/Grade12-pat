@@ -2,8 +2,8 @@ object Form1: TForm1
   Left = 0
   Top = 0
   Caption = 'Form1'
-  ClientHeight = 201
-  ClientWidth = 241
+  ClientHeight = 208
+  ClientWidth = 296
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -58,5 +58,13 @@ object Form1: TForm1
     Height = 41
     Caption = 'Sign up'
     TabOrder = 3
+  end
+  object CHKCookie: TCheckBox
+    Left = 191
+    Top = 129
+    Width = 97
+    Height = 17
+    Caption = 'Remember me?'
+    TabOrder = 4
   end
 end

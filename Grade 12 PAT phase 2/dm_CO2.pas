@@ -1,13 +1,14 @@
-unit frm_Login;
+unit dm_CO2;
 
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs;
+  SysUtils, Classes, DB, ADODB;
 
 type
-  TForm1 = class(TForm)
+  TDMCO2 = class(TDataModule)
+    ConCO2: TADOConnection;
+    ADOUsers: TADOTable;
   private
     { Private declarations }
   public
@@ -15,7 +16,7 @@ type
   end;
 
 var
-  Form1: TForm1;
+  DMCO2: TDMCO2;
 
 implementation
 

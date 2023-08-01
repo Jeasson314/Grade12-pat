@@ -1,0 +1,25 @@
+unit u_SignIn;
+
+interface
+
+type
+  SignIn = class(tObject)
+  private
+    fFirst_name: string;
+    flast_name: string;
+    Fusername: String;
+    Fpassword: string;
+  public
+    Constructor SignIn(Fusername, Fpassword: string);
+  end;
+
+implementation
+
+{ SignIn }
+
+constructor SignIn.SignIn(Fusername, FFassword: string);
+begin
+  Fusername := sUsername
+end;
+
+end.

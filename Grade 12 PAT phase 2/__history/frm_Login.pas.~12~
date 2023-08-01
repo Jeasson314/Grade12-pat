@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls,u_SignIn;
+  Dialogs, StdCtrls;
 
 type
   TForm1 = class(TForm)
@@ -30,11 +30,6 @@ implementation
 procedure TForm1.btnSigninClick(Sender: TObject);
 var sHashed_password,sUsername:string;
 begin
-
-try
-
-finally
-end;
 showmessage((hash(edtPassword.Text)));
 end;
 

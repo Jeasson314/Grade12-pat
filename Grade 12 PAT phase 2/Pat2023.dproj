@@ -46,6 +46,11 @@
 			<DCCReference Include="frm_Login.pas">
 				<Form>Form1</Form>
 			</DCCReference>
+			<DCCReference Include="dm_CO2.pas">
+				<Form>DMCO2</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="u_SignIn.pas"/>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>
