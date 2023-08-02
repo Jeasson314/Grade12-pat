@@ -37,10 +37,10 @@ begin
         else
           ADOUsers.Next;
       end;
+      // while dmCO2.tblUser.Eof do
       result := false;
       inc(fAttempts);
-      MessageDlg('Please check your username and password.', mtWarning, [mbOk],
-        0);
+      showmessage('Please check your password and username');
       exit;
     end;
 

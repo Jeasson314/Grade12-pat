@@ -4,14 +4,17 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls;
+  Dialogs, StdCtrls,u_SignIn;
 
 type
   TForm1 = class(TForm)
-    Edit1: TEdit;
     edtPassword: TEdit;
+    btnSignin: TButton;
+    Label1: TLabel;
+    Label2: TLabel;
     Button1: TButton;
-    procedure Button1Click(Sender: TObject);
+    CHKCookie: TCheckBox;
+    procedure btnSigninClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -24,9 +27,15 @@ implementation
  uses u_passwordhasher;
 {$R *.dfm}
 
-procedure TForm1.Button1Click(Sender: TObject);
+procedure TForm1.btnSigninClick(Sender: TObject);
+var sHashed_password,sUsername:string;
 begin
-edtPassword.Text:=(hash(edit1.Text));
+
+try
+
+finally
+end;
+showmessage((hash(edtPassword.Text)));
 end;
 
 end.

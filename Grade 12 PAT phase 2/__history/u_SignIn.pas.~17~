@@ -39,8 +39,8 @@ begin
       end;
       result := false;
       inc(fAttempts);
-      MessageDlg('Please check your username and password.', mtWarning, [mbOk],
-        0);
+      MessageDlg('Please check your username and password.',
+      mtWarning, [mbOk], 0);
       exit;
     end;
 

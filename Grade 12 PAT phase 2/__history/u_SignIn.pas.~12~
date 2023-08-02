@@ -3,7 +3,7 @@ unit u_SignIn;
 interface
 
 uses
-  u_passwordhasher, dm_CO2, Dialogs, Forms;
+  u_passwordhasher, dm_CO2;
 
 type
   SignIn = class(tObject)
@@ -12,7 +12,7 @@ type
     flast_name: string;
     fUsername: String;
     fPassword: string;
-    fAttempts: integer;
+    fAttempts: string;
   public
     procedure SetLogin(sUsername, sPassword: string);
     Function PasswordCheck: boolean;
@@ -24,7 +24,7 @@ implementation
 
 function SignIn.PasswordCheck: boolean;
 begin
-  if fAttempts <= 3 then
+  if fAttempts < -3 then
   begin
     with dmCO2 do
     begin
@@ -34,28 +34,24 @@ begin
         if (fUsername = ADOUsers['Username']) and
           (hash(fPassword) = ADOUsers['Password']) then
           result := true
+
         else
           ADOUsers.Next;
       end;
-      result := false;
-      inc(fAttempts);
-      MessageDlg('Please check your username and password.', mtWarning, [mbOk],
-        0);
-      exit;
+      // while dmCO2.tblUser.Eof do
+      inc(fAttempts)
     end;
+    i
 
   end
   else
-    MessageDlg('Maxmium number of attempts reached. Terminating program.',
-      mtError, [mbOk], 0);
-  application.Terminate;
 
-end;
+  end;
 
-procedure SignIn.SetLogin(sUsername, sPassword: string);
-begin
-  fUsername := sUsername;
-  fPassword := sPassword;
-end;
+  procedure SignIn.SetLogin(sUsername, sPassword: string);
+  begin
+    fUsername := sUsername;
+    fPassword := sPassword;
+  end;
 
 end.

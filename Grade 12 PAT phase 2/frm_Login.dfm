@@ -11,6 +11,7 @@ object Form1: TForm1
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnActivate = FormActivate
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -27,7 +28,7 @@ object Form1: TForm1
     Height = 13
     Caption = 'password:'
   end
-  object TEdit
+  object edtUsername: TEdit
     Left = 64
     Top = 80
     Width = 121
