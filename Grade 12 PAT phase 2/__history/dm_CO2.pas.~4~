@@ -9,8 +9,6 @@ type
   TDMCO2 = class(TDataModule)
     ConCO2: TADOConnection;
     ADOUsers: TADOTable;
-    ADOCars: TADOTable;
-    ADOOrganisation: TADOTable;
   private
     { Private declarations }
   public

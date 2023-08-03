@@ -12,7 +12,7 @@ type
     fPassword: string;
     fAttempts: integer;
   public
-    constructor create;
+    constructor create(sUsername:string;sattempt:integer);
     procedure SetLogin(sUsername, sPassword: string);
     Function PasswordCheck: boolean;
   end;
@@ -21,11 +21,11 @@ implementation
 
 { SignIn }
 
-constructor SignIn.create();
+constructor SignIn.create(fUsername: string; Fattempt: integer);
 begin
-  fUsername := '';
-  fPassword := '';
-  fAttempts := 0;
+fUsername:='';
+fPassword:='';
+fAttempts:=0;
 end;
 
 function SignIn.PasswordCheck: boolean;

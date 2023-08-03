@@ -8,11 +8,12 @@ uses
 type
   SignIn = class(tObject)
   private
+    fFirst_name: string;
+    flast_name: string;
     fUsername: String;
     fPassword: string;
     fAttempts: integer;
   public
-    constructor create;
     procedure SetLogin(sUsername, sPassword: string);
     Function PasswordCheck: boolean;
   end;
@@ -20,13 +21,6 @@ type
 implementation
 
 { SignIn }
-
-constructor SignIn.create();
-begin
-  fUsername := '';
-  fPassword := '';
-  fAttempts := 0;
-end;
 
 function SignIn.PasswordCheck: boolean;
 begin

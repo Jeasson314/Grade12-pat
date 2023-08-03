@@ -43,7 +43,7 @@
 			<DelphiCompile Include="Pat2023.dpr">
 				<MainSource>MainSource</MainSource>
 			</DelphiCompile>
-			<DCCReference Include="frm_Login.pas">
+			<DCCReference Include="u_Login.pas">
 				<Form>Form1</Form>
 			</DCCReference>
 			<DCCReference Include="dm_CO2.pas">
@@ -51,6 +51,9 @@
 				<DesignClass>TDataModule</DesignClass>
 			</DCCReference>
 			<DCCReference Include="u_SignIn.pas"/>
+			<DCCReference Include="u_Signup.pas">
+				<Form>frmSignup</Form>
+			</DCCReference>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>
