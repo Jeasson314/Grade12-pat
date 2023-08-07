@@ -5,16 +5,16 @@ object DMCO2: TDMCO2
   object ConCO2: TADOConnection
     Connected = True
     ConnectionString = 
-      'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\James\Docu' +
-      'ments\GitHub\Grade12-pat\Grade 12 PAT phase 2\Database\db_CO2.md' +
-      'b;Mode=Share Deny None;Persist Security Info=False;Jet OLEDB:Sys' +
-      'tem database="";Jet OLEDB:Registry Path="";Jet OLEDB:Database Pa' +
-      'ssword="";Jet OLEDB:Engine Type=5;Jet OLEDB:Database Locking Mod' +
-      'e=1;Jet OLEDB:Global Partial Bulk Ops=2;Jet OLEDB:Global Bulk Tr' +
-      'ansactions=1;Jet OLEDB:New Database Password="";Jet OLEDB:Create' +
-      ' System Database=False;Jet OLEDB:Encrypt Database=False;Jet OLED' +
-      'B:Don'#39't Copy Locale on Compact=False;Jet OLEDB:Compact Without R' +
-      'eplica Repair=False;Jet OLEDB:SFP=False'
+      'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\13236\Down' +
+      'loads\Grade12-pat-main\Grade12-pat-main\Grade 12 PAT phase 2\Dat' +
+      'abase\db_CO2.mdb;Mode=Share Deny None;Persist Security Info=Fals' +
+      'e;Jet OLEDB:System database="";Jet OLEDB:Registry Path="";Jet OL' +
+      'EDB:Database Password="";Jet OLEDB:Engine Type=5;Jet OLEDB:Datab' +
+      'ase Locking Mode=1;Jet OLEDB:Global Partial Bulk Ops=2;Jet OLEDB' +
+      ':Global Bulk Transactions=1;Jet OLEDB:New Database Password="";J' +
+      'et OLEDB:Create System Database=False;Jet OLEDB:Encrypt Database' +
+      '=False;Jet OLEDB:Don'#39't Copy Locale on Compact=False;Jet OLEDB:Co' +
+      'mpact Without Replica Repair=False;Jet OLEDB:SFP=False'
     LoginPrompt = False
     Mode = cmShareDenyNone
     Provider = 'Microsoft.Jet.OLEDB.4.0'

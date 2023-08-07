@@ -12,16 +12,15 @@ type
     edtLast_name: TEdit;
     pnlUsername: TPanel;
     btnGenerate_name: TButton;
-    edtPasswordOriginal: TEdit;
+    Edit3: TEdit;
     Label1: TLabel;
     btnOrganisation: TButton;
     Button1: TButton;
     DBMemo1: TDBMemo;
     tdb_organisation: TDBEdit;
-    edtPasswordSecond: TEdit;
+    Edit1: TEdit;
     btnSignup: TButton;
     procedure btnGenerate_nameClick(Sender: TObject);
-    procedure btnSignupClick(Sender: TObject);
   private
 
   public
@@ -46,13 +45,8 @@ begin
   pnlUsername.Caption := objSignup.UsernameGeneration;
 end;
 
-procedure TfrmSignup.btnSignupClick(Sender: TObject);
-begin
-  if objSignup.passwordvalidate(edtPasswordOriginal.Text,
-    edtPasswordSecond.Text) = true then
-    SignUp.addPassword(edtPasswordOriginal.Text)
-  else
-    MessageDlg('Please check your password', mtWarning, [mbOk], 0);
+
+
 end;
 
 end.

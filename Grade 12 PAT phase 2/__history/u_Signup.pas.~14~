@@ -46,13 +46,11 @@ begin
   pnlUsername.Caption := objSignup.UsernameGeneration;
 end;
 
+
 procedure TfrmSignup.btnSignupClick(Sender: TObject);
 begin
-  if objSignup.passwordvalidate(edtPasswordOriginal.Text,
-    edtPasswordSecond.Text) = true then
-    SignUp.addPassword(edtPasswordOriginal.Text)
-  else
-    MessageDlg('Please check your password', mtWarning, [mbOk], 0);
+if objSignup.passwordvalidate(edtPasswordOriginal.text,edtPasswordSecond.text)=true
+then
 end;
 
 end.

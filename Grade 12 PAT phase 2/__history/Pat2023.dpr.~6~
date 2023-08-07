@@ -5,8 +5,7 @@ uses
   u_Login in 'u_Login.pas' {Form1},
   dm_CO2 in 'dm_CO2.pas' {DMCO2: TDataModule},
   u_SignIn in 'u_SignIn.pas',
-  u_Signup in 'u_Signup.pas' {frmSignup},
-  u_validation in 'u_validation.pas';
+  u_Signup in 'u_Signup.pas' {frmSignup};
 
 {$R *.res}
 

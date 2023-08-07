@@ -3,7 +3,7 @@ unit u_SignIn;
 interface
 
 uses
-  u_passwordhasher, dm_CO2, Dialogs, Forms,sysUtils;
+  u_passwordhasher, dm_CO2, Dialogs, Forms, sysUtils;
 
 type
   SignIn = class(tObject)
@@ -16,15 +16,19 @@ type
     procedure SetLogin(sUsername, sPassword: string);
     Function PasswordCheck: boolean;
   end;
-  Signup= class(tObject)
-    private
-    fFirst_name:string;
-    fLast_name:string;
-    fUsername:string;
-    fPassword:string;
-    public
-    constructor create(sFirst_name,sLast_name:string);
-    function UsernameGeneration:string;
+
+  Signup = class(tObject)
+  private
+    fFirst_name: string;
+    fLast_name: string;
+    fUsername: string;
+    fPassword: string;
+  public
+    constructor create(sFirst_name, sLast_name: string);
+    function UsernameGeneration: string;
+    function passwordvalidate(sPasswordOrginal, sPasswordSecond: string)
+      : boolean;
+    procedure addPassword(sPassword);
   end;
 
 implementation
@@ -76,15 +80,80 @@ end;
 
 { Signup }
 
+procedure Signup.addPassword(sPassword);
+begin
+  fPassword := sPassword;
+end;
+
 constructor Signup.create(sFirst_name, sLast_name: string);
 begin
-fFirst_name:=sFirst_name;
-fLast_name:=sLast_name;
+  fFirst_name := sFirst_name;
+  fLast_name := sLast_name;
+end;
+
+function passwordvalidate(sPasswordOrginal, sPasswordSecond: string): boolean;
+var
+  icharacterloop: integer;
+  chrPassword: char;
+  rSpecialchr, rNumber, rCapital: boolean;
+begin
+  if (sPasswordOrginal = '') or (sPasswordSecond = '') then
+  begin
+    result := false;
+    MessageDlg('Please type in a password', mtWarning, [mbOk], 0);
+    exit;
+  end
+  else
+    result := true;
+
+  if sPasswordOrginal = sPasswordSecond then
+    result := true
+  else
+    result := false;
+  exit;
+  MessageDlg('Password must match', mtWarning, [mbOk], 0);
+  if length(sPasswordOrginal) < 8 then
+  begin
+    result := false;
+    MessageDlg('Please make sure your password is more than 8 character long',
+      mtWarning, [mbOk], 0);
+    exit;
+  end
+  else
+    result := true;
+  for icharacterloop := 1 to length(sPasswordOrginal) do
+    chrPassword := sPasswordOrginal[icharacterloop];
+  case ord(chrPassword) of
+    48 .. 57:
+      rNumber := true;
+    58 .. 64:
+      rSpecialchr := true;
+    92 .. 96:
+      rSpecialchr := true;
+    123, 125:
+      rSpecialchr := true;
+    65 .. 90:
+      rCapital := true;
+
+  end;
+  if rNumber = false then
+    MessageDlg('Please use a number in your password', mtWarning, [mbOk], 0);
+  result := false;
+  if rSpecialchr = false then
+    MessageDlg('Please use a special character(Such as "@") in your password',
+      mtWarning, [mbOk], 0);
+  result := false;
+  if rCapital = true then
+    MessageDlg('Please use a capital letter in your password in your password',
+      mtWarning, [mbOk], 0);
+  result := false;
+
 end;
 
 function Signup.UsernameGeneration: string;
 begin
-fUsername:=fFirst_name+fLast_name+inttostr(random(100));
+  fUsername := fFirst_name + fLast_name + inttostr(random(100));
+  result := fUsername;
 end;
 
 end.

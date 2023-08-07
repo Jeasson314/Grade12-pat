@@ -54,6 +54,7 @@
 			<DCCReference Include="u_Signup.pas">
 				<Form>frmSignup</Form>
 			</DCCReference>
+			<DCCReference Include="u_validation.pas"/>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>
