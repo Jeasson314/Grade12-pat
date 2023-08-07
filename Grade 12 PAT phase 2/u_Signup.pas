@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ExtCtrls, Mask, DBCtrls;
+  Dialogs, StdCtrls, ExtCtrls, Mask, DBCtrls,u_SignIn;
 
 type
   TfrmSignup = class(TForm)
@@ -19,6 +19,7 @@ type
     DBMemo1: TDBMemo;
     tdb_organisation: TDBEdit;
     Edit1: TEdit;
+    procedure btnGenerate_nameClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -27,9 +28,18 @@ type
 
 var
   frmSignup: TfrmSignup;
+  objSignup: SignUp;
 
 implementation
 
 {$R *.dfm}
+
+procedure TfrmSignup.btnGenerate_nameClick(Sender: TObject);
+var sFirstname,sLastname:string;
+begin
+sFirstname:=edtFirst_name.Text;
+sLastname:=edtLast_name.Text;
+objSignup:=signup.create(sFirstname,sLastname) ;
+end;
 
 end.

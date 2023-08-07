@@ -1,6 +1,6 @@
 object frmSignup: TfrmSignup
-  Left = 526
-  Top = 207
+  Left = 743
+  Top = 579
   Caption = 'frmSignup'
   ClientHeight = 248
   ClientWidth = 508
@@ -49,6 +49,7 @@ object frmSignup: TfrmSignup
     Height = 25
     Caption = 'Generate username'
     TabOrder = 3
+    OnClick = btnGenerate_nameClick
   end
   object Edit3: TEdit
     Left = 8

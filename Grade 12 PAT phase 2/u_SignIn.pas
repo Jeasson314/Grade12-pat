@@ -3,7 +3,7 @@ unit u_SignIn;
 interface
 
 uses
-  u_passwordhasher, dm_CO2, Dialogs, Forms;
+  u_passwordhasher, dm_CO2, Dialogs, Forms,sysUtils;
 
 type
   SignIn = class(tObject)
@@ -15,6 +15,16 @@ type
     constructor create;
     procedure SetLogin(sUsername, sPassword: string);
     Function PasswordCheck: boolean;
+  end;
+  Signup= class(tObject)
+    private
+    fFirst_name:string;
+    fLast_name:string;
+    fUsername:string;
+    fPassword:string;
+    public
+    constructor create(sFirst_name,sLast_name:string);
+    function UsernameGeneration:string;
   end;
 
 implementation
@@ -62,6 +72,19 @@ procedure SignIn.SetLogin(sUsername, sPassword: string);
 begin
   fUsername := sUsername;
   fPassword := sPassword;
+end;
+
+{ Signup }
+
+constructor Signup.create(sFirst_name, sLast_name: string);
+begin
+fFirst_name:=sFirst_name;
+fLast_name:=sLast_name;
+end;
+
+function Signup.UsernameGeneration: string;
+begin
+fUsername:=fFirst_name+fLast_name+inttostr(random(100));
 end;
 
 end.
