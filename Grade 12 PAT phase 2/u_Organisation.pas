@@ -1,15 +1,15 @@
-unit u_Organisation;
+unit U_Organisation;
 
 interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Grids, DBGrids, dblookup,dm_CO2, StdCtrls, ExtCtrls;
+  Dialogs, StdCtrls, ExtCtrls, DBCtrls,dm_CO2, Mask;
 
 type
   Tfrm_Organsiation = class(TForm)
-    imgAddCar: TImage;
-    ComboBox1: TComboBox;
+    imgAddOrganisation: TImage;
+    procedure FormActivate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -22,5 +22,10 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure Tfrm_Organsiation.FormActivate(Sender: TObject);
+begin
+imgaddOrganisation.Picture.LoadFromFile('.\images\Health.png');
+end;
 
 end.

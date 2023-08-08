@@ -1,7 +1,7 @@
 object DMCO2: TDMCO2
   OldCreateOrder = False
-  Height = 221
-  Width = 326
+  Height = 368
+  Width = 422
   object ConCO2: TADOConnection
     Connected = True
     ConnectionString = 
@@ -46,12 +46,23 @@ object DMCO2: TDMCO2
   end
   object DbSourceCar: TDataSource
     DataSet = ADOCars
-    Left = 208
-    Top = 88
+    Left = 216
+    Top = 72
   end
   object dbSourceOrganisation: TDataSource
     DataSet = ADOOrganisation
     Left = 200
     Top = 144
+  end
+  object ADOQuery: TADOQuery
+    Connection = ConCO2
+    Parameters = <>
+    Left = 88
+    Top = 232
+  end
+  object dbSourceQuery: TDataSource
+    DataSet = ADOQuery
+    Left = 184
+    Top = 232
   end
 end

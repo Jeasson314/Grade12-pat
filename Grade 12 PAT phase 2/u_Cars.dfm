@@ -14,10 +14,18 @@ object frm_Cars: Tfrm_Cars
   OnActivate = FormActivate
   PixelsPerInch = 96
   TextHeight = 13
-  object imgAddorganisation: TImage
+  object imgAddCars: TImage
     Left = 176
     Top = 87
-    Width = 49
-    Height = 50
+    Width = 65
+    Height = 82
+  end
+  object ComboBox1: TComboBox
+    Left = 16
+    Top = 47
+    Width = 145
+    Height = 21
+    TabOrder = 0
+    Text = 'ComboBox1'
   end
 end

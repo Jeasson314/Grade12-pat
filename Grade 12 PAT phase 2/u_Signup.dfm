@@ -1,6 +1,6 @@
 object frmSignup: TfrmSignup
-  Left = 743
-  Top = 579
+  Left = 598
+  Top = 236
   Caption = 'frmSignup'
   ClientHeight = 248
   ClientWidth = 508

@@ -57,7 +57,9 @@
 			<DCCReference Include="u_Cars.pas">
 				<Form>frm_Cars</Form>
 			</DCCReference>
-			<DCCReference Include="u_Organisation.pas"/>
+			<DCCReference Include="U_Organisation.pas">
+				<Form>frm_Organsiation</Form>
+			</DCCReference>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>
