@@ -11,6 +11,8 @@ type
     ADOUsers: TADOTable;
     ADOCars: TADOTable;
     ADOOrganisation: TADOTable;
+    DbSourceCar: TDataSource;
+    dbSourceOrganisation: TDataSource;
   private
     { Private declarations }
   public

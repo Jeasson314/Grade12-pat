@@ -66,6 +66,7 @@ object frmSignup: TfrmSignup
     Height = 25
     Caption = 'Choose organisation'
     TabOrder = 5
+    OnClick = btnOrganisationClick
   end
   object Button1: TButton
     Left = 168
@@ -74,27 +75,21 @@ object frmSignup: TfrmSignup
     Height = 25
     Caption = 'Choose vehicle'
     TabOrder = 6
-  end
-  object DBMemo1: TDBMemo
-    Left = 168
-    Top = 117
-    Width = 153
-    Height = 36
-    TabOrder = 7
+    OnClick = Button1Click
   end
   object tdb_organisation: TDBEdit
     Left = 168
     Top = 52
     Width = 121
     Height = 21
-    TabOrder = 8
+    TabOrder = 7
   end
   object edtPasswordSecond: TEdit
     Left = 8
     Top = 206
     Width = 121
     Height = 21
-    TabOrder = 9
+    TabOrder = 8
     Text = 'edtPasswordSecond'
   end
   object btnSignup: TButton
@@ -103,7 +98,7 @@ object frmSignup: TfrmSignup
     Width = 105
     Height = 35
     Caption = 'Sign up'
-    TabOrder = 10
+    TabOrder = 9
     OnClick = btnSignupClick
   end
 end

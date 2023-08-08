@@ -5,16 +5,15 @@ object DMCO2: TDMCO2
   object ConCO2: TADOConnection
     Connected = True
     ConnectionString = 
-      'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\James\Docu' +
-      'ments\GitHub\Grade12-pat\Grade 12 PAT phase 2\Database\db_CO2.md' +
-      'b;Mode=Share Deny None;Persist Security Info=False;Jet OLEDB:Sys' +
-      'tem database="";Jet OLEDB:Registry Path="";Jet OLEDB:Database Pa' +
-      'ssword="";Jet OLEDB:Engine Type=5;Jet OLEDB:Database Locking Mod' +
-      'e=1;Jet OLEDB:Global Partial Bulk Ops=2;Jet OLEDB:Global Bulk Tr' +
-      'ansactions=1;Jet OLEDB:New Database Password="";Jet OLEDB:Create' +
-      ' System Database=False;Jet OLEDB:Encrypt Database=False;Jet OLED' +
-      'B:Don'#39't Copy Locale on Compact=False;Jet OLEDB:Compact Without R' +
-      'eplica Repair=False;Jet OLEDB:SFP=False'
+      'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=.\Database\db_CO2.m' +
+      'db;Mode=Share Deny None;Persist Security Info=False;Jet OLEDB:Sy' +
+      'stem database="";Jet OLEDB:Registry Path="";Jet OLEDB:Database P' +
+      'assword="";Jet OLEDB:Engine Type=5;Jet OLEDB:Database Locking Mo' +
+      'de=1;Jet OLEDB:Global Partial Bulk Ops=2;Jet OLEDB:Global Bulk T' +
+      'ransactions=1;Jet OLEDB:New Database Password="";Jet OLEDB:Creat' +
+      'e System Database=False;Jet OLEDB:Encrypt Database=False;Jet OLE' +
+      'DB:Don'#39't Copy Locale on Compact=False;Jet OLEDB:Compact Without ' +
+      'Replica Repair=False;Jet OLEDB:SFP=False'
     LoginPrompt = False
     Mode = cmShareDenyNone
     Provider = 'Microsoft.Jet.OLEDB.4.0'
@@ -43,6 +42,16 @@ object DMCO2: TDMCO2
     CursorType = ctStatic
     TableName = 'tblOrganisation'
     Left = 88
+    Top = 144
+  end
+  object DbSourceCar: TDataSource
+    DataSet = ADOCars
+    Left = 208
+    Top = 88
+  end
+  object dbSourceOrganisation: TDataSource
+    DataSet = ADOOrganisation
+    Left = 200
     Top = 144
   end
 end

@@ -6,7 +6,8 @@ uses
   dm_CO2 in 'dm_CO2.pas' {DMCO2: TDataModule},
   u_SignIn in 'u_SignIn.pas',
   u_Signup in 'u_Signup.pas' {frmSignup},
-  u_validation in 'u_validation.pas';
+  u_Cars in 'u_Cars.pas' {frm_Cars},
+  u_Organisation in 'u_Organisation.pas';
 
 {$R *.res}
 
@@ -16,5 +17,7 @@ begin
   Application.CreateForm(TForm1, Form1);
   Application.CreateForm(TDMCO2, DMCO2);
   Application.CreateForm(TfrmSignup, frmSignup);
+  Application.CreateForm(Tfrm_Organsiation, frm_Organsiation);
+  Application.CreateForm(Tfrm_Cars, frm_Cars);
   Application.Run;
 end.

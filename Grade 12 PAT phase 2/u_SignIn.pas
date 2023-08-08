@@ -24,11 +24,11 @@ type
     fUsername: string;
     fPassword: string;
   public
-    constructor create(sFirst_name, sLast_name: string);
+    constructor create();
     function UsernameGeneration: string;
     function passwordvalidate(sPasswordOrginal, sPasswordSecond: string)
       : boolean;
-    procedure addPassword(sPassword);
+    procedure addPassword(sPassword:string);
   end;
 
 implementation
@@ -80,23 +80,27 @@ end;
 
 { Signup }
 
-procedure Signup.addPassword(sPassword);
+procedure Signup.addPassword(sPassword:string);
 begin
   fPassword := sPassword;
 end;
 
-constructor Signup.create(sFirst_name, sLast_name: string);
+constructor Signup.create();
 begin
-  fFirst_name := sFirst_name;
-  fLast_name := sLast_name;
+    fFirst_name:='';
+    fLast_name:='';
+
 end;
 
-function passwordvalidate(sPasswordOrginal, sPasswordSecond: string): boolean;
+function Signup.passwordvalidate(sPasswordOrginal, sPasswordSecond: string): boolean;
 var
   icharacterloop: integer;
   chrPassword: char;
-  rSpecialchr, rNumber, rCapital: boolean;
+  bSpecialchr, bNumber, bCapital: boolean;
 begin
+  bNumber := false;
+  bSpecialchr := false;
+  bCapital:=false;
   if (sPasswordOrginal = '') or (sPasswordSecond = '') then
   begin
     result := false;
@@ -125,25 +129,25 @@ begin
     chrPassword := sPasswordOrginal[icharacterloop];
   case ord(chrPassword) of
     48 .. 57:
-      rNumber := true;
+      bNumber := true;
     58 .. 64:
-      rSpecialchr := true;
+      bSpecialchr := true;
     92 .. 96:
-      rSpecialchr := true;
+      bSpecialchr := true;
     123, 125:
-      rSpecialchr := true;
+      bSpecialchr := true;
     65 .. 90:
-      rCapital := true;
+      bCapital := true;
 
   end;
-  if rNumber = false then
+  if bNumber = false then
     MessageDlg('Please use a number in your password', mtWarning, [mbOk], 0);
   result := false;
-  if rSpecialchr = false then
+  if bSpecialchr = false then
     MessageDlg('Please use a special character(Such as "@") in your password',
       mtWarning, [mbOk], 0);
   result := false;
-  if rCapital = true then
+  if bCapital = false then
     MessageDlg('Please use a capital letter in your password in your password',
       mtWarning, [mbOk], 0);
   result := false;
