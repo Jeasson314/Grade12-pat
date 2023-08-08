@@ -1,0 +1,21 @@
+program Pat2023;
+
+uses
+  Forms,
+  u_Login in 'u_Login.pas' {Form1},
+  dm_CO2 in 'dm_CO2.pas' {DMCO2: TDataModule},
+  u_SignIn in 'u_SignIn.pas',
+  u_Signup in 'u_Signup.pas' {frmSignup},
+  u_Organisation in 'u_Organisation.pas' {Form2};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  AApplication.CreateForm(TForm1, Form1);
+  AApplication.CreateForm(TDMCO2, DMCO2);
+  AApplication.CreateForm(TfrmSignup, frmSignup);
+  AApplication.CreateForm(TForm2, Form2);
+  ication.Run;
+end.

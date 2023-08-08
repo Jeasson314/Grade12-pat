@@ -1,0 +1,32 @@
+unit u_Vehicle;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Grids, DBGrids, dblookup,dm_CO2, StdCtrls, ExtCtrls,jpeg,pngimage;
+
+type
+  Tfrm_Organsiation = class(TForm)
+    DBLookupCombo1: TDBLookupCombo;
+    imgAddorganisation: TImage;
+    procedure FormActivate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_Organsiation: Tfrm_Organsiation;
+
+implementation
+
+{$R *.dfm}
+
+procedure Tfrm_Organsiation.FormActivate(Sender: TObject);
+begin
+imgAddOrganisation.Picture.LoadFromFile('.\images\Health.png');
+end;
+
+end.

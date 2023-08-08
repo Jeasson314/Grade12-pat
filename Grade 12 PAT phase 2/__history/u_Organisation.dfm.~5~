@@ -1,0 +1,30 @@
+object frm_Organsiation: Tfrm_Organsiation
+  Left = 0
+  Top = 0
+  Caption = 'frm_Organsiation'
+  ClientHeight = 242
+  ClientWidth = 527
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Image1: TImage
+    Left = 144
+    Top = 79
+    Width = 105
+    Height = 105
+  end
+  object DBLookupCombo1: TDBLookupCombo
+    Left = 64
+    Top = 48
+    Width = 121
+    Height = 25
+    DataSource = DMCO2.dbSourceOrgansiation
+    TabOrder = 0
+  end
+end
