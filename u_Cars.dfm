@@ -56,6 +56,7 @@ object frm_Cars: Tfrm_Cars
     ParentFont = False
   end
   object DBLookupComboBox1: TDBLookupComboBox
+    AlignWithMargins = True
     Left = 32
     Top = 58
     Width = 121
