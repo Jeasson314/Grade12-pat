@@ -32,18 +32,11 @@ implementation
 
 procedure TDMCO2.runSQL(sSql: string);
 begin
-  try
-    if (ADOQuery <> Nil) then
-    if (ADOQuery.Connection <> Nil) then
-    begin
-      ADOQuery.Close;
+      ADOQuery.close;
       ADOQuery.SQL.clear;
       ADOQuery.SQL.Add(sSql);
       ADOQuery.Open;
-    end;
-  except
 
-  end;
 end;
 
 end.

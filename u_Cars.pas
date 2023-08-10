@@ -10,9 +10,19 @@ uses
 type
   Tfrm_Cars = class(TForm)
     imgAddCars: TImage;
-    ComboBox1: TComboBox;
     DBLookupComboBox1: TDBLookupComboBox;
+    Edit1: TEdit;
+    btnSearch: TButton;
+    edtMake: TEdit;
+    edtModel: TEdit;
+    edtEmission: TEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
     procedure FormActivate(Sender: TObject);
+    procedure btnSearchClick(Sender: TObject);
+    procedure imgAddCarsClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -28,21 +38,40 @@ implementation
 
 {$R *.dfm}
 
+procedure Tfrm_Cars.btnSearchClick(Sender: TObject);
+begin
+
+  sSQL := 'SELECT * FROM tblCar';
+  dm_CO2.runSQL(sSQL);
+end;
+
 procedure Tfrm_Cars.FormActivate(Sender: TObject);
 var
   iloop: integer;
 
 begin
-  imgAddCars.Picture.LoadFromFile('.\images\Health.png');
-  //sSQL := 'SELECT [Make]+'+QuotedStr(' > ')+'[Model] AS ModelTypes FROM tblCar ORDER BY [Make]+'+QuotedStr(',')+'[Model]';
-  //dm_CO2.runSQL(sSQL);
-  // adoCars
 
+   //adoCars
+   imgAddCars.Picture.LoadFromFile('.\images\Health.png');
+   imgAddCars.Stretch:=true;
 
 
   // for iLoop := 0 to dbgDisplay.Columns.Count - 1 do
   // cmbSearch.Items.ADD(dbgDisplay.Columns[iLoop].Field.FieldName);
 
+end;
+
+procedure Tfrm_Cars.imgAddCarsClick(Sender: TObject);
+begin
+with dm_co2 do
+begin
+adoCars.Last;
+adoCars.Insert;
+adoCars['Make']:=edtMake.Text;
+adoCars['Model']:=edtModel.Text;
+adoCars['CO2 Emissions(g/km)']:=strtoint(edtEmission.Text);
+adoCars.Post;
+end;
 end;
 
 end.

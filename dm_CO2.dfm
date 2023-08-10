@@ -46,8 +46,8 @@ object DMCO2: TDMCO2
   end
   object DbSourceCar: TDataSource
     DataSet = ADOCars
-    Left = 216
-    Top = 72
+    Left = 192
+    Top = 80
   end
   object dbSourceOrganisation: TDataSource
     DataSet = ADOOrganisation
@@ -56,9 +56,12 @@ object DMCO2: TDMCO2
   end
   object ADOQuery: TADOQuery
     Connection = ConCO2
+    CursorType = ctStatic
     Parameters = <>
-    Left = 88
-    Top = 232
+    SQL.Strings = (
+      'SELECT Make,Model FROM tblCar')
+    Left = 72
+    Top = 240
   end
   object dbSourceQuery: TDataSource
     DataSet = ADOQuery
