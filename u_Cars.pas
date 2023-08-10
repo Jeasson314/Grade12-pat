@@ -11,7 +11,7 @@ type
   Tfrm_Cars = class(TForm)
     imgAddCars: TImage;
     ComboBox1: TComboBox;
-    DBComboBox1: TDBComboBox;
+    DBLookupComboBox1: TDBLookupComboBox;
     procedure FormActivate(Sender: TObject);
   private
     { Private declarations }
@@ -34,8 +34,8 @@ var
 
 begin
   imgAddCars.Picture.LoadFromFile('.\images\Health.png');
-  sSQL := 'SELECT * FROM tblCars';
-  dm_CO2.runSQL(sSQL);
+  //sSQL := 'SELECT [Make]+'+QuotedStr(' > ')+'[Model] AS ModelTypes FROM tblCar ORDER BY [Make]+'+QuotedStr(',')+'[Model]';
+  //dm_CO2.runSQL(sSQL);
   // adoCars
 
 

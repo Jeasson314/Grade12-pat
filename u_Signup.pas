@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ExtCtrls, Mask, DBCtrls, u_SignIn,u_Organisation,u_Cars;
+  Dialogs, StdCtrls, ExtCtrls, Mask, DBCtrls, u_SignIn, u_Organisation, u_Cars;
 
 type
   TfrmSignup = class(TForm)
@@ -49,21 +49,21 @@ end;
 
 procedure TfrmSignup.btnOrganisationClick(Sender: TObject);
 begin
-frm_Organsiation.ShowModal;
+  frm_Organsiation.ShowModal;
 end;
 
 procedure TfrmSignup.btnSignupClick(Sender: TObject);
 begin
   if objSignup.passwordvalidate(edtPasswordOriginal.Text,
     edtPasswordSecond.Text) = true then
-    objSignUp.addPassword(edtPasswordOriginal.Text)
+    objSignup.addPassword(edtPasswordOriginal.Text)
   else
     MessageDlg('Please check your password', mtWarning, [mbOk], 0);
 end;
 
 procedure TfrmSignup.Button1Click(Sender: TObject);
 begin
-frm_Cars.ShowModal;
+  frm_Cars.ShowModal;
 end;
 
 end.
