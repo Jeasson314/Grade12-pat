@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2023/07/28 20:24:38.857.pas,C:\Users\James\Documents\RAD Studio\Projects\Unit1.pas=C:\Users\James\Documents\RAD Studio\Projects\generator.pas</Transaction>
+    <Transaction>2023/07/28 20:24:38.857.dfm,C:\Users\James\Documents\RAD Studio\Projects\Unit1.dfm=C:\Users\James\Documents\RAD Studio\Projects\generator.dfm</Transaction>
+    <Transaction>2023/07/28 20:24:50.435.dproj,C:\Users\James\Documents\RAD Studio\Projects\Project1.dproj=C:\Users\James\Documents\RAD Studio\Projects\hashgenerator.dproj</Transaction>
+  </Transactions>
+</BorlandProject>
