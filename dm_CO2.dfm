@@ -5,17 +5,17 @@ object DMCO2: TDMCO2
   object ConCO2: TADOConnection
     Connected = True
     ConnectionString = 
-      'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=.\Database\db_CO2.m' +
-      'db;Mode=Share Deny None;Persist Security Info=False;Jet OLEDB:Sy' +
-      'stem database="";Jet OLEDB:Registry Path="";Jet OLEDB:Database P' +
-      'assword="";Jet OLEDB:Engine Type=5;Jet OLEDB:Database Locking Mo' +
-      'de=1;Jet OLEDB:Global Partial Bulk Ops=2;Jet OLEDB:Global Bulk T' +
-      'ransactions=1;Jet OLEDB:New Database Password="";Jet OLEDB:Creat' +
-      'e System Database=False;Jet OLEDB:Encrypt Database=False;Jet OLE' +
-      'DB:Don'#39't Copy Locale on Compact=False;Jet OLEDB:Compact Without ' +
-      'Replica Repair=False;Jet OLEDB:SFP=False'
+      'Provider=Microsoft.Jet.OLEDB.4.0;User ID=Admin;Data Source=./Dat' +
+      'abase/db_CO2.mdb;Mode=ReadWrite;Persist Security Info=False;Jet ' +
+      'OLEDB:System database="";Jet OLEDB:Registry Path="";Jet OLEDB:Da' +
+      'tabase Password="";Jet OLEDB:Engine Type=5;Jet OLEDB:Database Lo' +
+      'cking Mode=1;Jet OLEDB:Global Partial Bulk Ops=2;Jet OLEDB:Globa' +
+      'l Bulk Transactions=1;Jet OLEDB:New Database Password="";Jet OLE' +
+      'DB:Create System Database=False;Jet OLEDB:Encrypt Database=False' +
+      ';Jet OLEDB:Don'#39't Copy Locale on Compact=False;Jet OLEDB:Compact ' +
+      'Without Replica Repair=False;Jet OLEDB:SFP=False'
     LoginPrompt = False
-    Mode = cmShareDenyNone
+    Mode = cmReadWrite
     Provider = 'Microsoft.Jet.OLEDB.4.0'
     Left = 8
     Top = 152
@@ -55,13 +55,17 @@ object DMCO2: TDMCO2
     Top = 144
   end
   object ADOQuery: TADOQuery
-    Connection = ConCO2
+    Active = True
+    ConnectionString = 
+      'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\James\Docu' +
+      'ments\GitHub\Grade12-pat\Database\db_CO2.mdb;Persist Security In' +
+      'fo=False'
     CursorType = ctStatic
     Parameters = <>
     SQL.Strings = (
-      'SELECT Make,Model FROM tblCar')
-    Left = 72
-    Top = 240
+      'SELECT CarID,Make+'#39'  '#39'+Model  as MakeandModel FROM tblCar')
+    Left = 96
+    Top = 232
   end
   object dbSourceQuery: TDataSource
     DataSet = ADOQuery

@@ -55,35 +55,28 @@ object frm_Cars: Tfrm_Cars
     Font.Style = []
     ParentFont = False
   end
-  object DBLookupComboBox1: TDBLookupComboBox
-    AlignWithMargins = True
-    Left = 32
-    Top = 58
-    Width = 121
-    Height = 21
-    DataField = 'Make;Model'
-    DataSource = DMCO2.dbSourceQuery
-    KeyField = 'CarID'
-    ListField = 'Model'
-    ListFieldIndex = 2
-    ListSource = DMCO2.DbSourceCar
-    TabOrder = 0
+  object Image1: TImage
+    Left = 166
+    Top = 49
+    Width = 26
+    Height = 29
+    OnClick = imgAddCarsClick
   end
   object Edit1: TEdit
     Left = 32
     Top = 20
     Width = 121
     Height = 21
-    TabOrder = 1
+    TabOrder = 0
     Text = 'Edit1'
   end
   object btnSearch: TButton
-    Left = 176
-    Top = 54
+    Left = 159
+    Top = 18
     Width = 105
     Height = 25
     Caption = 'Search Companies'
-    TabOrder = 2
+    TabOrder = 1
     OnClick = btnSearchClick
   end
   object edtMake: TEdit
@@ -91,7 +84,7 @@ object frm_Cars: Tfrm_Cars
     Top = 133
     Width = 121
     Height = 21
-    TabOrder = 3
+    TabOrder = 2
     TextHint = 'Honda'
   end
   object edtModel: TEdit
@@ -99,7 +92,7 @@ object frm_Cars: Tfrm_Cars
     Top = 133
     Width = 121
     Height = 21
-    TabOrder = 4
+    TabOrder = 3
     TextHint = 'Jazz'
   end
   object edtEmission: TEdit
@@ -107,7 +100,23 @@ object frm_Cars: Tfrm_Cars
     Top = 133
     Width = 121
     Height = 21
-    TabOrder = 5
+    TabOrder = 4
     TextHint = '100'
+  end
+  object Panel1: TPanel
+    Left = 287
+    Top = 38
+    Width = 175
+    Height = 41
+    Caption = 'Panel1'
+    TabOrder = 5
+  end
+  object ComboBox1: TComboBox
+    Left = 32
+    Top = 47
+    Width = 121
+    Height = 21
+    TabOrder = 6
+    Text = 'ComboBox1'
   end
 end

@@ -32,6 +32,8 @@ implementation
 
 procedure TDMCO2.runSQL(sSql: string);
 begin
+showmessage(sSQL);
+
       ADOQuery.close;
       ADOQuery.SQL.clear;
       ADOQuery.SQL.Add(sSql);

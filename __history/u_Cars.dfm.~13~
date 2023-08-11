@@ -56,16 +56,17 @@ object frm_Cars: Tfrm_Cars
     ParentFont = False
   end
   object DBLookupComboBox1: TDBLookupComboBox
+    AlignWithMargins = True
     Left = 32
     Top = 58
     Width = 121
     Height = 21
-    DataField = 'Make;Model'
-    DataSource = DMCO2.dbSourceQuery
+    DataSource = DMCO2.DbSourceCar
     KeyField = 'CarID'
-    ListField = 'Model'
+    ListField = 'MakeandModel'
     ListFieldIndex = 2
-    ListSource = DMCO2.DbSourceCar
+    ListSource = DMCO2.dbSourceQuery
+    ReadOnly = True
     TabOrder = 0
   end
   object Edit1: TEdit

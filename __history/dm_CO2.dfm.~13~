@@ -46,8 +46,8 @@ object DMCO2: TDMCO2
   end
   object DbSourceCar: TDataSource
     DataSet = ADOCars
-    Left = 216
-    Top = 72
+    Left = 192
+    Top = 80
   end
   object dbSourceOrganisation: TDataSource
     DataSet = ADOOrganisation
@@ -55,18 +55,30 @@ object DMCO2: TDMCO2
     Top = 144
   end
   object ADOQuery: TADOQuery
+    Active = True
+    Connection = ADOConnection1
     CursorType = ctStatic
-    DataSource = DbSourceCar
     Parameters = <>
     SQL.Strings = (
-      'SELECT * FROM tblCar'
-      '')
-    Left = 88
+      'SELECT CarID,Make+'#39'  '#39'+Model  as MakeandModel FROM tblCar')
+    Left = 96
     Top = 232
   end
   object dbSourceQuery: TDataSource
     DataSet = ADOQuery
     Left = 184
+    Top = 232
+  end
+  object ADOConnection1: TADOConnection
+    Connected = True
+    ConnectionString = 
+      'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\James\Docu' +
+      'ments\GitHub\Grade12-pat\Database\db_CO2.mdb;Persist Security In' +
+      'fo=False'
+    LoginPrompt = False
+    Mode = cmShareDenyNone
+    Provider = 'Microsoft.Jet.OLEDB.4.0'
+    Left = 8
     Top = 232
   end
 end
