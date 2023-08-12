@@ -22,6 +22,9 @@ object frm_Cars: Tfrm_Cars
     Height = 105
     Align = alTop
     TabOrder = 0
+    ExplicitLeft = 8
+    ExplicitTop = 272
+    ExplicitWidth = 513
     object imgAddCars: TImage
       Left = 439
       Top = 52
@@ -102,7 +105,7 @@ object frm_Cars: Tfrm_Cars
       Width = 521
       Height = 129
       Align = alClient
-      DataSource = dsListMakes
+      DataSource = DMCO2.DbSourceCar
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -117,8 +120,6 @@ object frm_Cars: Tfrm_Cars
       Height = 71
       Align = alBottom
       TabOrder = 1
-      ExplicitLeft = 3
-      ExplicitTop = 147
       object lookupMake: TDBLookupComboBox
         Left = 5
         Top = 8
