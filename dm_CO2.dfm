@@ -4,6 +4,7 @@ object DMCO2: TDMCO2
   Height = 368
   Width = 422
   object ADOUsers: TADOTable
+    Active = True
     Connection = con
     CursorType = ctStatic
     TableName = 'tblUsers'
@@ -11,6 +12,7 @@ object DMCO2: TDMCO2
     Top = 24
   end
   object ADOCarsOld: TADOTable
+    Active = True
     Connection = con
     CursorType = ctStatic
     TableName = 'tblCar'
@@ -18,6 +20,7 @@ object DMCO2: TDMCO2
     Top = 88
   end
   object ADOOrganisation: TADOTable
+    Active = True
     Connection = con
     CursorType = ctStatic
     TableName = 'tblOrganisation'
@@ -57,6 +60,14 @@ object DMCO2: TDMCO2
     Top = 96
   end
   object con: TADOConnection
+    Connected = True
+    ConnectionString = 
+      'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\James\Docu' +
+      'ments\GitHub\Grade12-pat\Database\db_CO2.mdb;Persist Security In' +
+      'fo=False'
+    LoginPrompt = False
+    Mode = cmShareDenyNone
+    Provider = 'Microsoft.Jet.OLEDB.4.0'
     Left = 24
     Top = 96
   end

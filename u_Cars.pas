@@ -40,7 +40,6 @@ type
 
 var
   frm_Cars: Tfrm_Cars;
-  dm_CO2: TDMCO2;
   sSQL: string;
 
 implementation
@@ -50,7 +49,7 @@ implementation
 procedure Tfrm_Cars.btnFilterByMakeClick(Sender: TObject);
 begin
 
-  if dm_CO2.ADOCars.Active then  showMessage('Applying Filter');
+  if dmCO2.ADOCars.Active then  showMessage('Applying Filter');
  {
     try
       dm_CO2.ADOCars.Filtered := False;
@@ -68,7 +67,7 @@ procedure Tfrm_Cars.btnSearchClick(Sender: TObject);
 begin
   // DBLookupMakeModel.ListSource.Enabled:=false;
   sSQL := 'SELECT * FROM tblCar';
-  dm_CO2.runSQL(sSQL);
+  dmCO2.runSQL(sSQL);
   // DBLookupMakeModel.ListSource.Enabled:=true;
 end;
 
@@ -99,7 +98,7 @@ end;
 
 procedure Tfrm_Cars.imgAddCarsClick(Sender: TObject);
 begin
-  with dm_CO2 do
+  with dmCO2 do
   begin
     // adoCars.Last;
     // adoCars.Close;

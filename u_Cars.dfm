@@ -22,9 +22,6 @@ object frm_Cars: Tfrm_Cars
     Height = 105
     Align = alTop
     TabOrder = 0
-    ExplicitLeft = 8
-    ExplicitTop = 272
-    ExplicitWidth = 513
     object imgAddCars: TImage
       Left = 439
       Top = 52
@@ -159,6 +156,7 @@ object frm_Cars: Tfrm_Cars
     end
   end
   object adoListMakes: TADOQuery
+    Active = True
     Connection = DMCO2.con
     CursorType = ctStatic
     Parameters = <>
