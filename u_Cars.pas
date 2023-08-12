@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Grids, DBGrids, dblookup, dm_CO2, StdCtrls, ExtCtrls, jpeg, pngimage,
-  DBCtrls, DB, ADODB;
+  DBCtrls, DB, ADODB,u_SignIn, ComCtrls;
 
 type
   Tfrm_Cars = class(TForm)
@@ -21,17 +21,21 @@ type
     adoListMakes: TADOQuery;
     dsListMakes: TDataSource;
     GroupBox2: TGroupBox;
-    DBModel: TDBGrid;
+    DBGridModel: TDBGrid;
     Panel1: TPanel;
     lookupMake: TDBLookupComboBox;
     edtSearch: TEdit;
     btnFilterByMake: TButton;
     btnSearch: TButton;
+    GroupBox3: TGroupBox;
+    imgAddV: TImage;
+    redoutCars: TRichEdit;
     procedure FormActivate(Sender: TObject);
     procedure btnSearchClick(Sender: TObject);
     procedure imgAddCarsClick(Sender: TObject);
     procedure btnFilterByMakeClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure imgAddVClick(Sender: TObject);
   private
     function dbcheck(sModel: string): boolean;
   public
@@ -41,10 +45,20 @@ type
 var
   frm_Cars: Tfrm_Cars;
   sSQL: string;
-
 implementation
-
+uses u_Signup;
 {$R *.dfm}
+
+procedure Tfrm_Cars.imgAddVClick(Sender: TObject);
+begin
+try
+//showmessage(sCarKey);
+objSignup.addCar(inttostr(dmco2.adoCars['CarID']),dmco2.adoCars['Make'],dmco2.adoCars['Model']);
+redoutCars.Lines.Add(objSignup.CarsToString);
+except
+showmessage('An error has occured!?!?');
+end;
+end;
 
 procedure Tfrm_Cars.btnFilterByMakeClick(Sender: TObject);
 begin
@@ -66,7 +80,7 @@ end;
 procedure Tfrm_Cars.btnSearchClick(Sender: TObject);
 begin
 dmCO2.ADOCars.Filtered := False;
-    dmCO2.ADOCars.Filter := 'Model like ' + quotedstr(edtSearch.Text);
+    dmCO2.ADOCars.Filter := 'Model like ' + uppercase(quotedstr(edtSearch.Text));
     dmCO2.ADOCars.Filtered := True;
 end;
 
@@ -93,10 +107,11 @@ var
   iloop: integer;
 
 begin
-
-  // adoCars
+ // adoCars
   imgAddCars.Picture.LoadFromFile('.\images\Health.png');
   imgAddCars.Stretch := True;
+    imgAddV.Picture.LoadFromFile('.\images\Health.png');
+  imgAddV.Stretch := True;
   // showmessage(dm_CO2.ADOCars.IndexFieldNames);
 
   // for iLoop := 0 to dbgDisplay.Columns.Count - 1 do

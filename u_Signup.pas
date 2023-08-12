@@ -23,6 +23,7 @@ type
     procedure btnSignupClick(Sender: TObject);
     procedure btnOrganisationClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
   private
 
   public
@@ -43,7 +44,7 @@ var
 begin
   sFirstname := edtFirst_name.Text;
   sLastname := edtLast_name.Text;
-  objSignup := SignUp.create();
+
   pnlUsername.Caption := objSignup.UsernameGeneration;
 end;
 
@@ -64,6 +65,11 @@ end;
 procedure TfrmSignup.Button1Click(Sender: TObject);
 begin
   frm_Cars.ShowModal;
+end;
+
+procedure TfrmSignup.FormActivate(Sender: TObject);
+begin
+ objSignup := SignUp.create();
 end;
 
 end.

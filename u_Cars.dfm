@@ -2,7 +2,7 @@ object frm_Cars: Tfrm_Cars
   Left = 0
   Top = 0
   Caption = 'frm_Cars'
-  ClientHeight = 407
+  ClientHeight = 436
   ClientWidth = 525
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -22,6 +22,8 @@ object frm_Cars: Tfrm_Cars
     Height = 105
     Align = alTop
     TabOrder = 0
+    ExplicitLeft = -2
+    ExplicitTop = 211
     object imgAddCars: TImage
       Left = 439
       Top = 52
@@ -96,13 +98,14 @@ object frm_Cars: Tfrm_Cars
     Align = alTop
     Caption = 'GroupBox2'
     TabOrder = 1
-    object DBModel: TDBGrid
+    object DBGridModel: TDBGrid
       Left = 2
       Top = 15
       Width = 521
       Height = 129
       Align = alClient
       DataSource = DMCO2.DbSourceCar
+      ReadOnly = True
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -135,6 +138,14 @@ object frm_Cars: Tfrm_Cars
       Height = 71
       Align = alBottom
       TabOrder = 1
+      ExplicitTop = 150
+      object imgAddV: TImage
+        Left = 267
+        Top = 32
+        Width = 30
+        Height = 25
+        OnClick = imgAddVClick
+      end
       object lookupMake: TDBLookupComboBox
         Left = 5
         Top = 8
@@ -170,6 +181,30 @@ object frm_Cars: Tfrm_Cars
         TabOrder = 3
         OnClick = btnSearchClick
       end
+    end
+  end
+  object GroupBox3: TGroupBox
+    Left = 0
+    Top = 322
+    Width = 525
+    Height = 97
+    Align = alTop
+    TabOrder = 2
+    ExplicitTop = 312
+    object redoutCars: TRichEdit
+      Left = 240
+      Top = 5
+      Width = 185
+      Height = 89
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      Lines.Strings = (
+        'redoutCars')
+      ParentFont = False
+      TabOrder = 0
     end
   end
   object adoListMakes: TADOQuery

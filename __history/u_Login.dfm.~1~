@@ -1,0 +1,73 @@
+object Form1: TForm1
+  Left = 342
+  Top = 165
+  Caption = 'Form1'
+  ClientHeight = 208
+  ClientWidth = 296
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesigned
+  OnActivate = FormActivate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 64
+    Top = 61
+    Width = 52
+    Height = 13
+    Caption = 'Username:'
+  end
+  object Label2: TLabel
+    Left = 64
+    Top = 107
+    Width = 50
+    Height = 13
+    Caption = 'password:'
+  end
+  object edtUsername: TEdit
+    Left = 64
+    Top = 80
+    Width = 121
+    Height = 21
+    TabOrder = 0
+  end
+  object edtPassword: TEdit
+    Left = 64
+    Top = 125
+    Width = 121
+    Height = 21
+    PasswordChar = '*'
+    TabOrder = 1
+  end
+  object btnSignin: TButton
+    Left = 8
+    Top = 152
+    Width = 102
+    Height = 41
+    Caption = 'Sign in'
+    TabOrder = 2
+    OnClick = btnSigninClick
+  end
+  object Button1: TButton
+    Left = 116
+    Top = 152
+    Width = 117
+    Height = 41
+    Caption = 'Sign up'
+    TabOrder = 3
+    OnClick = Button1Click
+  end
+  object CHKCookie: TCheckBox
+    Left = 191
+    Top = 129
+    Width = 97
+    Height = 17
+    Caption = 'Remember me?'
+    TabOrder = 4
+  end
+end

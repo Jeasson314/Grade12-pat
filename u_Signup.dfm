@@ -12,6 +12,7 @@ object frmSignup: TfrmSignup
   Font.Style = []
   OldCreateOrder = False
   Position = poDesigned
+  OnActivate = FormActivate
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel

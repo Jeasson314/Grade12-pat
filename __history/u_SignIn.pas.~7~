@@ -23,19 +23,15 @@ type
     fLast_name: string;
     fUsername: string;
     fPassword: string;
-    fCarsID: string;
-    fCarsModel: string;
-    fCarsMake: string;
+    fCars:string;
   public
     constructor create();
     function UsernameGeneration: string;
     function passwordvalidate(sPasswordOrginal, sPasswordSecond: string)
       : boolean;
-    procedure addPassword(sPassword: string);
-    procedure addCar(sCarsID, sCarsMake, sCarsModel: string);
-    function CarsToString():string;
+    procedure addPassword(sPassword:string);
+    procedure addCar(sCarsID:string);
   end;
-
 implementation
 
 { SignIn }
@@ -86,35 +82,26 @@ end;
 
 { Signup }
 
-procedure Signup.addCar(sCarsID, sCarsMake, sCarsModel: string);
+procedure Signup.addCar(sCarsID: string);
 begin
-  fCarsID := fCarsID + ',' + sCarsID;
-  fCarsModel := fCarsModel + ',' + sCarsModel;
-  fCarsMake := fCarsMake + ',' + sCarsMake;
+fCars:=
+sCarsID;
 end;
 
-procedure Signup.addPassword(sPassword: string);
+procedure Signup.addPassword(sPassword:string);
 begin
   fPassword := sPassword;
 end;
 
-function Signup.CarsToString: string;
-begin
-result:='Make: '+fCarsMake+#13+'Model: '+fCarsModel;
-end;
-
 constructor Signup.create();
 begin
-  fFirst_name := '';
-  fLast_name := '';
-  fCarsID := '';
-  fCarsModel := '';
-  fCarsMake := '';
+    fFirst_name:='';
+    fLast_name:='';
+      fCars:='';
 
 end;
 
-function Signup.passwordvalidate(sPasswordOrginal, sPasswordSecond: string)
-  : boolean;
+function Signup.passwordvalidate(sPasswordOrginal, sPasswordSecond: string): boolean;
 var
   icharacterloop: integer;
   chrPassword: char;
@@ -122,7 +109,7 @@ var
 begin
   bNumber := false;
   bSpecialchr := false;
-  bCapital := false;
+  bCapital:=false;
   if (sPasswordOrginal = '') or (sPasswordSecond = '') then
   begin
     result := false;

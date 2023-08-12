@@ -33,7 +33,6 @@ type
       : boolean;
     procedure addPassword(sPassword: string);
     procedure addCar(sCarsID, sCarsMake, sCarsModel: string);
-    function CarsToString():string;
   end;
 
 implementation
@@ -96,11 +95,6 @@ end;
 procedure Signup.addPassword(sPassword: string);
 begin
   fPassword := sPassword;
-end;
-
-function Signup.CarsToString: string;
-begin
-result:='Make: '+fCarsMake+#13+'Model: '+fCarsModel;
 end;
 
 constructor Signup.create();

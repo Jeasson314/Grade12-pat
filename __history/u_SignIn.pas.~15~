@@ -98,11 +98,6 @@ begin
   fPassword := sPassword;
 end;
 
-function Signup.CarsToString: string;
-begin
-result:='Make: '+fCarsMake+#13+'Model: '+fCarsModel;
-end;
-
 constructor Signup.create();
 begin
   fFirst_name := '';
