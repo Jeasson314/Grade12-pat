@@ -7,6 +7,7 @@ uses
 
 type
   TDMCO2 = class(TDataModule)
+    ConCO2Old: TADOConnection;
     ADOUsers: TADOTable;
     ADOCarsOld: TADOTable;
     ADOOrganisation: TADOTable;

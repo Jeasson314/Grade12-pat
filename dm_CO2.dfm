@@ -1,51 +1,31 @@
 object DMCO2: TDMCO2
   OldCreateOrder = False
+  OnCreate = DataModuleCreate
   Height = 368
   Width = 422
-  object ConCO2: TADOConnection
-    Connected = True
-    ConnectionString = 
-      'Provider=Microsoft.Jet.OLEDB.4.0;User ID=Admin;Data Source=./Dat' +
-      'abase/db_CO2.mdb;Mode=ReadWrite;Persist Security Info=False;Jet ' +
-      'OLEDB:System database="";Jet OLEDB:Registry Path="";Jet OLEDB:Da' +
-      'tabase Password="";Jet OLEDB:Engine Type=5;Jet OLEDB:Database Lo' +
-      'cking Mode=1;Jet OLEDB:Global Partial Bulk Ops=2;Jet OLEDB:Globa' +
-      'l Bulk Transactions=1;Jet OLEDB:New Database Password="";Jet OLE' +
-      'DB:Create System Database=False;Jet OLEDB:Encrypt Database=False' +
-      ';Jet OLEDB:Don'#39't Copy Locale on Compact=False;Jet OLEDB:Compact ' +
-      'Without Replica Repair=False;Jet OLEDB:SFP=False'
-    LoginPrompt = False
-    Mode = cmReadWrite
-    Provider = 'Microsoft.Jet.OLEDB.4.0'
-    Left = 8
-    Top = 152
-  end
   object ADOUsers: TADOTable
-    Active = True
-    Connection = ConCO2
+    Connection = con
     CursorType = ctStatic
     TableName = 'tblUsers'
     Left = 88
     Top = 24
   end
-  object ADOCars: TADOTable
-    Active = True
-    Connection = ConCO2
+  object ADOCarsOld: TADOTable
+    Connection = con
     CursorType = ctStatic
     TableName = 'tblCar'
     Left = 88
     Top = 88
   end
   object ADOOrganisation: TADOTable
-    Active = True
-    Connection = ConCO2
+    Connection = con
     CursorType = ctStatic
     TableName = 'tblOrganisation'
     Left = 88
     Top = 144
   end
   object DbSourceCar: TDataSource
-    DataSet = ADOCars
+    DataSet = adoCars
     Left = 192
     Top = 80
   end
@@ -55,21 +35,29 @@ object DMCO2: TDMCO2
     Top = 144
   end
   object ADOQuery: TADOQuery
-    Active = True
     ConnectionString = 
-      'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\James\Docu' +
-      'ments\GitHub\Grade12-pat\Database\db_CO2.mdb;Persist Security In' +
-      'fo=False'
+      'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\13236\Down' +
+      'loads\Grade12-pat-main\Grade12-pat-main\Database\db_CO2.mdb;Pers' +
+      'ist Security Info=False'
     CursorType = ctStatic
     Parameters = <>
     SQL.Strings = (
       'SELECT CarID,Make+'#39'  '#39'+Model  as MakeandModel FROM tblCar')
-    Left = 96
-    Top = 232
+    Left = 88
+    Top = 208
   end
   object dbSourceQuery: TDataSource
     DataSet = ADOQuery
-    Left = 184
-    Top = 232
+    Left = 200
+    Top = 224
+  end
+  object adoCars: TADOTable
+    TableName = 'tblCar'
+    Left = 304
+    Top = 96
+  end
+  object con: TADOConnection
+    Left = 24
+    Top = 96
   end
 end

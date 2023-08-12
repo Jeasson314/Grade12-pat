@@ -7,6 +7,7 @@ uses
 
 type
   TDMCO2 = class(TDataModule)
+    ConCO2: TADOConnection;
     ADOUsers: TADOTable;
     ADOCarsOld: TADOTable;
     ADOOrganisation: TADOTable;
@@ -15,7 +16,6 @@ type
     ADOQuery: TADOQuery;
     dbSourceQuery: TDataSource;
     adoCars: TADOTable;
-    con: TADOConnection;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
@@ -36,15 +36,15 @@ procedure TDMCO2.DataModuleCreate(Sender: TObject);
 var
   path: String;
 begin
-  con.Connected := False;
+  ConCO2.Connected := False;
   try
   path := ExpandFileName(ExtractFileDir(Application.ExeName)) + '\Database\db_CO2.mdb;';
-  con.ConnectionString := 'Provider=Microsoft.Jet.OLEDB.4.0;' +
+  ConCO2.ConnectionString := 'Provider=Microsoft.Jet.OLEDB.4.0;' +
     'User ID=Admin;Data Source=' + path;
   except
    showMessage('Error - Unable to find database at: '+path);
   end;
-  con.Connected := True;
+  ConCO2.Connected := True;
   ADOCars.active := True;
   AdoUsers.Active := True;
   ADOOrganisation.Active:=true;

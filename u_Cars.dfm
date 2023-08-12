@@ -2,8 +2,8 @@ object frm_Cars: Tfrm_Cars
   Left = 0
   Top = 0
   Caption = 'frm_Cars'
-  ClientHeight = 180
-  ClientWidth = 470
+  ClientHeight = 407
+  ClientWidth = 525
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,111 +12,164 @@ object frm_Cars: Tfrm_Cars
   Font.Style = []
   OldCreateOrder = False
   OnActivate = FormActivate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object imgAddCars: TImage
-    Left = 431
-    Top = 133
-    Width = 26
-    Height = 29
-    OnClick = imgAddCarsClick
-  end
-  object Label1: TLabel
-    Left = 160
-    Top = 114
-    Width = 32
-    Height = 13
-    Caption = 'Model:'
-  end
-  object Label2: TLabel
-    Left = 24
-    Top = 114
-    Width = 29
-    Height = 13
-    Caption = 'Make:'
-  end
-  object Label3: TLabel
-    Left = 304
-    Top = 114
-    Width = 83
-    Height = 13
-    Caption = 'Emmisions(g/km):'
-  end
-  object Label4: TLabel
-    Left = 24
-    Top = 85
-    Width = 148
-    Height = 23
-    Caption = 'Add New Vehicle:'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clBlack
-    Font.Height = -19
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    ParentFont = False
-  end
-  object Image1: TImage
-    Left = 166
-    Top = 49
-    Width = 26
-    Height = 29
-    OnClick = imgAddCarsClick
-  end
-  object Edit1: TEdit
-    Left = 32
-    Top = 20
-    Width = 121
-    Height = 21
+  object GroupBox1: TGroupBox
+    Left = 0
+    Top = 217
+    Width = 525
+    Height = 105
+    Align = alTop
     TabOrder = 0
-    Text = 'Edit1'
+    ExplicitLeft = 8
+    ExplicitTop = 272
+    ExplicitWidth = 513
+    object imgAddCars: TImage
+      Left = 439
+      Top = 52
+      Width = 26
+      Height = 29
+      OnClick = imgAddCarsClick
+    end
+    object Label3: TLabel
+      Left = 290
+      Top = 49
+      Width = 83
+      Height = 13
+      Caption = 'Emmisions(g/km):'
+    end
+    object Label1: TLabel
+      Left = 158
+      Top = 49
+      Width = 32
+      Height = 13
+      Caption = 'Model:'
+    end
+    object Label2: TLabel
+      Left = 16
+      Top = 49
+      Width = 29
+      Height = 13
+      Caption = 'Make:'
+    end
+    object Label4: TLabel
+      Left = 16
+      Top = 7
+      Width = 148
+      Height = 23
+      Caption = 'Add New Vehicle:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -19
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object edtEmission: TEdit
+      Left = 290
+      Top = 68
+      Width = 121
+      Height = 21
+      TabOrder = 0
+      TextHint = '100'
+    end
+    object edtModel: TEdit
+      Left = 151
+      Top = 68
+      Width = 121
+      Height = 21
+      TabOrder = 1
+      TextHint = 'Jazz'
+    end
+    object edtMake: TEdit
+      Left = 16
+      Top = 68
+      Width = 121
+      Height = 21
+      TabOrder = 2
+      TextHint = 'Honda'
+    end
   end
-  object btnSearch: TButton
-    Left = 159
-    Top = 18
-    Width = 105
-    Height = 25
-    Caption = 'Search Companies'
+  object GroupBox2: TGroupBox
+    Left = 0
+    Top = 0
+    Width = 525
+    Height = 217
+    Align = alTop
+    Caption = 'GroupBox2'
     TabOrder = 1
-    OnClick = btnSearchClick
+    object DBGrid1: TDBGrid
+      Left = 2
+      Top = 15
+      Width = 521
+      Height = 129
+      Align = alClient
+      DataSource = DMCO2.DbSourceCar
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+    end
+    object Panel1: TPanel
+      Left = 2
+      Top = 144
+      Width = 521
+      Height = 71
+      Align = alBottom
+      TabOrder = 1
+      object lookupMake: TDBLookupComboBox
+        Left = 5
+        Top = 8
+        Width = 145
+        Height = 21
+        KeyField = 'Make'
+        ListField = 'Make'
+        ListSource = dsListMakes
+        TabOrder = 0
+      end
+      object Edit1: TEdit
+        Left = 5
+        Top = 35
+        Width = 145
+        Height = 21
+        TabOrder = 1
+        Text = 'Edit1'
+      end
+      object btnFilterByMake: TButton
+        Left = 156
+        Top = 4
+        Width = 75
+        Height = 25
+        Caption = 'Filter By'
+        TabOrder = 2
+        OnClick = btnFilterByMakeClick
+      end
+      object btnSearch: TButton
+        Left = 156
+        Top = 35
+        Width = 105
+        Height = 25
+        Caption = 'Search Companies'
+        TabOrder = 3
+        OnClick = btnSearchClick
+      end
+    end
   end
-  object edtMake: TEdit
-    Left = 24
-    Top = 133
-    Width = 121
-    Height = 21
-    TabOrder = 2
-    TextHint = 'Honda'
+  object adoListMakes: TADOQuery
+    Connection = DMCO2.con
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'SELECT DISTINCT Make FROM tblCar')
+    Left = 200
+    Top = 32
   end
-  object edtModel: TEdit
-    Left = 160
-    Top = 133
-    Width = 121
-    Height = 21
-    TabOrder = 3
-    TextHint = 'Jazz'
-  end
-  object edtEmission: TEdit
-    Left = 304
-    Top = 133
-    Width = 121
-    Height = 21
-    TabOrder = 4
-    TextHint = '100'
-  end
-  object Panel1: TPanel
-    Left = 287
-    Top = 38
-    Width = 175
-    Height = 41
-    Caption = 'Panel1'
-    TabOrder = 5
-  end
-  object ComboBox1: TComboBox
-    Left = 32
-    Top = 47
-    Width = 121
-    Height = 21
-    TabOrder = 6
-    Text = 'ComboBox1'
+  object dsListMakes: TDataSource
+    DataSet = adoListMakes
+    Left = 264
+    Top = 32
   end
 end
