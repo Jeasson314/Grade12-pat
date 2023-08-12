@@ -23,7 +23,6 @@ type
     fLast_name: string;
     fUsername: string;
     fPassword: string;
-    fCars:string;
   public
     constructor create();
     function UsernameGeneration: string;

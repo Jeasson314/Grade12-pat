@@ -55,6 +55,9 @@ object DMCO2: TDMCO2
     Top = 224
   end
   object adoCars: TADOTable
+    Active = True
+    Connection = con
+    CursorType = ctStatic
     TableName = 'tblCar'
     Left = 304
     Top = 96

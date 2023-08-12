@@ -9,11 +9,6 @@ uses
 
 type
   Tfrm_Cars = class(TForm)
-    Edit1: TEdit;
-    btnSearch: TButton;
-    Panel1: TPanel;
-    Image1: TImage;
-    DBGrid1: TDBGrid;
     GroupBox1: TGroupBox;
     imgAddCars: TImage;
     edtEmission: TEdit;
@@ -24,9 +19,14 @@ type
     Label2: TLabel;
     Label4: TLabel;
     adoListMakes: TADOQuery;
-    lookupMake: TDBLookupComboBox;
     dsListMakes: TDataSource;
+    GroupBox2: TGroupBox;
+    DBGrid1: TDBGrid;
+    Panel1: TPanel;
+    lookupMake: TDBLookupComboBox;
+    Edit1: TEdit;
     btnFilterByMake: TButton;
+    btnSearch: TButton;
     procedure FormActivate(Sender: TObject);
     procedure btnSearchClick(Sender: TObject);
     procedure imgAddCarsClick(Sender: TObject);
@@ -40,7 +40,6 @@ type
 
 var
   frm_Cars: Tfrm_Cars;
-  dm_CO2: TDMCO2;
   sSQL: string;
 
 implementation
@@ -49,16 +48,25 @@ implementation
 
 procedure Tfrm_Cars.btnFilterByMakeClick(Sender: TObject);
 begin
-  dm_CO2.ADOCars.Filtered := False;
-  dm_CO2.ADOCars.Filter := 'Make = '+lookupMake.Text;
-  dm_CO2.ADOCars.Filtered := True;
+
+  if dmCO2.ADOCars.Active then  showMessage('Applying Filter');
+    try
+      dmCO2.ADOCars.Filtered := False;
+      dmCO2.ADOCars.Filter := 'Make = ' + lookupMake.Text;
+      dmCO2.ADOCars.Filtered := True;
+    except
+      showMessage('Error : Unable to apply filter: ' + dmCO2.ADOCars.Filter);
+    end
+  else
+    showMessage('Cars table is unavailable');
+    }
 end;
 
 procedure Tfrm_Cars.btnSearchClick(Sender: TObject);
 begin
   // DBLookupMakeModel.ListSource.Enabled:=false;
   sSQL := 'SELECT * FROM tblCar';
-  dm_CO2.runSQL(sSQL);
+  dmCO2.runSQL(sSQL);
   // DBLookupMakeModel.ListSource.Enabled:=true;
 end;
 
@@ -70,7 +78,7 @@ begin
 
   // adoCars
   imgAddCars.Picture.LoadFromFile('.\images\Health.png');
-  imgAddCars.Stretch := true;
+  imgAddCars.Stretch := True;
   // showmessage(dm_CO2.ADOCars.IndexFieldNames);
 
   // for iLoop := 0 to dbgDisplay.Columns.Count - 1 do
@@ -80,25 +88,29 @@ end;
 
 procedure Tfrm_Cars.FormShow(Sender: TObject);
 begin
-  self.adoListMakes.Active := True;
+  try
+    self.adoListMakes.Active := True;
+  except
+    showMessage('Unable to load list of car makes');
+  end;
 end;
 
 procedure Tfrm_Cars.imgAddCarsClick(Sender: TObject);
 begin
-  with dm_CO2 do
+  with dmCO2 do
   begin
     // adoCars.Last;
     // adoCars.Close;
-    if adoCars.Active then
-    TRY
-      adoCars.Insert;
-      adoCars['Make'] := edtMake.Text;
-      adoCars['Model'] := edtModel.Text;
-      adoCars['CO2 Emissions(g/km)'] := strtoint(edtEmission.Text);
-      adoCars.Post;
-    EXCEPT
+    if ADOCars.Active then
+      TRY
+        ADOCars.Insert;
+        ADOCars['Make'] := edtMake.Text;
+        ADOCars['Model'] := edtModel.Text;
+        ADOCars['CO2 Emissions(g/km)'] := strtoint(edtEmission.Text);
+        ADOCars.Post;
+      EXCEPT
 
-    END;
+      END;
     // adoCars.Open;
   end;
 end;

@@ -96,7 +96,7 @@ object frm_Cars: Tfrm_Cars
     Align = alTop
     Caption = 'GroupBox2'
     TabOrder = 1
-    object DBGrid1: TDBGrid
+    object DBModel: TDBGrid
       Left = 2
       Top = 15
       Width = 521
@@ -109,6 +109,24 @@ object frm_Cars: Tfrm_Cars
       TitleFont.Height = -11
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'Make'
+          Width = 150
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Model'
+          Width = 150
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'CO2 Emissions(g/km)'
+          Visible = True
+        end>
     end
     object Panel1: TPanel
       Left = 2
@@ -127,13 +145,12 @@ object frm_Cars: Tfrm_Cars
         ListSource = dsListMakes
         TabOrder = 0
       end
-      object Edit1: TEdit
+      object edtSearch: TEdit
         Left = 5
         Top = 35
         Width = 145
         Height = 21
         TabOrder = 1
-        Text = 'Edit1'
       end
       object btnFilterByMake: TButton
         Left = 156

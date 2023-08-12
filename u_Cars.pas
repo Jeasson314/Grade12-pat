@@ -21,10 +21,10 @@ type
     adoListMakes: TADOQuery;
     dsListMakes: TDataSource;
     GroupBox2: TGroupBox;
-    DBGrid1: TDBGrid;
+    DBModel: TDBGrid;
     Panel1: TPanel;
     lookupMake: TDBLookupComboBox;
-    Edit1: TEdit;
+    edtSearch: TEdit;
     btnFilterByMake: TButton;
     btnSearch: TButton;
     procedure FormActivate(Sender: TObject);
@@ -33,7 +33,7 @@ type
     procedure btnFilterByMakeClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
-    { Private declarations }
+    function dbcheck(sModel: string): boolean;
   public
     { Public declarations }
   end;
@@ -49,26 +49,43 @@ implementation
 procedure Tfrm_Cars.btnFilterByMakeClick(Sender: TObject);
 begin
 
-  if dmCO2.ADOCars.Active then  showMessage('Applying Filter');
- {
-    try
-      dm_CO2.ADOCars.Filtered := False;
-      dm_CO2.ADOCars.Filter := 'Make = ' + lookupMake.Text;
-      dm_CO2.ADOCars.Filtered := True;
-    except
-      showMessage('Error : Unable to apply filter: ' + dm_CO2.ADOCars.Filter);
-    end
-  else
-    showMessage('Cars table is unavailable');
-    }
+  if dmCO2.ADOCars.Active then
+    showMessage('Applying Filter');
+  try
+    dmCO2.ADOCars.Filtered := False;
+    dmCO2.ADOCars.Filter := 'Make = ' + quotedstr(lookupMake.Text);
+    dmCO2.ADOCars.Filtered := True;
+
+  except
+    showMessage('Error : Unable to apply filter: ' + dmCO2.ADOCars.Filter)
+    { else
+      showMessage('Cars table is unavailable'); }
+  end;
 end;
 
 procedure Tfrm_Cars.btnSearchClick(Sender: TObject);
 begin
-  // DBLookupMakeModel.ListSource.Enabled:=false;
-  sSQL := 'SELECT * FROM tblCar';
-  dmCO2.runSQL(sSQL);
-  // DBLookupMakeModel.ListSource.Enabled:=true;
+dmCO2.ADOCars.Filtered := False;
+    dmCO2.ADOCars.Filter := 'Model like ' + quotedstr(edtSearch.Text);
+    dmCO2.ADOCars.Filtered := True;
+end;
+
+function Tfrm_Cars.dbcheck(sModel: string): boolean;
+begin
+  with dmCO2 do
+  begin
+    ADOUsers.first;
+    while not ADOUsers.eof do
+    begin
+      if (sModel = ADOCars['Model']) then
+      begin
+        result := False;
+        exit;
+      end
+      else
+        ADOUsers.Next;
+    end;
+  end;
 end;
 
 procedure Tfrm_Cars.FormActivate(Sender: TObject);
@@ -97,22 +114,48 @@ begin
 end;
 
 procedure Tfrm_Cars.imgAddCarsClick(Sender: TObject);
+var
+  sModel, sMake: string;
+  iEmission: integer;
+  result: boolean;
 begin
-  with dmCO2 do
-  begin
-    // adoCars.Last;
-    // adoCars.Close;
-    if ADOCars.Active then
-      TRY
-        ADOCars.Insert;
-        ADOCars['Make'] := edtMake.Text;
-        ADOCars['Model'] := edtModel.Text;
-        ADOCars['CO2 Emissions(g/km)'] := strtoint(edtEmission.Text);
-        ADOCars.Post;
-      EXCEPT
+  try
+    sMake := uppercase(edtMake.Text);
+    sModel := uppercase(edtModel.Text);
+    iEmission := strtoint(edtEmission.Text);
+    result := dbcheck(sMake);
+    if result = False then
+    begin
+      MessageDlg('Car already exist in database,use top down memories',
+        mtWarning, [mbOk], 0);
+      exit;
+    end
+    else
+      with dmCO2 do
+      begin
+        // adoCars.Last;
+        // adoCars.Close;
+        if ADOCars.Active then
+        begin
+          TRY
+            ADOCars.Insert;
+            ADOCars['Make'] := sMake;
+            ADOCars['Model'] := sModel;
+            ADOCars['CO2 Emissions(g/km)'] := iEmission;
+            ADOCars.Post;
+          EXCEPT
 
-      END;
-    // adoCars.Open;
+          END;
+          // adoCars.Open;
+        end;
+      end;
+  finally
+    if sMake = '' then
+      MessageDlg('Please make sure you have a Make', mtWarning, [mbOk], 0);
+    if sModel = '' then
+      MessageDlg('Please make sure you have a Model', mtWarning, [mbOk], 0);
+    { if iEmission =  then
+      MessageDlg('Please make sure you have a Emission number', mtWarning, [mbOk], 0); }
   end;
 end;
 
