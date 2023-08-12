@@ -16,7 +16,6 @@ type
     dbSourceQuery: TDataSource;
     adoCars: TADOTable;
     con: TADOConnection;
-    DBSourceUsers: TDataSource;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

@@ -16,7 +16,6 @@ type
     dbSourceQuery: TDataSource;
     adoCars: TADOTable;
     con: TADOConnection;
-    DBSourceUsers: TDataSource;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
@@ -38,7 +37,6 @@ var
   path: String;
 begin
   con.Connected := False;
-  con.LoginPrompt:=false;
   try
   path := ExpandFileName(ExtractFileDir(Application.ExeName)) + '\Database\db_CO2.mdb;';
   con.ConnectionString := 'Provider=Microsoft.Jet.OLEDB.4.0;' +

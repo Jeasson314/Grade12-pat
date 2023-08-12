@@ -5,7 +5,6 @@ object DMCO2: TDMCO2
   Width = 422
   object ADOUsers: TADOTable
     Connection = con
-    CursorType = ctStatic
     TableName = 'tblUsers'
     Left = 88
     Top = 24
@@ -19,7 +18,6 @@ object DMCO2: TDMCO2
   end
   object ADOOrganisation: TADOTable
     Connection = con
-    CursorType = ctStatic
     TableName = 'tblOrganisation'
     Left = 88
     Top = 144
@@ -53,11 +51,19 @@ object DMCO2: TDMCO2
   end
   object adoCars: TADOTable
     TableName = 'tblCar'
-    Left = 304
-    Top = 96
+    Left = 88
+    Top = 264
   end
   object con: TADOConnection
+    LoginPrompt = False
+    Mode = cmReadWrite
+    Provider = 'Microsoft.Jet.OLEDB.4.0'
     Left = 24
     Top = 96
+  end
+  object DBSourceUsers: TDataSource
+    DataSet = ADOUsers
+    Left = 184
+    Top = 24
   end
 end
