@@ -10,7 +10,6 @@ uses
   u_organisation in 'u_organisation.pas' {frmOrganisation};
 
 {$R *.res}
-
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;

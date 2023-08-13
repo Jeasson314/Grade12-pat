@@ -9,13 +9,16 @@ type
   TDMCO2 = class(TDataModule)
     ADOUsers: TADOTable;
     ADOCarsOld: TADOTable;
-    ADOOrganisation: TADOTable;
+    ADOCars: TADOTable;
     DbSourceCar: TDataSource;
     dbSourceOrganisation: TDataSource;
     ADOQuery: TADOQuery;
     dbSourceQuery: TDataSource;
-   ADOCars: TADOTable;
+    ADOOrganisation: TADOTable;
     con: TADOConnection;
+    dbSourceUsers: TDataSource;
+    ADOCarList: TADOTable;
+    dbSourceCarList: TDataSource;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
@@ -48,7 +51,6 @@ begin
   ADOCars.active := True;
   AdoUsers.Active := True;
   ADOOrganisation.Active:=true;}
-
 end;
 
 procedure TDMCO2.runSQL(sSql: string);

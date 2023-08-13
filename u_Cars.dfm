@@ -24,8 +24,6 @@ object frm_Cars: Tfrm_Cars
     Padding.Left = 5
     Padding.Right = 5
     TabOrder = 0
-    ExplicitTop = 217
-    ExplicitWidth = 525
     object imgAddCars: TImage
       Left = 439
       Top = 52
@@ -156,9 +154,6 @@ object frm_Cars: Tfrm_Cars
       Height = 71
       Align = alBottom
       TabOrder = 1
-      ExplicitLeft = 2
-      ExplicitTop = 144
-      ExplicitWidth = 521
       object imgAddV: TImage
         Left = 267
         Top = 32
@@ -212,7 +207,6 @@ object frm_Cars: Tfrm_Cars
     Padding.Left = 5
     Padding.Right = 5
     TabOrder = 2
-    ExplicitTop = 322
     DesignSize = (
       573
       98)
@@ -227,8 +221,6 @@ object frm_Cars: Tfrm_Cars
       Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = []
-      Lines.Strings = (
-        'redoutCars')
       ParentFont = False
       TabOrder = 0
     end
@@ -240,6 +232,7 @@ object frm_Cars: Tfrm_Cars
       Anchors = [akLeft, akTop, akRight]
       Caption = 'Complete Car Selection'
       TabOrder = 1
+      OnClick = btnCompleteCarClick
     end
   end
   object adoListMakes: TADOQuery

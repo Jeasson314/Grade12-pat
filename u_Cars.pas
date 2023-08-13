@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Grids, DBGrids, dblookup, dm_CO2, StdCtrls, ExtCtrls, jpeg, pngimage,
-  DBCtrls, DB, ADODB,u_SignIn, ComCtrls;
+  DBCtrls, DB, ADODB, u_SignIn, ComCtrls;
 
 type
   Tfrm_Cars = class(TForm)
@@ -37,6 +37,7 @@ type
     procedure btnFilterByMakeClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure imgAddVClick(Sender: TObject);
+    procedure btnCompleteCarClick(Sender: TObject);
   private
     function dbcheck(sModel: string): boolean;
   public
@@ -46,33 +47,42 @@ type
 var
   frm_Cars: Tfrm_Cars;
   sSQL: string;
+
 implementation
+
 uses u_Signup;
 {$R *.dfm}
 
 procedure Tfrm_Cars.imgAddVClick(Sender: TObject);
 begin
-try
-//showmessage(sCarKey);
-objSignup.addCar(inttostr(dmco2.adoOrganisation['CarID']),dmco2.adoOrganisation['Make'],dmco2.adoOrganisation['Model']);
-redoutCars.Lines.Add(objSignup.CarsToString);
-except
-showmessage('An error has occured!?!?');
+  try
+    // showmessage(sCarKey);
+    objSignup.addCar(inttostr(dmco2.ADOCars['CarID']), dmco2.ADOCars['Make'],
+      dmco2.ADOCars['Model']);
+    redoutCars.Lines.Add(objSignup.CarsToString);
+  except
+    showmessage('An error has occured!?!?');
+  end;
 end;
+
+procedure Tfrm_Cars.btnCompleteCarClick(Sender: TObject);
+begin
+  frm_Cars.Close;
+  frmSignup.redoutCarsSignup.Lines.Add(objSignup.CarsToString)
 end;
 
 procedure Tfrm_Cars.btnFilterByMakeClick(Sender: TObject);
 begin
 
-  if dmCO2.adoCars.Active then
-    showMessage('Applying Filter');
+  if dmco2.ADOCars.Active then
+    showmessage('Applying Filter');
   try
-    dmCO2.adoCars.Filtered := False;
-    dmCO2.adoCars.Filter := 'Make = ' + quotedstr(lookupMake.Text);
-    dmCO2.adoCars.Filtered := True;
+    dmco2.ADOCars.Filtered := False;
+    dmco2.ADOCars.Filter := 'Make = ' + quotedstr(lookupMake.Text);
+    dmco2.ADOCars.Filtered := True;
 
   except
-    showMessage('Error : Unable to apply filter: ' + dmCO2.adoOrganisation.Filter)
+    showmessage('Error : Unable to apply filter: ' + dmco2.ADOCars.Filter)
     { else
       showMessage('Cars table is unavailable'); }
   end;
@@ -80,25 +90,26 @@ end;
 
 procedure Tfrm_Cars.btnSearchClick(Sender: TObject);
 begin
-dmCO2.adoOrganisation.Filtered := False;
-    dmCO2.adoOrganisation.Filter := 'Model like ' + uppercase(quotedstr(edtSearch.Text));
-    dmCO2.adoOrganisation.Filtered := True;
+  dmco2.ADOCars.Filtered := False;
+  dmco2.ADOCars.Filter := 'Model like ' + uppercase(quotedstr(edtSearch.Text));
+  dmco2.ADOCars.Filtered := True;
 end;
 
 function Tfrm_Cars.dbcheck(sModel: string): boolean;
 begin
-  with dmCO2 do
+result:=true;
+  with dmco2 do
   begin
-    ADOUsers.first;
-    while not ADOUsers.eof do
+    ADOCars.first;
+    while not (ADOCars.eof) and (result = True)do
     begin
-      if (sModel = adoOrganisation['Model']) then
+      if (ADOCars['Model']= sModel )  then
       begin
         result := False;
         exit;
       end
       else
-        ADOUsers.Next;
+        ADOCars.Next;
     end;
   end;
 end;
@@ -108,10 +119,10 @@ var
   iloop: integer;
 
 begin
- // adoCars
+  // adoCars
   imgAddCars.Picture.LoadFromFile('.\images\Health.png');
   imgAddCars.Stretch := True;
-    imgAddV.Picture.LoadFromFile('.\images\Health.png');
+  imgAddV.Picture.LoadFromFile('.\images\Health.png');
   imgAddV.Stretch := True;
   // showmessage(dm_CO2.ADOCars.IndexFieldNames);
 
@@ -125,7 +136,7 @@ begin
   try
     self.adoListMakes.Active := True;
   except
-    showMessage('Unable to load list of car makes');
+    showmessage('Unable to load list of car makes');
   end;
 end;
 
@@ -147,19 +158,20 @@ begin
       exit;
     end
     else
-      with dmCO2 do
+      with dmco2 do
       begin
         // adoCars.Last;
         // adoCars.Close;
-        if adoOrganisation.Active then
+        if ADOCars.Active then
         begin
           TRY
-            adoOrganisation.Insert;
-            adoOrganisation['Make'] := sMake;
-            adoOrganisation['Model'] := sModel;
-            adoOrganisation['CO2 Emissions(g/km)'] := iEmission;
-            adoOrganisation.Post;
-            objSignup.addCar(inttostr(dmco2.adoOrganisation['CarID']),dmco2.adoOrganisation['Make'],dmco2.adoOrganisation['Model']);
+            ADOCars.Insert;
+            ADOCars['Make'] := sMake;
+            ADOCars['Model'] := sModel;
+            ADOCars['CO2 Emissions(g/km)'] := iEmission;
+            ADOCars.Post;
+            objSignup.addCar(inttostr(dmco2.ADOCars['CarID']),
+              dmco2.ADOCars['Make'], dmco2.ADOCars['Model']);
             redoutCars.Lines.Add(objSignup.CarsToString);
           EXCEPT
 

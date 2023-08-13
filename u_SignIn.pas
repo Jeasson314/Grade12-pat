@@ -1,9 +1,8 @@
 unit u_SignIn;
-
-interface
+interface
 
 uses
-  u_passwordhasher, dm_CO2, Dialogs, Forms, sysUtils;
+  u_passwordhasher, dm_CO2, Dialogs, Forms, sysUtils, StrUtils;
 
 type
   SignIn = class(tObject)
@@ -26,17 +25,26 @@ type
     fCarsID: string;
     fCarsModel: string;
     fCarsMake: string;
-    fOrganisation:string;
-    fOrganisationID:integer;
+    fOrganisation: string;
+    fOrganisationID: integer;
+    fIsAdmin: boolean;
+    fIsMember: boolean;
+    fEmail: string;
+    fGoal: integer;
   public
     constructor create();
-    function UsernameGeneration: string;
+    function UsernameGeneration(sFirst_name, sLast_name: string): string;
     function passwordvalidate(sPasswordOrginal, sPasswordSecond: string)
       : boolean;
     procedure addPassword(sPassword: string);
     procedure addCar(sCarsID, sCarsMake, sCarsModel: string);
-    function CarsToString():string;
-    procedure addOrganisation(sOrgaganisationID:integer;sOrganisation:string);
+    function CarsToString(): string;
+    procedure addOrganisation(sOrgaganisationID: integer;
+      sOrganisation: string; bIsAdmin: boolean);
+    function Organisationtostring(): string;
+    procedure IsMember(bMember: boolean);
+    procedure addEmailGoal(sEmail: string; sGoal: string);
+    function addUser(): boolean;
   end;
 
 implementation
@@ -96,11 +104,28 @@ begin
   fCarsMake := fCarsMake + ',' + sCarsMake;
 end;
 
-procedure Signup.addOrganisation(sOrgaganisationID: integer;
-  sOrganisation: string);
+procedure Signup.addEmailGoal(sEmail, sGoal: string);
 begin
-fOrganisation:=sOrganisation;
-fOrganisationid:=sOrgaganisationID
+  if not ansipos('@', sEmail) = 0 then
+  begin
+    try
+      fEmail := sEmail;
+      fGoal := strtoint(sGoal);
+    except
+      showmessage('Please check that you have typed in number in the goal box');
+    end
+  end
+  else
+    showmessage('Please type in a valid email')
+
+end;
+
+procedure Signup.addOrganisation(sOrgaganisationID: integer;
+  sOrganisation: string; bIsAdmin: boolean);
+begin
+  fOrganisation := sOrganisation;
+  fOrganisationID := sOrgaganisationID;
+  fIsAdmin := bIsAdmin;
 end;
 
 procedure Signup.addPassword(sPassword: string);
@@ -108,9 +133,49 @@ begin
   fPassword := sPassword;
 end;
 
+function Signup.addUser: boolean;
+var
+  sCarIDtemp: string;
+  iUserID: integer;
+begin
+  try
+    with dmCO2 do
+    begin
+      if ADOUsers.Active then
+      begin
+        ADOUsers.Insert;
+
+        ADOUsers['First_name'] := fFirst_name;
+        ADOUsers['Last_name'] := fLast_name;
+        ADOUsers['Username'] := fUsername;
+        ADOUsers['Password'] := fPassword;
+        ADOUsers['OrganisationID'] := fOrganisationID;
+        ADOUsers['Admin'] := fIsAdmin;
+        ADOUsers['OrganisationID'] := fIsMember;
+        ADOUsers['Goal'] := fGoal;
+        ADOUsers['Email'] := fEmail;
+        iUserID := ADOUsers['UserID'];
+
+        ADOUsers.post;
+      end;
+    end;
+    while not length(fCarsID) = 0 do
+    begin
+      sCarIDtemp := copy(fCarsID, 2, pos(',', fCarsID));
+      delete(fCarsID, 1, (pos(',', fCarsID) - 1));
+      dmCO2.ADOCarList.Insert;
+      dmCO2.ADOCarList['UserID'] := iUserID;
+      dmCO2.ADOCarList['CarID'] := strtoint(sCarIDtemp);
+      dmCO2.ADOCarList.post;
+    end;
+  except
+    showmessage('There was an error trying to add new user')
+  end;
+end;
+
 function Signup.CarsToString: string;
 begin
-result:='Make: '+fCarsMake+#13+'Model: '+fCarsModel;
+  result := 'Make: ' + fCarsMake + #13 + 'Model: ' + fCarsModel;
 end;
 
 constructor Signup.create();
@@ -120,8 +185,21 @@ begin
   fCarsID := '';
   fCarsModel := '';
   fCarsMake := '';
-  fOrganisation:='';
+  fOrganisation := '';
+  fEmail:='';
+  fUsername:='';
+  fPassword:='';
 
+end;
+
+procedure Signup.IsMember(bMember: boolean);
+begin
+  fIsMember := bMember;
+end;
+
+function Signup.Organisationtostring: string;
+begin
+  result := fOrganisation
 end;
 
 function Signup.passwordvalidate(sPasswordOrginal, sPasswordSecond: string)
@@ -187,10 +265,13 @@ begin
 
 end;
 
-function Signup.UsernameGeneration: string;
+function Signup.UsernameGeneration(sFirst_name, sLast_name: string): string;
 begin
+  fFirst_name := sFirst_name;
+  fLast_name := sLast_name;
   fUsername := fFirst_name + fLast_name + inttostr(random(100));
   result := fUsername;
 end;
 
 end.
+

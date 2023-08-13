@@ -2,8 +2,8 @@ object frmOrganisation: TfrmOrganisation
   Left = 0
   Top = 0
   Caption = 'frmOrganisation'
-  ClientHeight = 337
-  ClientWidth = 476
+  ClientHeight = 371
+  ClientWidth = 364
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,22 +12,26 @@ object frmOrganisation: TfrmOrganisation
   Font.Style = []
   OldCreateOrder = False
   OnActivate = FormActivate
+  DesignSize = (
+    364
+    371)
   PixelsPerInch = 96
   TextHeight = 13
   object GroupBox1: TGroupBox
     Left = 0
     Top = 0
-    Width = 476
+    Width = 364
     Height = 153
     Align = alTop
     Caption = 'GroupBox1'
     Padding.Left = 5
     Padding.Right = 5
     TabOrder = 0
+    ExplicitWidth = 476
     object DBGrid1: TDBGrid
       Left = 7
       Top = 15
-      Width = 462
+      Width = 350
       Height = 98
       Align = alTop
       DataSource = DMCO2.dbSourceOrganisation
@@ -47,15 +51,17 @@ object frmOrganisation: TfrmOrganisation
     object Panel1: TPanel
       Left = 7
       Top = 113
-      Width = 462
+      Width = 350
       Height = 40
       Align = alTop
       TabOrder = 1
-      object imgAddOrganisation: TImage
+      ExplicitWidth = 462
+      object imgSelectOrganisation: TImage
         Left = 207
         Top = 6
         Width = 25
         Height = 25
+        OnClick = imgSelectOrganisationClick
       end
       object btnSearch: TButton
         Left = 119
@@ -71,27 +77,27 @@ object frmOrganisation: TfrmOrganisation
         Left = 0
         Top = 6
         Width = 113
-        Height = 35
+        Height = 21
         Align = alCustom
         TabOrder = 1
-        Text = 'edtSearch'
       end
     end
   end
   object GroupBox2: TGroupBox
     Left = 0
     Top = 153
-    Width = 476
+    Width = 364
     Height = 105
     Align = alTop
+    Padding.Left = 5
     TabOrder = 1
-    ExplicitTop = 159
-    ExplicitWidth = 185
+    ExplicitTop = 152
+    ExplicitWidth = 476
     object Label1: TLabel
-      Left = 2
+      Left = 7
       Top = 15
-      Width = 472
-      Height = 199
+      Width = 355
+      Height = 23
       Align = alTop
       Caption = 'Create an Organisation:'
       Font.Charset = DEFAULT_CHARSET
@@ -100,16 +106,79 @@ object frmOrganisation: TfrmOrganisation
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      ExplicitLeft = 275
-      ExplicitWidth = 88
+      ExplicitWidth = 472
     end
-    object Edit1: TEdit
-      Left = 40
-      Top = 64
-      Width = 121
-      Height = 21
+    object imgCreateOrganisation: TImage
+      Left = 296
+      Top = 57
+      Width = 33
+      Height = 29
+      OnClick = imgCreateOrganisationClick
+    end
+    object Label2: TLabel
+      Left = 8
+      Top = 44
+      Width = 78
+      Height = 13
+      Caption = 'Company name:'
+    end
+    object Label3: TLabel
+      Left = 135
+      Top = 44
+      Width = 142
+      Height = 13
+      Caption = 'Company emissions footprint:'
+    end
+    object edtOrganisation: TEdit
+      Left = 7
+      Top = 63
+      Width = 122
+      Height = 25
       TabOrder = 0
-      Text = 'Edit1'
+    end
+    object edtEmissions: TEdit
+      Left = 135
+      Top = 63
+      Width = 142
+      Height = 25
+      TabOrder = 1
+    end
+  end
+  object GroupBox3: TGroupBox
+    Left = 0
+    Top = 264
+    Width = 364
+    Height = 109
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    TabOrder = 2
+    ExplicitWidth = 450
+    ExplicitHeight = 141
+    object btnAddOrganisation: TButton
+      Left = 2
+      Top = 57
+      Width = 360
+      Height = 49
+      Align = alTop
+      Caption = 'Add Organisation'
+      Enabled = False
+      TabOrder = 0
+      OnClick = btnAddOrganisationClick
+      ExplicitTop = 56
+      ExplicitWidth = 446
+    end
+    object redoutOrgansiation: TRichEdit
+      Left = 2
+      Top = 15
+      Width = 360
+      Height = 42
+      Align = alTop
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
     end
   end
 end
