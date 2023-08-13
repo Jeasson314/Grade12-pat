@@ -2,8 +2,8 @@ object frm_Cars: Tfrm_Cars
   Left = 0
   Top = 0
   Caption = 'frm_Cars'
-  ClientHeight = 436
-  ClientWidth = 525
+  ClientHeight = 449
+  ClientWidth = 573
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,13 +17,15 @@ object frm_Cars: Tfrm_Cars
   TextHeight = 13
   object GroupBox1: TGroupBox
     Left = 0
-    Top = 217
-    Width = 525
+    Top = 247
+    Width = 573
     Height = 105
     Align = alTop
+    Padding.Left = 5
+    Padding.Right = 5
     TabOrder = 0
-    ExplicitLeft = -2
-    ExplicitTop = 211
+    ExplicitTop = 217
+    ExplicitWidth = 525
     object imgAddCars: TImage
       Left = 439
       Top = 52
@@ -90,20 +92,36 @@ object frm_Cars: Tfrm_Cars
       TextHint = 'Honda'
     end
   end
-  object GroupBox2: TGroupBox
+  object TGroupBox
     Left = 0
     Top = 0
-    Width = 525
-    Height = 217
+    Width = 573
+    Height = 247
     Align = alTop
-    Caption = 'GroupBox2'
+    Padding.Left = 5
+    Padding.Right = 5
     TabOrder = 1
-    object DBGridModel: TDBGrid
-      Left = 2
+    object Label5: TLabel
+      Left = 7
       Top = 15
-      Width = 521
-      Height = 129
-      Align = alClient
+      Width = 559
+      Height = 23
+      Align = alTop
+      Caption = 'Select a vehicle:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -19
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      ExplicitWidth = 136
+    end
+    object DBGridModel: TDBGrid
+      Left = 7
+      Top = 38
+      Width = 559
+      Height = 134
+      Align = alTop
       DataSource = DMCO2.DbSourceCar
       ReadOnly = True
       TabOrder = 0
@@ -132,13 +150,15 @@ object frm_Cars: Tfrm_Cars
         end>
     end
     object Panel1: TPanel
-      Left = 2
-      Top = 144
-      Width = 521
+      Left = 7
+      Top = 174
+      Width = 559
       Height = 71
       Align = alBottom
       TabOrder = 1
-      ExplicitTop = 150
+      ExplicitLeft = 2
+      ExplicitTop = 144
+      ExplicitWidth = 521
       object imgAddV: TImage
         Left = 267
         Top = 32
@@ -185,17 +205,23 @@ object frm_Cars: Tfrm_Cars
   end
   object GroupBox3: TGroupBox
     Left = 0
-    Top = 322
-    Width = 525
-    Height = 97
+    Top = 352
+    Width = 573
+    Height = 98
     Align = alTop
+    Padding.Left = 5
+    Padding.Right = 5
     TabOrder = 2
-    ExplicitTop = 312
+    ExplicitTop = 322
+    DesignSize = (
+      573
+      98)
     object redoutCars: TRichEdit
-      Left = 240
-      Top = 5
-      Width = 185
-      Height = 89
+      Left = 3
+      Top = 3
+      Width = 570
+      Height = 52
+      Anchors = [akLeft, akTop, akRight]
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -205,6 +231,15 @@ object frm_Cars: Tfrm_Cars
         'redoutCars')
       ParentFont = False
       TabOrder = 0
+    end
+    object btnCompleteCar: TButton
+      Left = 0
+      Top = 56
+      Width = 573
+      Height = 38
+      Anchors = [akLeft, akTop, akRight]
+      Caption = 'Complete Car Selection'
+      TabOrder = 1
     end
   end
   object adoListMakes: TADOQuery

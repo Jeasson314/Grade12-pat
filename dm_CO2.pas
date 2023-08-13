@@ -14,7 +14,7 @@ type
     dbSourceOrganisation: TDataSource;
     ADOQuery: TADOQuery;
     dbSourceQuery: TDataSource;
-    adoCars: TADOTable;
+   ADOCars: TADOTable;
     con: TADOConnection;
     procedure DataModuleCreate(Sender: TObject);
   private

@@ -1,0 +1,37 @@
+unit u_organisation;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Grids, DBGrids,dm_CO2, ExtCtrls,jpeg, pngimage;
+
+type
+  TfrmOrganisation = class(TForm)
+    GroupBox1: TGroupBox;
+    DBGrid1: TDBGrid;
+    Panel1: TPanel;
+    imgAddOrganisation: TImage;
+    Button1: TButton;
+    Edit1: TEdit;
+    procedure FormActivate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_Organisation: TfrmOrganisation;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmOrganisation.FormActivate(Sender: TObject);
+begin
+ imgAddOrganisation.Picture.LoadFromFile('.\images\Health.png');
+  imgAddOrganisation.Stretch := True;
+end;
+
+end.

@@ -26,6 +26,8 @@ type
     fCarsID: string;
     fCarsModel: string;
     fCarsMake: string;
+    fOrganisation:string;
+    fOrganisationID:integer;
   public
     constructor create();
     function UsernameGeneration: string;
@@ -34,6 +36,7 @@ type
     procedure addPassword(sPassword: string);
     procedure addCar(sCarsID, sCarsMake, sCarsModel: string);
     function CarsToString():string;
+    procedure addOrganisation(sOrgaganisationID:integer;sOrganisation:string);
   end;
 
 implementation
@@ -93,6 +96,13 @@ begin
   fCarsMake := fCarsMake + ',' + sCarsMake;
 end;
 
+procedure Signup.addOrganisation(sOrgaganisationID: integer;
+  sOrganisation: string);
+begin
+fOrganisation:=sOrganisation;
+fOrganisationid:=sOrgaganisationID
+end;
+
 procedure Signup.addPassword(sPassword: string);
 begin
   fPassword := sPassword;
@@ -110,6 +120,7 @@ begin
   fCarsID := '';
   fCarsModel := '';
   fCarsMake := '';
+  fOrganisation:='';
 
 end;
 

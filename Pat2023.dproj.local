@@ -27,6 +27,16 @@
     <Transaction>2023/08/08 18:03:03.160.dfm,C:\Users\James\Documents\GitHub\Grade12-pat\Grade 12 PAT phase 2\u_Organisation.dfm=</Transaction>
     <Transaction>2023/08/08 18:05:07.565.pas,C:\Users\James\Documents\GitHub\Grade12-pat\Grade 12 PAT phase 2\Unit2.pas=C:\Users\James\Documents\GitHub\Grade12-pat\Grade 12 PAT phase 2\U_Organisation.pas</Transaction>
     <Transaction>2023/08/08 18:05:07.565.dfm,C:\Users\James\Documents\GitHub\Grade12-pat\Grade 12 PAT phase 2\Unit2.dfm=C:\Users\James\Documents\GitHub\Grade12-pat\Grade 12 PAT phase 2\U_Organisation.dfm</Transaction>
+    <Transaction>2023/08/13 11:19:46.541.pas,C:\Users\James\Documents\GitHub\Grade12-pat\U_Organisation.pas=</Transaction>
+    <Transaction>2023/08/13 11:19:46.541.dfm,C:\Users\James\Documents\GitHub\Grade12-pat\U_Organisation.dfm=</Transaction>
+    <Transaction>2023/08/13 11:44:09.920.pas,C:\Users\James\Documents\GitHub\Grade12-pat\u_Organisation.pas=</Transaction>
+    <Transaction>2023/08/13 11:44:09.920.dfm,C:\Users\James\Documents\GitHub\Grade12-pat\u_Organisation.dfm=</Transaction>
+    <Transaction>2023/08/13 11:46:10.539.pas,C:\Users\James\Documents\GitHub\Grade12-pat\Unit2.pas=C:\Users\James\Documents\GitHub\Grade12-pat\u_organization.pas</Transaction>
+    <Transaction>2023/08/13 11:46:10.539.dfm,C:\Users\James\Documents\GitHub\Grade12-pat\Unit2.dfm=C:\Users\James\Documents\GitHub\Grade12-pat\u_organization.dfm</Transaction>
+    <Transaction>2023/08/13 11:48:09.753.pas,C:\Users\James\Documents\GitHub\Grade12-pat\u_organization.pas=C:\Users\James\Documents\GitHub\Grade12-pat\u_organisaation.pas</Transaction>
+    <Transaction>2023/08/13 11:48:09.753.dfm,C:\Users\James\Documents\GitHub\Grade12-pat\u_organization.dfm=C:\Users\James\Documents\GitHub\Grade12-pat\u_organisaation.dfm</Transaction>
+    <Transaction>2023/08/13 11:48:33.180.pas,C:\Users\James\Documents\GitHub\Grade12-pat\u_organisaation.pas=C:\Users\James\Documents\GitHub\Grade12-pat\u_organisation.pas</Transaction>
+    <Transaction>2023/08/13 11:48:33.180.dfm,C:\Users\James\Documents\GitHub\Grade12-pat\u_organisaation.dfm=C:\Users\James\Documents\GitHub\Grade12-pat\u_organisation.dfm</Transaction>
   </Transactions>
 	<ProjectSortOrder AutoSort="0" SortType="0">
     <File Path="dm_CO2.pas"/>
@@ -38,7 +48,7 @@
     <File Path="u_Signup.dfm"/>
     <File Path="u_Cars.pas"/>
     <File Path="u_Cars.dfm"/>
-    <File Path="U_Organisation.pas"/>
-    <File Path="U_Organisation.dfm"/>
+    <File Path="u_organisation.pas"/>
+    <File Path="u_organisation.dfm"/>
   </ProjectSortOrder>
 </BorlandProject>

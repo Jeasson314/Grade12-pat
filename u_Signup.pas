@@ -4,21 +4,28 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ExtCtrls, Mask, DBCtrls, u_SignIn, u_Organisation, u_Cars;
+  Dialogs, StdCtrls, ExtCtrls, Mask, DBCtrls, u_SignIn, u_Organisation, u_Cars,
+  ComCtrls;
 
 type
   TfrmSignup = class(TForm)
+    btnSignup: TButton;
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
     edtFirst_name: TEdit;
     edtLast_name: TEdit;
-    pnlUsername: TPanel;
     btnGenerate_name: TButton;
-    edtPasswordOriginal: TEdit;
-    Label1: TLabel;
+    Label2: TLabel;
+    pnlUsername: TPanel;
+    GroupBox2: TGroupBox;
     btnOrganisation: TButton;
     Button1: TButton;
-    tdb_organisation: TDBEdit;
+    RichEdit1: TRichEdit;
+    RichEdit2: TRichEdit;
+    edtPasswordOriginal: TEdit;
     edtPasswordSecond: TEdit;
-    btnSignup: TButton;
+    Label3: TLabel;
+    Label4: TLabel;
     procedure btnGenerate_nameClick(Sender: TObject);
     procedure btnSignupClick(Sender: TObject);
     procedure btnOrganisationClick(Sender: TObject);
@@ -50,7 +57,7 @@ end;
 
 procedure TfrmSignup.btnOrganisationClick(Sender: TObject);
 begin
-  frm_Organsiation.ShowModal;
+  frm_Organisation.ShowModal;
 end;
 
 procedure TfrmSignup.btnSignupClick(Sender: TObject);

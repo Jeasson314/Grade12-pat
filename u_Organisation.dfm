@@ -1,9 +1,9 @@
-object frm_Organsiation: Tfrm_Organsiation
+object frmOrganisation: TfrmOrganisation
   Left = 0
   Top = 0
-  Caption = 'frm_Organsiation'
-  ClientHeight = 201
-  ClientWidth = 447
+  Caption = 'frmOrganisation'
+  ClientHeight = 337
+  ClientWidth = 476
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,10 +14,102 @@ object frm_Organsiation: Tfrm_Organsiation
   OnActivate = FormActivate
   PixelsPerInch = 96
   TextHeight = 13
-  object imgAddOrganisation: TImage
-    Left = 248
-    Top = 80
-    Width = 49
-    Height = 49
+  object GroupBox1: TGroupBox
+    Left = 0
+    Top = 0
+    Width = 476
+    Height = 153
+    Align = alTop
+    Caption = 'GroupBox1'
+    Padding.Left = 5
+    Padding.Right = 5
+    TabOrder = 0
+    object DBGrid1: TDBGrid
+      Left = 7
+      Top = 15
+      Width = 462
+      Height = 98
+      Align = alTop
+      DataSource = DMCO2.dbSourceOrganisation
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'OrganisationName'
+          Visible = True
+        end>
+    end
+    object Panel1: TPanel
+      Left = 7
+      Top = 113
+      Width = 462
+      Height = 40
+      Align = alTop
+      TabOrder = 1
+      object imgAddOrganisation: TImage
+        Left = 207
+        Top = 6
+        Width = 25
+        Height = 25
+      end
+      object btnSearch: TButton
+        Left = 119
+        Top = 6
+        Width = 82
+        Height = 27
+        Align = alCustom
+        Caption = 'Search'
+        TabOrder = 0
+        OnClick = btnSearchClick
+      end
+      object edtSearch: TEdit
+        Left = 0
+        Top = 6
+        Width = 113
+        Height = 35
+        Align = alCustom
+        TabOrder = 1
+        Text = 'edtSearch'
+      end
+    end
+  end
+  object GroupBox2: TGroupBox
+    Left = 0
+    Top = 153
+    Width = 476
+    Height = 105
+    Align = alTop
+    TabOrder = 1
+    ExplicitTop = 159
+    ExplicitWidth = 185
+    object Label1: TLabel
+      Left = 2
+      Top = 15
+      Width = 472
+      Height = 199
+      Align = alTop
+      Caption = 'Create an Organisation:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      ExplicitLeft = 275
+      ExplicitWidth = 88
+    end
+    object Edit1: TEdit
+      Left = 40
+      Top = 64
+      Width = 121
+      Height = 21
+      TabOrder = 0
+      Text = 'Edit1'
+    end
   end
 end

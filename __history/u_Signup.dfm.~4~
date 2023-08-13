@@ -1,0 +1,185 @@
+object frmSignup: TfrmSignup
+  Left = 598
+  Top = 236
+  Caption = 'frmSignup'
+  ClientHeight = 395
+  ClientWidth = 650
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesigned
+  OnActivate = FormActivate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object btnSignup: TButton
+    Left = 0
+    Top = 321
+    Width = 650
+    Height = 74
+    Align = alBottom
+    Caption = 'Sign up'
+    TabOrder = 0
+    OnClick = btnSignupClick
+    ExplicitTop = 272
+  end
+  object GroupBox1: TGroupBox
+    Left = 0
+    Top = 0
+    Width = 153
+    Height = 321
+    Align = alLeft
+    Caption = 'GroupBox1'
+    TabOrder = 1
+    ExplicitHeight = 272
+    DesignSize = (
+      153
+      321)
+    object Label1: TLabel
+      Left = 2
+      Top = 15
+      Width = 149
+      Height = 13
+      Align = alTop
+      Caption = 'First name:'
+      ExplicitLeft = 12
+      ExplicitTop = 18
+      ExplicitWidth = 54
+    end
+    object Label2: TLabel
+      Left = 3
+      Top = 60
+      Width = 53
+      Height = 13
+      Caption = 'Last name:'
+    end
+    object edtFirst_name: TEdit
+      Left = 2
+      Top = 28
+      Width = 149
+      Height = 26
+      Align = alTop
+      TabOrder = 0
+    end
+    object edtLast_name: TEdit
+      Left = 3
+      Top = 79
+      Width = 147
+      Height = 25
+      Anchors = [akLeft, akTop, akRight]
+      TabOrder = 1
+    end
+    object btnGenerate_name: TButton
+      Left = 3
+      Top = 110
+      Width = 147
+      Height = 35
+      Caption = 'Generate username'
+      TabOrder = 2
+      OnClick = btnGenerate_nameClick
+    end
+    object pnlUsername: TPanel
+      Left = 3
+      Top = 151
+      Width = 147
+      Height = 40
+      TabOrder = 3
+    end
+  end
+  object GroupBox2: TGroupBox
+    Left = 157
+    Top = -2
+    Width = 221
+    Height = 201
+    Caption = 'Vehicle and Organisation'
+    TabOrder = 2
+    object btnOrganisation: TButton
+      Left = 2
+      Top = 15
+      Width = 217
+      Height = 25
+      Align = alTop
+      Caption = 'Choose organisation'
+      TabOrder = 0
+      OnClick = btnOrganisationClick
+      ExplicitLeft = 64
+      ExplicitTop = 21
+      ExplicitWidth = 121
+    end
+    object Button1: TButton
+      Left = 2
+      Top = 75
+      Width = 217
+      Height = 25
+      Align = alTop
+      Caption = 'Choose vehicle'
+      TabOrder = 1
+      OnClick = Button1Click
+      ExplicitLeft = 64
+      ExplicitTop = 79
+      ExplicitWidth = 121
+    end
+    object RichEdit1: TRichEdit
+      Left = 2
+      Top = 100
+      Width = 217
+      Height = 35
+      Align = alTop
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      Lines.Strings = (
+        'RichEdit1')
+      ParentFont = False
+      TabOrder = 2
+      ExplicitLeft = 64
+      ExplicitTop = 110
+      ExplicitWidth = 121
+    end
+    object RichEdit2: TRichEdit
+      Left = 2
+      Top = 40
+      Width = 217
+      Height = 35
+      Align = alTop
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      Lines.Strings = (
+        'RichEdit2')
+      ParentFont = False
+      TabOrder = 3
+    end
+  end
+  object GroupBox3: TGroupBox
+    Left = 159
+    Top = 197
+    Width = 222
+    Height = 118
+    Caption = 'GroupBox3'
+    TabOrder = 3
+    object edtPasswordSecond: TEdit
+      Left = 3
+      Top = 50
+      Width = 121
+      Height = 21
+      TabOrder = 0
+      Text = 'edtPasswordSecond'
+    end
+    object edtPasswordOriginal: TEdit
+      Left = 3
+      Top = 23
+      Width = 121
+      Height = 21
+      TabOrder = 1
+      Text = 'edtPasswordOriginal'
+    end
+  end
+end

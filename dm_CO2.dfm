@@ -16,8 +16,8 @@ object DMCO2: TDMCO2
     Connection = con
     CursorType = ctStatic
     TableName = 'tblCar'
-    Left = 88
-    Top = 88
+    Left = 320
+    Top = 224
   end
   object ADOOrganisation: TADOTable
     Active = True
@@ -59,8 +59,8 @@ object DMCO2: TDMCO2
     Connection = con
     CursorType = ctStatic
     TableName = 'tblCar'
-    Left = 304
-    Top = 96
+    Left = 88
+    Top = 88
   end
   object con: TADOConnection
     Connected = True

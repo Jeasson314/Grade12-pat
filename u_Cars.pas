@@ -20,7 +20,6 @@ type
     Label4: TLabel;
     adoListMakes: TADOQuery;
     dsListMakes: TDataSource;
-    GroupBox2: TGroupBox;
     DBGridModel: TDBGrid;
     Panel1: TPanel;
     lookupMake: TDBLookupComboBox;
@@ -30,6 +29,8 @@ type
     GroupBox3: TGroupBox;
     imgAddV: TImage;
     redoutCars: TRichEdit;
+    btnCompleteCar: TButton;
+    Label5: TLabel;
     procedure FormActivate(Sender: TObject);
     procedure btnSearchClick(Sender: TObject);
     procedure imgAddCarsClick(Sender: TObject);
@@ -53,7 +54,7 @@ procedure Tfrm_Cars.imgAddVClick(Sender: TObject);
 begin
 try
 //showmessage(sCarKey);
-objSignup.addCar(inttostr(dmco2.adoCars['CarID']),dmco2.adoCars['Make'],dmco2.adoCars['Model']);
+objSignup.addCar(inttostr(dmco2.adoOrganisation['CarID']),dmco2.adoOrganisation['Make'],dmco2.adoOrganisation['Model']);
 redoutCars.Lines.Add(objSignup.CarsToString);
 except
 showmessage('An error has occured!?!?');
@@ -63,15 +64,15 @@ end;
 procedure Tfrm_Cars.btnFilterByMakeClick(Sender: TObject);
 begin
 
-  if dmCO2.ADOCars.Active then
+  if dmCO2.adoCars.Active then
     showMessage('Applying Filter');
   try
-    dmCO2.ADOCars.Filtered := False;
-    dmCO2.ADOCars.Filter := 'Make = ' + quotedstr(lookupMake.Text);
-    dmCO2.ADOCars.Filtered := True;
+    dmCO2.adoCars.Filtered := False;
+    dmCO2.adoCars.Filter := 'Make = ' + quotedstr(lookupMake.Text);
+    dmCO2.adoCars.Filtered := True;
 
   except
-    showMessage('Error : Unable to apply filter: ' + dmCO2.ADOCars.Filter)
+    showMessage('Error : Unable to apply filter: ' + dmCO2.adoOrganisation.Filter)
     { else
       showMessage('Cars table is unavailable'); }
   end;
@@ -79,9 +80,9 @@ end;
 
 procedure Tfrm_Cars.btnSearchClick(Sender: TObject);
 begin
-dmCO2.ADOCars.Filtered := False;
-    dmCO2.ADOCars.Filter := 'Model like ' + uppercase(quotedstr(edtSearch.Text));
-    dmCO2.ADOCars.Filtered := True;
+dmCO2.adoOrganisation.Filtered := False;
+    dmCO2.adoOrganisation.Filter := 'Model like ' + uppercase(quotedstr(edtSearch.Text));
+    dmCO2.adoOrganisation.Filtered := True;
 end;
 
 function Tfrm_Cars.dbcheck(sModel: string): boolean;
@@ -91,7 +92,7 @@ begin
     ADOUsers.first;
     while not ADOUsers.eof do
     begin
-      if (sModel = ADOCars['Model']) then
+      if (sModel = adoOrganisation['Model']) then
       begin
         result := False;
         exit;
@@ -150,20 +151,23 @@ begin
       begin
         // adoCars.Last;
         // adoCars.Close;
-        if ADOCars.Active then
+        if adoOrganisation.Active then
         begin
           TRY
-            ADOCars.Insert;
-            ADOCars['Make'] := sMake;
-            ADOCars['Model'] := sModel;
-            ADOCars['CO2 Emissions(g/km)'] := iEmission;
-            ADOCars.Post;
+            adoOrganisation.Insert;
+            adoOrganisation['Make'] := sMake;
+            adoOrganisation['Model'] := sModel;
+            adoOrganisation['CO2 Emissions(g/km)'] := iEmission;
+            adoOrganisation.Post;
+            objSignup.addCar(inttostr(dmco2.adoOrganisation['CarID']),dmco2.adoOrganisation['Make'],dmco2.adoOrganisation['Model']);
+            redoutCars.Lines.Add(objSignup.CarsToString);
           EXCEPT
 
           END;
           // adoCars.Open;
         end;
       end;
+
   finally
     if sMake = '' then
       MessageDlg('Please make sure you have a Make', mtWarning, [mbOk], 0);
