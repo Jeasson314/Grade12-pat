@@ -236,7 +236,6 @@ object frm_Cars: Tfrm_Cars
     end
   end
   object adoListMakes: TADOQuery
-    Active = True
     Connection = DMCO2.con
     CursorType = ctStatic
     Parameters = <>

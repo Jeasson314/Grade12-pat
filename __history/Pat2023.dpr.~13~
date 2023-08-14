@@ -7,17 +7,18 @@ uses
   u_SignIn in 'u_SignIn.pas',
   u_Signup in 'u_Signup.pas' {frmSignup},
   u_Cars in 'u_Cars.pas' {frm_Cars},
-  u_Organisation in 'u_Organisation.pas' {frm_Organisation};
+  u_organisation in 'u_organisation.pas' {frmOrganisation},
+  u_User in 'u_User.pas' {Form2};
 
 {$R *.res}
-
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  AApplication.CreateForm(TForm1, Form1);
-  AApplication.CreateForm(TDMCO2, DMCO2);
-  AApplication.CreateForm(TfrmSignup, frmSignup);
+  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TDMCO2, DMCO2);
+  Application.CreateForm(TfrmSignup, frmSignup);
   Application.CreateForm(Tfrm_Cars, frm_Cars);
-  Application.CreateForm(Tfrm_Organsiation, frm_Organsiation);
-  lication.Run;
+  Application.CreateForm(Tfrm_Organisation, frm_Organisation);
+  Application.CreateForm(TForm2, Form2);
+  Application.Run;
 end.

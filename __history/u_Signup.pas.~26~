@@ -21,14 +21,19 @@ type
     Button1: TButton;
     redoutCarsSignup: TRichEdit;
     GroupBox3: TGroupBox;
-    edtPasswordOriginal: TEdit;
-    Label3: TLabel;
-    Label4: TLabel;
-    edtPasswordSecond: TEdit;
     pnlOrganisation: TPanel;
     btnOrganisation: TButton;
     redoutOrganisation: TRichEdit;
     ChkOrganisation: TCheckBox;
+    Label3: TLabel;
+    edtPasswordOriginal: TEdit;
+    Label4: TLabel;
+    edtPasswordSecond: TEdit;
+    Panel1: TPanel;
+    edtEmail: TEdit;
+    edtPersonalgoal: TEdit;
+    Label5: TLabel;
+    Label6: TLabel;
     procedure btnGenerate_nameClick(Sender: TObject);
     procedure btnSignupClick(Sender: TObject);
     procedure btnOrganisationClick(Sender: TObject);
@@ -56,7 +61,7 @@ begin
   sFirstname := edtFirst_name.Text;
   sLastname := edtLast_name.Text;
 
-  pnlUsername.Caption := objSignup.UsernameGeneration;
+  pnlUsername.Caption := objSignup.UsernameGeneration(sFirstname,sLastname);
 end;
 
 procedure TfrmSignup.btnOrganisationClick(Sender: TObject);
@@ -67,10 +72,15 @@ end;
 procedure TfrmSignup.btnSignupClick(Sender: TObject);
 begin
   if objSignup.passwordvalidate(edtPasswordOriginal.Text,
-    edtPasswordSecond.Text) = true then
+    edtPasswordSecond.Text) = false then
     objSignup.addPassword(edtPasswordOriginal.Text)
   else
     MessageDlg('Please check your password', mtWarning, [mbOk], 0);
+objSignUp.addEmailGoal(edtEmail.Text,edtPersonalgoal.text);
+if objSignup.addUser=true then
+frmSignup.CloseModal;
+
+
 end;
 
 procedure TfrmSignup.Button1Click(Sender: TObject);

@@ -39,7 +39,7 @@ procedure TDMCO2.DataModuleCreate(Sender: TObject);
 var
   path: String;
 begin
-  con.Connected := False;
+  {con.Connected := False;
   try
   path := ExpandFileName(ExtractFileDir(Application.ExeName)) + '\Database\db_CO2.mdb;';
   con.ConnectionString := 'Provider=Microsoft.Jet.OLEDB.4.0;' +
@@ -50,8 +50,7 @@ begin
   con.Connected := True;
   ADOCars.active := True;
   AdoUsers.Active := True;
-  ADOOrganisation.Active:=true;
-  ADOCarList.Active:=true;
+  ADOOrganisation.Active:=true;}
 end;
 
 procedure TDMCO2.runSQL(sSql: string);

@@ -18,6 +18,7 @@ type
 
   Signup = class(tObject)
   private
+    fArraylength: integer;
     fFirst_name: string;
     fLast_name: string;
     fUsername: string;
@@ -32,6 +33,7 @@ type
     fEmail: string;
     fGoal: integer;
   public
+    arrCar: Array of integer;
     constructor create();
     function UsernameGeneration(sFirst_name, sLast_name: string): string;
     function passwordvalidate(sPasswordOrginal, sPasswordSecond: string)
@@ -99,7 +101,9 @@ end;
 
 procedure Signup.addCar(sCarsID, sCarsMake, sCarsModel: string);
 begin
-  fCarsID := fCarsID + ',' + sCarsID;
+  inc(fArraylength);
+  setlength(arrCar, fArraylength);
+  arrCar[fArraylength] := strtoint(sCarsID);
   fCarsModel := fCarsModel + ',' + sCarsModel;
   fCarsMake := fCarsMake + ',' + sCarsMake;
 end;
@@ -136,7 +140,7 @@ end;
 function Signup.addUser: boolean;
 var
   sCarIDtemp: string;
-  iUserID: integer;
+  iUserID, iloop: integer;
 begin
   try
     with dmCO2 do
@@ -158,17 +162,15 @@ begin
         iUserID := ADOUsers['UserID'];
       end;
     end;
-    while not length(fCarsID) = 0 do
+    for iloop := 1 to fArraylength do
     begin
-      sCarIDtemp := copy(fCarsID, 2, pos(',', fCarsID));
-      delete(fCarsID, 1, (pos(',', fCarsID) - 1));
       dmCO2.ADOCarList.Insert;
       dmCO2.ADOCarList['UserID'] := iUserID;
-      dmCO2.ADOCarList['CarID'] := strtoint(sCarIDtemp);
+      dmCO2.ADOCarList['CarID'] := arrCar[1];
       dmCO2.ADOCarList.post;
     end;
-  except
-    showmessage('There was an error trying to add new user')
+    result := true except showmessage(
+      'There was an error trying to add new user')
   end;
 end;
 
@@ -188,7 +190,7 @@ begin
   fEmail := '';
   fUsername := '';
   fPassword := '';
-
+  fArraylength := 0;
 end;
 
 procedure Signup.IsMember(bMember: boolean);
@@ -214,7 +216,8 @@ begin
   if (sPasswordOrginal = '') or (sPasswordSecond = '') then
   begin
     result := false;
-    MessageDlg('Please type in a password or retype password', mtWarning, [mbOk], 0);
+    MessageDlg('Please type in a password or retype password', mtWarning,
+      [mbOk], 0);
     exit;
   end
   else
@@ -223,9 +226,11 @@ begin
   if sPasswordOrginal = sPasswordSecond then
     result := true
   else
+  begin
     result := false;
-  exit;
-  MessageDlg('Password must match', mtWarning, [mbOk], 0);
+    MessageDlg('Password must match', mtWarning, [mbOk], 0);
+    exit;
+  end;
   if length(sPasswordOrginal) < 8 then
   begin
     result := false;
@@ -234,21 +239,25 @@ begin
     exit;
   end
   else
+  begin
     result := true;
-for icharacterloop := 1 to length(sPasswordOrginal) do
-    chrPassword := sPasswordOrginal[icharacterloop];
-case ord(chrPassword) of
-    48 .. 57:
-      bNumber := true;
-    58 .. 64:
-      bSpecialchr := true;
-    92 .. 96:
-      bSpecialchr := true;
-    123, 125:
-      bSpecialchr := true;
-    65 .. 90:
-      bCapital := true;
+    for icharacterloop := 1 to length(sPasswordOrginal) do
+    begin
+      chrPassword := sPasswordOrginal[icharacterloop];
+      case ord(chrPassword) of
+        48 .. 57:
+          bNumber := true;
+        58 .. 64:
+          bSpecialchr := true;
+        92 .. 96:
+          bSpecialchr := true;
+        123, 125:
+          bSpecialchr := true;
+        65 .. 90:
+          bCapital := true;
 
+      end;
+    end;
   end;
   if bNumber = false then
     MessageDlg('Please use a number in your password', mtWarning, [mbOk], 0);
@@ -269,6 +278,8 @@ begin
   fFirst_name := sFirst_name;
   fLast_name := sLast_name;
   fUsername := fFirst_name + fLast_name + inttostr(random(100));
+  if dmCO2.ADOUsers.locate('Username', fUsername, []) = true then
+    fUsername := fFirst_name + fLast_name + inttostr(random(100));
   result := fUsername;
 end;
 

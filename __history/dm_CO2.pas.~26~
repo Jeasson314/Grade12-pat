@@ -51,7 +51,6 @@ begin
   ADOCars.active := True;
   AdoUsers.Active := True;
   ADOOrganisation.Active:=true;
-  ADOCarList.Active:=true;
 end;
 
 procedure TDMCO2.runSQL(sSql: string);

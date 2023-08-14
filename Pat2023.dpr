@@ -7,7 +7,8 @@ uses
   u_SignIn in 'u_SignIn.pas',
   u_Signup in 'u_Signup.pas' {frmSignup},
   u_Cars in 'u_Cars.pas' {frm_Cars},
-  u_organisation in 'u_organisation.pas' {frmOrganisation};
+  u_organisation in 'u_organisation.pas' {frmOrganisation},
+  u_User in 'u_User.pas' {Form2};
 
 {$R *.res}
 begin
@@ -18,5 +19,6 @@ begin
   Application.CreateForm(TfrmSignup, frmSignup);
   Application.CreateForm(Tfrm_Cars, frm_Cars);
   Application.CreateForm(TfrmOrganisation, frm_Organisation);
+  Application.CreateForm(TForm2, Form2);
   Application.Run;
 end.

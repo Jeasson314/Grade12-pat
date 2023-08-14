@@ -27,7 +27,6 @@ object frmOrganisation: TfrmOrganisation
     Padding.Left = 5
     Padding.Right = 5
     TabOrder = 0
-    ExplicitWidth = 476
     object DBGrid1: TDBGrid
       Left = 7
       Top = 15
@@ -35,6 +34,7 @@ object frmOrganisation: TfrmOrganisation
       Height = 98
       Align = alTop
       DataSource = DMCO2.dbSourceOrganisation
+      ReadOnly = True
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -55,7 +55,6 @@ object frmOrganisation: TfrmOrganisation
       Height = 40
       Align = alTop
       TabOrder = 1
-      ExplicitWidth = 462
       object imgSelectOrganisation: TImage
         Left = 207
         Top = 6
@@ -91,8 +90,6 @@ object frmOrganisation: TfrmOrganisation
     Align = alTop
     Padding.Left = 5
     TabOrder = 1
-    ExplicitTop = 152
-    ExplicitWidth = 476
     object Label1: TLabel
       Left = 7
       Top = 15
@@ -106,7 +103,7 @@ object frmOrganisation: TfrmOrganisation
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      ExplicitWidth = 472
+      ExplicitWidth = 199
     end
     object imgCreateOrganisation: TImage
       Left = 296
@@ -133,14 +130,14 @@ object frmOrganisation: TfrmOrganisation
       Left = 7
       Top = 63
       Width = 122
-      Height = 25
+      Height = 21
       TabOrder = 0
     end
     object edtEmissions: TEdit
       Left = 135
       Top = 63
       Width = 142
-      Height = 25
+      Height = 21
       TabOrder = 1
     end
   end
@@ -151,8 +148,6 @@ object frmOrganisation: TfrmOrganisation
     Height = 109
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 2
-    ExplicitWidth = 450
-    ExplicitHeight = 141
     object btnAddOrganisation: TButton
       Left = 2
       Top = 57
@@ -163,8 +158,6 @@ object frmOrganisation: TfrmOrganisation
       Enabled = False
       TabOrder = 0
       OnClick = btnAddOrganisationClick
-      ExplicitTop = 56
-      ExplicitWidth = 446
     end
     object redoutOrgansiation: TRichEdit
       Left = 2

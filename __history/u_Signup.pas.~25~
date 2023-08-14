@@ -1,5 +1,6 @@
 unit u_Signup;
-interface
+
+interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
@@ -60,7 +61,7 @@ begin
   sFirstname := edtFirst_name.Text;
   sLastname := edtLast_name.Text;
 
-  pnlUsername.Caption := objSignup.UsernameGeneration(sFirstname, sLastname);
+  pnlUsername.Caption := objSignup.UsernameGeneration(sFirstname,sLastname);
 end;
 
 procedure TfrmSignup.btnOrganisationClick(Sender: TObject);
@@ -72,17 +73,12 @@ procedure TfrmSignup.btnSignupClick(Sender: TObject);
 begin
   if objSignup.passwordvalidate(edtPasswordOriginal.Text,
     edtPasswordSecond.Text) = false then
-
-  begin
-    objSignup.addPassword(edtPasswordOriginal.Text);
-    objSignup.addEmailGoal(edtEmail.Text, edtPersonalgoal.Text);
-    if objSignup.addUser = true then
-      frmSignup.Close;
-  end
+    objSignup.addPassword(edtPasswordOriginal.Text)
   else
-  begin
     MessageDlg('Please check your password', mtWarning, [mbOk], 0);
-  end;
+objSignUp.addEmailGoal(edtEmail.Text,edtPersonalgoal.text);
+if objSignup.addUser=true then
+
 
 end;
 
@@ -93,15 +89,14 @@ end;
 
 procedure TfrmSignup.ChkOrganisationClick(Sender: TObject);
 begin
-  if ChkOrganisation.Checked then
-  begin
+  if ChkOrganisation.Checked then begin
     pnlOrganisation.Visible := true;
     objSignup.IsMember(true);
   end
   else
   begin
     objSignup.IsMember(false);
-    pnlOrganisation.Visible := false;
+  pnlOrganisation.Visible := false;
   end;
 
 end;

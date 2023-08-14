@@ -4,7 +4,6 @@ object DMCO2: TDMCO2
   Height = 368
   Width = 422
   object ADOUsers: TADOTable
-    Active = True
     Connection = con
     CursorType = ctStatic
     TableName = 'tblUsers'
@@ -19,7 +18,6 @@ object DMCO2: TDMCO2
     Top = 224
   end
   object ADOOrganisation: TADOTable
-    Active = True
     Connection = con
     CursorType = ctStatic
     TableName = 'tblOrganisation'
@@ -37,7 +35,6 @@ object DMCO2: TDMCO2
     Top = 144
   end
   object ADOQuery: TADOQuery
-    Active = True
     ConnectionString = 
       'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\13236\Down' +
       'loads\Grade12-pat-main\Grade12-pat-main\Database\db_CO2.mdb;Pers' +
@@ -55,7 +52,6 @@ object DMCO2: TDMCO2
     Top = 264
   end
   object ADOCars: TADOTable
-    Active = True
     Connection = con
     CursorType = ctStatic
     TableName = 'tblCar'
@@ -63,13 +59,8 @@ object DMCO2: TDMCO2
     Top = 88
   end
   object con: TADOConnection
-    Connected = True
-    ConnectionString = 
-      'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\13236\Down' +
-      'loads\Grade12-pat-main\Grade12-pat-main\Database\db_CO2.mdb;Pers' +
-      'ist Security Info=False'
     LoginPrompt = False
-    Mode = cmShareDenyNone
+    Mode = cmReadWrite
     Provider = 'Microsoft.Jet.OLEDB.4.0'
     Left = 24
     Top = 96
@@ -80,7 +71,6 @@ object DMCO2: TDMCO2
     Top = 32
   end
   object ADOCarList: TADOTable
-    Active = True
     Connection = con
     CursorType = ctStatic
     TableName = 'tblCarList'
