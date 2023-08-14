@@ -106,7 +106,7 @@ end;
 
 procedure Signup.addEmailGoal(sEmail, sGoal: string);
 begin
-  if not ansipos('@', sEmail) = 0 then
+  if ansipos('@', sEmail) > 0 then
   begin
     try
       fEmail := sEmail;
@@ -130,7 +130,7 @@ end;
 
 procedure Signup.addPassword(sPassword: string);
 begin
-  fPassword := sPassword;
+  fPassword := hash(sPassword);
 end;
 
 function Signup.addUser: boolean;
@@ -151,12 +151,11 @@ begin
         ADOUsers['Password'] := fPassword;
         ADOUsers['OrganisationID'] := fOrganisationID;
         ADOUsers['Admin'] := fIsAdmin;
-        ADOUsers['OrganisationID'] := fIsMember;
+        ADOUsers['OrganisationMembership'] := fIsMember;
         ADOUsers['Goal'] := fGoal;
         ADOUsers['Email'] := fEmail;
-        iUserID := ADOUsers['UserID'];
-
         ADOUsers.post;
+        iUserID := ADOUsers['UserID'];
       end;
     end;
     while not length(fCarsID) = 0 do
@@ -186,9 +185,9 @@ begin
   fCarsModel := '';
   fCarsMake := '';
   fOrganisation := '';
-  fEmail:='';
-  fUsername:='';
-  fPassword:='';
+  fEmail := '';
+  fUsername := '';
+  fPassword := '';
 
 end;
 
@@ -215,7 +214,7 @@ begin
   if (sPasswordOrginal = '') or (sPasswordSecond = '') then
   begin
     result := false;
-    MessageDlg('Please type in a password', mtWarning, [mbOk], 0);
+    MessageDlg('Please type in a password or retype password', mtWarning, [mbOk], 0);
     exit;
   end
   else
@@ -236,9 +235,9 @@ begin
   end
   else
     result := true;
-  for icharacterloop := 1 to length(sPasswordOrginal) do
+for icharacterloop := 1 to length(sPasswordOrginal) do
     chrPassword := sPasswordOrginal[icharacterloop];
-  case ord(chrPassword) of
+case ord(chrPassword) of
     48 .. 57:
       bNumber := true;
     58 .. 64:

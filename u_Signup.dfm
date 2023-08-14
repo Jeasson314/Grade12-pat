@@ -24,7 +24,6 @@ object frmSignup: TfrmSignup
     Caption = 'Sign up'
     TabOrder = 0
     OnClick = btnSignupClick
-    ExplicitLeft = -1
   end
   object GroupBox1: TGroupBox
     Left = 0
@@ -34,7 +33,6 @@ object frmSignup: TfrmSignup
     Align = alLeft
     Caption = 'Username Generation'
     TabOrder = 1
-    ExplicitHeight = 349
     DesignSize = (
       217
       344)
@@ -58,7 +56,7 @@ object frmSignup: TfrmSignup
       Left = 2
       Top = 28
       Width = 213
-      Height = 26
+      Height = 21
       Align = alTop
       TabOrder = 0
     end
@@ -66,7 +64,7 @@ object frmSignup: TfrmSignup
       Left = 3
       Top = 79
       Width = 211
-      Height = 25
+      Height = 21
       Anchors = [akLeft, akTop, akRight]
       TabOrder = 1
     end
@@ -97,9 +95,6 @@ object frmSignup: TfrmSignup
     Padding.Left = 20
     Padding.Right = 20
     TabOrder = 2
-    ExplicitLeft = 214
-    ExplicitTop = -6
-    ExplicitHeight = 349
     object Button1: TButton
       Left = 23
       Top = 26
@@ -177,9 +172,6 @@ object frmSignup: TfrmSignup
     Anchors = [akLeft, akTop, akRight, akBottom]
     Caption = 'GroupBox3'
     TabOrder = 3
-    ExplicitLeft = 475
-    ExplicitWidth = 242
-    ExplicitHeight = 349
     object TPanel
       Left = 2
       Top = 15
@@ -187,8 +179,6 @@ object frmSignup: TfrmSignup
       Height = 138
       Align = alTop
       TabOrder = 0
-      ExplicitLeft = 3
-      ExplicitWidth = 257
       object Label3: TLabel
         Left = 23
         Top = 15
@@ -221,7 +211,7 @@ object frmSignup: TfrmSignup
         Left = 20
         Top = 35
         Width = 213
-        Height = 29
+        Height = 21
         Align = alCustom
         TabOrder = 0
       end
@@ -229,7 +219,7 @@ object frmSignup: TfrmSignup
         Left = 20
         Top = 90
         Width = 213
-        Height = 34
+        Height = 21
         Align = alCustom
         TabOrder = 1
       end
@@ -241,7 +231,6 @@ object frmSignup: TfrmSignup
       Height = 193
       Align = alTop
       TabOrder = 1
-      ExplicitWidth = 257
       object Label5: TLabel
         Left = 23
         Top = 11
@@ -275,14 +264,14 @@ object frmSignup: TfrmSignup
       Left = 24
       Top = 184
       Width = 209
-      Height = 33
+      Height = 21
       TabOrder = 2
     end
     object edtPersonalgoal: TEdit
       Left = 24
       Top = 243
       Width = 209
-      Height = 38
+      Height = 21
       TabOrder = 3
     end
   end
