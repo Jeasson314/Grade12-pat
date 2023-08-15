@@ -39,6 +39,8 @@
     <Transaction>2023/08/13 11:48:33.180.dfm,C:\Users\James\Documents\GitHub\Grade12-pat\u_organisaation.dfm=C:\Users\James\Documents\GitHub\Grade12-pat\u_organisation.dfm</Transaction>
     <Transaction>2023/08/14 17:47:09.606.pas,C:\Users\James\Documents\GitHub\Grade12-pat\Unit2.pas=C:\Users\James\Documents\GitHub\Grade12-pat\u_User.pas</Transaction>
     <Transaction>2023/08/14 17:47:09.607.dfm,C:\Users\James\Documents\GitHub\Grade12-pat\Unit2.dfm=C:\Users\James\Documents\GitHub\Grade12-pat\u_User.dfm</Transaction>
+    <Transaction>2023/08/15 12:29:12.645.pas,C:\Users\13236\Downloads\Pat\Unit3.pas=C:\Users\13236\Downloads\Pat\u_graph.pas</Transaction>
+    <Transaction>2023/08/15 12:29:12.645.dfm,C:\Users\13236\Downloads\Pat\Unit3.dfm=C:\Users\13236\Downloads\Pat\u_graph.dfm</Transaction>
   </Transactions>
 	<ProjectSortOrder AutoSort="0" SortType="0">
     <File Path="dm_CO2.pas"/>
@@ -54,5 +56,7 @@
     <File Path="u_organisation.dfm"/>
     <File Path="u_User.pas"/>
     <File Path="u_User.dfm"/>
+    <File Path="u_graph.pas"/>
+    <File Path="u_graph.dfm"/>
   </ProjectSortOrder>
 </BorlandProject>

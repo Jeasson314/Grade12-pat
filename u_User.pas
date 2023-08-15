@@ -4,12 +4,15 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Grids, DBGrids, StdCtrls;
+  Dialogs, Grids, DBGrids, StdCtrls, ComCtrls;
 
 type
   TForm2 = class(TForm)
-    DBGrid1: TDBGrid;
-    GroupBox1: TGroupBox;
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    Button1: TButton;
+    Button2: TButton;
   private
     { Private declarations }
   public

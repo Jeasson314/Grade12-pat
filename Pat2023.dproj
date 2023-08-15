@@ -63,6 +63,9 @@
 			<DCCReference Include="u_User.pas">
 				<Form>Form2</Form>
 			</DCCReference>
+			<DCCReference Include="u_graph.pas">
+				<Form>Form3</Form>
+			</DCCReference>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>

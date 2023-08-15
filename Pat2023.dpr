@@ -8,17 +8,19 @@ uses
   u_Signup in 'u_Signup.pas' {frmSignup},
   u_Cars in 'u_Cars.pas' {frm_Cars},
   u_organisation in 'u_organisation.pas' {frmOrganisation},
-  u_User in 'u_User.pas' {Form2};
+  u_User in 'u_User.pas' {Form2},
+  u_graph in 'u_graph.pas' {Form3};
 
 {$R *.res}
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TForm1, Form1);
-  Application.CreateForm(TDMCO2, DMCO2);
-  Application.CreateForm(TfrmSignup, frmSignup);
+  AApplication.CreateForm(TForm1, Form1);
+  AApplication.CreateForm(TDMCO2, DMCO2);
+  AApplication.CreateForm(TfrmSignup, frmSignup);
   Application.CreateForm(Tfrm_Cars, frm_Cars);
-  Application.CreateForm(TfrmOrganisation, frm_Organisation);
+  Application.CreateForm(Tfrm_Organisation, frm_Organisation);
   Application.CreateForm(TForm2, Form2);
-  Application.Run;
+  Application.CreateForm(TForm3, Form3);
+  lication.Run;
 end.
