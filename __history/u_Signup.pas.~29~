@@ -71,13 +71,14 @@ end;
 procedure TfrmSignup.btnSignupClick(Sender: TObject);
 begin
   if objSignup.passwordvalidate(edtPasswordOriginal.Text,
-    edtPasswordSecond.Text) = true then
-begin
+    edtPasswordSecond.Text) = false then
+
+  begin
     objSignup.addPassword(edtPasswordOriginal.Text);
     objSignup.addEmailGoal(edtEmail.Text, edtPersonalgoal.Text);
     if objSignup.addUser = true then
       frmSignup.Close;
-end
+  end
   else
   begin
     MessageDlg('Please check your password', mtWarning, [mbOk], 0);

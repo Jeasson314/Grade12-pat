@@ -77,7 +77,7 @@ begin
     objSignup.addEmailGoal(edtEmail.Text, edtPersonalgoal.Text);
     if objSignup.addUser = true then
       frmSignup.Close;
-end
+  end
   else
   begin
     MessageDlg('Please check your password', mtWarning, [mbOk], 0);

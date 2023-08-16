@@ -141,7 +141,7 @@ function Signup.addUser: boolean;
 var
   sCarIDtemp: string;
   iUserID, iloop: integer;
-  bFound: boolean;
+  bFound:boolean;
 begin
   try
     with dmCO2 do
@@ -162,22 +162,20 @@ begin
         ADOUsers.post;
       end;
       ADOUsers.first;
-      bFound := true;
-      while (not ADOUsers.eof) and (bFound = false) do
-        if ADOUsers['Username'] = fUsername then
-        begin
-          iUserID := ADOUsers['UserID'];
-          bFound := false;
-        end
-        else
-          ADOUsers.Next;
-    end;
+      bFound:=true;
+      while (not adoUsers.eof) and (bFound=false) do
+      if adoUsers['Username']=fUsername then
+      begin
+      iUserID:=adoUsers['UserID'];
+      bFound:=false;
+      end;
+end;
 
     for iloop := 1 to fArraylength do
     begin
       dmCO2.ADOCarList.Insert;
       dmCO2.ADOCarList['UserID'] := iUserID;
-      dmCO2.ADOCarList['CarID'] := arrCar[iloop];
+      dmCO2.ADOCarList['CarID'] := arrCar[1];
       dmCO2.ADOCarList.post;
     end;
 

@@ -13,7 +13,6 @@ type
     TabSheet2: TTabSheet;
     Button1: TButton;
     Button2: TButton;
-    DBGrid1: TDBGrid;
   private
     { Private declarations }
   public

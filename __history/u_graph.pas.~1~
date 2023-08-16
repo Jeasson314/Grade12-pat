@@ -28,7 +28,7 @@ implementation
 
 procedure TForm3.Button1Click(Sender: TObject);
 begin
-//series1.Add('100','January',clBlue)
+series1.Add('100','January',clBlue)
 end;
 
 end.

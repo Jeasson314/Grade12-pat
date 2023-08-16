@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs,u_SignIn, StdCtrls,u_Signup;
+  Dialogs,u_SignIn, StdCtrls,u_Signup,WideStrings;
 
 type
   TForm1 = class(TForm)
@@ -43,12 +43,12 @@ begin
     if objSignin.PasswordCheck = true then
 
       finally
-        {if edtUsername.Text = '' then
+        if edtUsername.Text = '' then
           MessageDlg('Please type in a username or create an account.',
             mtWarning, [mbOk], 0);
         if edtPassword.Text = '' then
           MessageDlg('Please type in a password.', mtWarning, [mbOk], 0);
-        edtPassword.Color := clRed}
+        edtPassword.Color := clRed;
       end;
     // showmessage((hash(edtPassword.Text)));
   end;
@@ -59,11 +59,12 @@ frmSignup.ShowModal;
 end;
 
 procedure TForm1.FormActivate(Sender: TObject);
-  var sReadln:string;
+  var sReadln,path:string;
   begin
     try
+    path:=ExpandFileName(ExtractFileDir(Application.ExeName)) + '\Textfile\tfUserCookie.txt';
       objSignin := SignIn.create();
-      assignfile(tfCookie, 'tfUserCookie.txt');
+      assignfile(tfCookie,path);
       reset(tfCookie);
       readln(tfCookie,sReadln);
       if  sReadln= '' then

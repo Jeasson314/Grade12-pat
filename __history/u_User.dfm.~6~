@@ -25,24 +25,12 @@ object Form2: TForm2
     object TabSheet1: TTabSheet
       Caption = 'User update'
       object Button2: TButton
-        Left = 360
-        Top = 184
+        Left = 320
+        Top = 112
         Width = 75
         Height = 25
         Caption = 'Button2'
         TabOrder = 0
-      end
-      object DBGrid1: TDBGrid
-        Left = 0
-        Top = 0
-        Width = 321
-        Height = 283
-        TabOrder = 1
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Tahoma'
-        TitleFont.Style = []
       end
     end
     object TabSheet2: TTabSheet

@@ -2,8 +2,8 @@ object Form1: TForm1
   Left = 342
   Top = 165
   Caption = 'Form1'
-  ClientHeight = 257
-  ClientWidth = 322
+  ClientHeight = 301
+  ClientWidth = 391
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,70 +15,81 @@ object Form1: TForm1
   OnActivate = FormActivate
   PixelsPerInch = 96
   TextHeight = 13
-  object TGroupBox
+  object GroupBox1: TGroupBox
     Left = 0
-    Top = 0
-    Width = 322
-    Height = 257
-    Align = alClient
+    Top = -7
+    Width = 393
+    Height = 312
+    Caption = 'GroupBox1'
     TabOrder = 0
-    OnClick = GroupBox1Click
-    ExplicitWidth = 313
-    ExplicitHeight = 225
-    object Label2: TLabel
-      Left = 64
-      Top = 92
-      Width = 50
-      Height = 13
-      Caption = 'password:'
-    end
     object Label1: TLabel
-      Left = 64
-      Top = 61
-      Width = 52
-      Height = 13
+      Left = 106
+      Top = 69
+      Width = 72
+      Height = 18
       Caption = 'Username:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
     end
-    object Button1: TButton
-      Left = 152
-      Top = 216
-      Width = 170
-      Height = 41
-      Caption = 'Sign up'
-      TabOrder = 0
-      OnClick = Button1Click
+    object Label2: TLabel
+      Left = 106
+      Top = 133
+      Width = 66
+      Height = 18
+      Caption = 'Password:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
     end
-    object CHKCookie: TCheckBox
-      Left = 88
+    object edtUsername: TEdit
+      Left = 106
       Top = 88
-      Width = 97
-      Height = 17
-      Caption = 'Remember me?'
+      Width = 137
+      Height = 39
+      TabOrder = 0
+      OnChange = edtUsernameChange
+    end
+    object edtPassword: TEdit
+      Left = 106
+      Top = 157
+      Width = 137
+      Height = 37
+      PasswordChar = '*'
       TabOrder = 1
     end
     object btnSignin: TButton
-      Left = 0
-      Top = 216
-      Width = 153
+      Left = 56
+      Top = 208
+      Width = 116
       Height = 41
       Caption = 'Sign in'
       TabOrder = 2
       OnClick = btnSigninClick
     end
-    object edtPassword: TEdit
-      Left = 88
-      Top = 138
-      Width = 121
-      Height = 21
-      PasswordChar = '*'
+    object Button1: TButton
+      Left = 196
+      Top = 208
+      Width = 117
+      Height = 41
+      Caption = 'Sign up'
       TabOrder = 3
+      OnClick = Button1Click
     end
-    object edtUsername: TEdit
-      Left = 88
-      Top = 111
-      Width = 121
-      Height = 21
+    object CHKCookie: TCheckBox
+      Left = 285
+      Top = 177
+      Width = 97
+      Height = 17
+      Caption = 'Remember me?'
       TabOrder = 4
+      OnClick = CHKCookieClick
     end
   end
 end

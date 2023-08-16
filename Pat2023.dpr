@@ -15,12 +15,12 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  AApplication.CreateForm(TForm1, Form1);
-  AApplication.CreateForm(TDMCO2, DMCO2);
-  AApplication.CreateForm(TfrmSignup, frmSignup);
+  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TDMCO2, DMCO2);
+  Application.CreateForm(TfrmSignup, frmSignup);
   Application.CreateForm(Tfrm_Cars, frm_Cars);
-  Application.CreateForm(Tfrm_Organisation, frm_Organisation);
+  Application.CreateForm(TfrmOrganisation, frm_Organisation);
   Application.CreateForm(TForm2, Form2);
   Application.CreateForm(TForm3, Form3);
-  lication.Run;
+  Application.Run;
 end.
