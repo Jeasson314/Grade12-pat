@@ -61,11 +61,12 @@
 				<Form>frmOrganisation</Form>
 			</DCCReference>
 			<DCCReference Include="u_User.pas">
-				<Form>Form2</Form>
+				<Form>frm_Users</Form>
 			</DCCReference>
 			<DCCReference Include="u_graph.pas">
 				<Form>Form3</Form>
 			</DCCReference>
+			<DCCReference Include="u_UserNormal.pas"/>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>

@@ -20,7 +20,6 @@ type
     procedure FormActivate(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure CHKCookieClick(Sender: TObject);
-    procedure edtUsernameChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -72,12 +71,7 @@ closefile(tfCookie);
 end;
 end;
 
-pprocedure TForm1.edtUsernameChange(Sender: TObject);
-begin
-
-end;
-
-rocedure TForm1.FormActivate(Sender: TObject);
+procedure TForm1.FormActivate(Sender: TObject);
   var sReadln,path:string;
   begin
     try

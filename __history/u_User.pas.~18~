@@ -27,8 +27,7 @@ type
 
 var
   frm_Users: Tfrm_Users;
-  objUser:Signup;
-  objUserdata: UserData;
+  objUserCreate:Signup;
 
 implementation
 
@@ -36,8 +35,8 @@ implementation
 
 procedure Tfrm_Users.FormActivate(Sender: TObject);
 begin
-objUser:=UserData.Usercreate(SignIn.AccessUsername);
-if objuser.isFirstAccess=true then
+objUserCreate:=UserData.Usercreate(SignIn.AccessUsername);
+if  then
 
 end;
 

@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Grids, DBGrids, StdCtrls, ComCtrls, ExtCtrls,u_SignIn,dm_co2,u_UserNormal,u_Signup;
+  Dialogs, Grids, DBGrids, StdCtrls, ComCtrls, ExtCtrls,u_SignIn,dm_co2;
 
 type
   Tfrm_Users = class(TForm)
@@ -27,18 +27,25 @@ type
 
 var
   frm_Users: Tfrm_Users;
-  objUser:Signup;
-  objUserdata: UserData;
 
 implementation
 
 {$R *.dfm}
 
 procedure Tfrm_Users.FormActivate(Sender: TObject);
+var bFound:boolean;
 begin
-objUser:=UserData.Usercreate(SignIn.AccessUsername);
-if objuser.isFirstAccess=true then
+with dmco2 do
+begin
+ADOUsers.First;
+bFound=false;
+while (not ADOUsers.Eof) and bFound= false do
+   begin
+    if ADOUsers['Username'] then
 
+
+   end;
+end;
 end;
 
 end.

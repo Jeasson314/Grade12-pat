@@ -14,8 +14,6 @@ type
     constructor create;
     procedure SetLogin(sUsername, sPassword: string);
     Function PasswordCheck: boolean;
-    function AccessUsername():string;
-
   end;
 
   Signup = class(tObject)
@@ -52,12 +50,8 @@ type
   end;
 
 implementation
-{ SignIn }
 
-function SignIn.AccessUsername: string;
-begin
-result:=AccessUsername();
-end;
+{ SignIn }
 
 constructor SignIn.create();
 begin
