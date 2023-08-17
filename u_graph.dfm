@@ -1,7 +1,7 @@
-object Form3: TForm3
+object frm_Graph: Tfrm_Graph
   Left = 0
   Top = 0
-  Caption = 'Form3'
+  Caption = 'frm_Graph'
   ClientHeight = 422
   ClientWidth = 618
   Color = clBtnFace

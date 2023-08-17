@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Grids, DBGrids, StdCtrls, ComCtrls, ExtCtrls,u_SignIn,dm_co2,u_UserNormal,u_Signup;
+  Dialogs, Grids, DBGrids, StdCtrls, ComCtrls, ExtCtrls, u_SignIn, dm_co2,
+  u_UserNormal, u_Signup,u_graph;
 
 type
   Tfrm_Users = class(TForm)
@@ -15,10 +16,14 @@ type
     btnGraph: TButton;
     DBGridUsers: TDBGrid;
     Edit1: TEdit;
-    Edit2: TEdit;
     Panel1: TPanel;
-    GroupBox1: TGroupBox;
+    pnlFirst: TPanel;
+    Edit2: TEdit;
+    edtMileage: TEdit;
+    Label1: TLabel;
+    btnAdd: TButton;
     procedure FormActivate(Sender: TObject);
+    procedure btnGraphClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -27,17 +32,25 @@ type
 
 var
   frm_Users: Tfrm_Users;
-  objUser:Signup;
+  objUser: Signup;
   objUserdata: UserData;
 
 implementation
-
+ uses u_Login;
 {$R *.dfm}
+
+procedure Tfrm_Users.btnGraphClick(Sender: TObject);
+begin
+frm_Graph.ShowModal;
+end;
 
 procedure Tfrm_Users.FormActivate(Sender: TObject);
 begin
-objUser:=UserData.Usercreate(SignIn.AccessUsername);
-if objuser.isFirstAccess=true then
+  objUserdata := UserData.Usercreate(u_Login.objSignin.AccessUsername);
+  if objUserdata.isFirstAccess = true then
+    pnlFirst.Visible := true
+  else
+    pnlFirst.Visible := true
 
 end;
 

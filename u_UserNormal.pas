@@ -7,10 +7,10 @@ UserData = class(tObject)
   Private
   fUsername:string;
   fUserID:integer;
-  fisFirst:boolean
+  fisFirst:boolean;
   public
-   constructor UserCreate(sUsername);
-   function isFirstAccess():boolean;
+   constructor UserCreate(sUsername:string);
+   function isFirstAccess:boolean;
 
 end;
 implementation
@@ -22,23 +22,22 @@ begin
 result:=fisFirst
 end;
 
-procedure UserData.Usercreate(sUsername);
+constructor UserData.UserCreate(sUsername:string);
 var bFound:boolean;
 begin
 fUsername:=sUsername;
 with dmco2 do
 begin
 ADOUsers.First;
-bFound=false;
-while (not ADOUsers.Eof) and bFound= false do
+bFound:=false;
+while (not ADOUsers.Eof) and (bFound= false) do
    begin
     if ADOUsers['Username']= fUsername then
     begin
     fUserID:=ADOUsers['UserID'];
-    if ADOUsers['Carbon_Footprint']=nil then
-      fisFirst:=true
-      else
-      fisFirst:=false;
+    if ADOUsers['Carbon_Footprint']=0 then
+      fisFirst:=true;
+
     bfound:=true;
     end;
     ADOUsers.Next;

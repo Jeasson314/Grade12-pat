@@ -1,7 +1,7 @@
-object frmSignup: TfrmSignup
+object frm_Signup: Tfrm_Signup
   Left = 598
   Top = 236
-  Caption = 'frmSignup'
+  Caption = 'frm_Signup'
   ClientHeight = 418
   ClientWidth = 723
   Color = clBtnFace

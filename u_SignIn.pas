@@ -14,7 +14,7 @@ type
     constructor create;
     procedure SetLogin(sUsername, sPassword: string);
     Function PasswordCheck: boolean;
-    function AccessUsername():string;
+    function AccessUsername(): string;
 
   end;
 
@@ -52,11 +52,12 @@ type
   end;
 
 implementation
+
 { SignIn }
 
 function SignIn.AccessUsername: string;
 begin
-result:=AccessUsername();
+  result := fUsername;
 end;
 
 constructor SignIn.create();
@@ -68,24 +69,30 @@ begin
 end;
 
 function SignIn.PasswordCheck: boolean;
+var
+  bAccountFound: boolean;
+  sPassword: string;
 begin
+  bAccountFound := false;
+  result := false;
   if fAttempts <= 3 then
   begin
     with dmCO2 do
     begin
+      sPassword := hash(fPassword);
       ADOUsers.first;
-      while not ADOUsers.eof do
+      while (not ADOUsers.eof) and (bAccountFound = false) do
       begin
         if (fUsername = ADOUsers['Username']) and
-          (hash(fPassword) = ADOUsers['Password']) then
-          result := true
+          (sPassword = ADOUsers['Password']) then
+        begin
+          result := true;
+          bAccountFound := true;
+        end
         else
           ADOUsers.Next;
       end;
-      result := false;
       inc(fAttempts);
-      MessageDlg('Please check your username and password.', mtWarning, [mbOk],
-        0);
       exit;
     end;
 
@@ -94,7 +101,7 @@ begin
     MessageDlg('Maxmium number of attempts reached. Terminating program.',
       mtError, [mbOk], 0);
   application.Terminate;
-
+  result := true;
 end;
 
 procedure SignIn.SetLogin(sUsername, sPassword: string);
@@ -108,8 +115,8 @@ end;
 procedure Signup.addCar(sCarsID, sCarsMake, sCarsModel: string);
 begin
   inc(fArraylength);
-  setlength(arrCar, fArraylength);
-  arrCar[fArraylength] := strtoint(sCarsID);
+  setLength(arrCar, fArraylength);
+  arrCar[fArraylength - 1] := strtoint(sCarsID);
   fCarsModel := fCarsModel + ',' + sCarsModel;
   fCarsMake := fCarsMake + ',' + sCarsMake;
 end;
@@ -144,18 +151,39 @@ begin
 end;
 
 function Signup.addUser: boolean;
+
 var
   sCarIDtemp: string;
   iUserID, iloop: integer;
-  bFound: boolean;
-begin
-  try
-    with dmCO2 do
+  isOkay: boolean;
+
+  {
+    procedure fillInCars;
+    var
+    iloop: integer;
     begin
+    if isOkay then
+    BEGIN
+    for iloop := 0 to Length(arrCar) - 1 do
+    begin
+    dmCO2.ADOCarList.Insert;
+    dmCO2.ADOCarList['UserID'] := dmCO2.ADOUsers.FieldByName('ID').AsInteger();
+    dmCO2.ADOCarList['CarID'] := arrCar[iloop];
+    dmCO2.ADOCarList['CurrentMileage'] := 0;
+    dmCO2.ADOCarList.Post;
+    end;
+    isOkay := true;
+    END;
+    end;
+    }
+begin
+  with dmCO2 do
+  BEGIN
+    try
+      isOkay := false;
       if ADOUsers.Active then
       begin
         ADOUsers.Insert;
-
         ADOUsers['First_name'] := fFirst_name;
         ADOUsers['Last_name'] := fLast_name;
         ADOUsers['Username'] := fUsername;
@@ -165,32 +193,18 @@ begin
         ADOUsers['OrganisationMembership'] := fIsMember;
         ADOUsers['Goal'] := fGoal;
         ADOUsers['Email'] := fEmail;
-        ADOUsers.post;
+        ADOUsers.Post;
       end;
-      ADOUsers.first;
-      bFound := true;
-      while (not ADOUsers.eof) and (bFound = false) do
-        if ADOUsers['Username'] = fUsername then
-        begin
-          iUserID := ADOUsers['UserID'];
-          bFound := false;
-        end
-        else
-          ADOUsers.Next;
+      ADOUsers.Last; // move to the last record = the most recent inserted
+      isOkay := true;
+    Except
+      isOkay := false;
+      showmessage('Unable to insert new user...');
     end;
 
-    for iloop := 1 to fArraylength do
-    begin
-      dmCO2.ADOCarList.Insert;
-      dmCO2.ADOCarList['UserID'] := iUserID;
-      dmCO2.ADOCarList['CarID'] := arrCar[iloop];
-      dmCo2.ADOCarList['CurrentMileage']:=0;
-      dmCO2.ADOCarList.post;
-    end;
-
-    result := true except showmessage(
-      'There was an error trying to add new user')
-  end;
+    // fillInCars;
+  END;
+  result := isOkay;
 end;
 
 function Signup.CarsToString: string;
@@ -251,7 +265,7 @@ begin
     MessageDlg('Password must match', mtWarning, [mbOk], 0);
     exit;
   end;
-  if length(sPasswordOrginal) < 8 then
+  if Length(sPasswordOrginal) < 8 then
   begin
     result := false;
     MessageDlg('Please make sure your password is more than 8 character long',
@@ -261,7 +275,7 @@ begin
   else
   begin
     result := true;
-    for icharacterloop := 1 to length(sPasswordOrginal) do
+    for icharacterloop := 1 to Length(sPasswordOrginal) do
     begin
       chrPassword := sPasswordOrginal[icharacterloop];
       case ord(chrPassword) of

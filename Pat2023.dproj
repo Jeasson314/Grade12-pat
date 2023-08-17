@@ -44,7 +44,7 @@
 				<MainSource>MainSource</MainSource>
 			</DelphiCompile>
 			<DCCReference Include="u_Login.pas">
-				<Form>Form1</Form>
+				<Form>frm_Login</Form>
 			</DCCReference>
 			<DCCReference Include="dm_CO2.pas">
 				<Form>DMCO2</Form>
@@ -52,7 +52,7 @@
 			</DCCReference>
 			<DCCReference Include="u_SignIn.pas"/>
 			<DCCReference Include="u_Signup.pas">
-				<Form>frmSignup</Form>
+				<Form>frm_Signup</Form>
 			</DCCReference>
 			<DCCReference Include="u_Cars.pas">
 				<Form>frm_Cars</Form>
@@ -64,7 +64,7 @@
 				<Form>frm_Users</Form>
 			</DCCReference>
 			<DCCReference Include="u_graph.pas">
-				<Form>Form3</Form>
+				<Form>frm_Graph</Form>
 			</DCCReference>
 			<DCCReference Include="u_UserNormal.pas"/>
 			<BuildConfiguration Include="Base">

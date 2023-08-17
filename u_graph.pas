@@ -7,7 +7,7 @@ uses
   Dialogs, TeEngine, Series, StdCtrls, ExtCtrls, TeeProcs, Chart;
 
 type
-  TForm3 = class(TForm)
+  Tfrm_Graph = class(TForm)
     ChartCo2: TChart;
     GroupBox1: TGroupBox;
     Button1: TButton;
@@ -20,13 +20,13 @@ type
   end;
 
 var
-  Form3: TForm3;
+  frm_Graph: Tfrm_Graph;
 
 implementation
 
 {$R *.dfm}
 
-procedure TForm3.Button1Click(Sender: TObject);
+procedure Tfrm_Graph.Button1Click(Sender: TObject);
 begin
 //series1.Add('100','January',clBlue)
 end;

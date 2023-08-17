@@ -68,7 +68,7 @@ end;
 procedure Tfrm_Cars.btnCompleteCarClick(Sender: TObject);
 begin
   frm_Cars.Close;
-  frmSignup.redoutCarsSignup.Lines.Add(objSignup.CarsToString)
+  frm_Signup.redoutCarsSignup.Lines.Add(objSignup.CarsToString)
 end;
 
 procedure Tfrm_Cars.btnFilterByMakeClick(Sender: TObject);

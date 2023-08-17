@@ -47,7 +47,7 @@ uses u_Signup;
 procedure TfrmOrganisation.btnAddOrganisationClick(Sender: TObject);
 begin
   frm_organisation.Close;
-  frmSignup.redoutOrganisation.Lines.Add(objSignup.OrganisationToString)
+  frm_Signup.redoutOrganisation.Lines.Add(objSignup.OrganisationToString)
 end;
 
 procedure TfrmOrganisation.btnSearchClick(Sender: TObject);

@@ -7,7 +7,7 @@ uses
   ComCtrls;
 
 type
-  TfrmSignup = class(TForm)
+  Tfrm_Signup = class(TForm)
     btnSignup: TButton;
     GroupBox1: TGroupBox;
     Label1: TLabel;
@@ -46,14 +46,14 @@ type
   end;
 
 var
-  frmSignup: TfrmSignup;
+  frm_Signup: Tfrm_Signup;
   objSignup: SignUp;
 
 implementation
 
 {$R *.dfm}
 
-procedure TfrmSignup.btnGenerate_nameClick(Sender: TObject);
+procedure Tfrm_Signup.btnGenerate_nameClick(Sender: TObject);
 var
   sFirstname, sLastname: string;
 begin
@@ -63,12 +63,12 @@ begin
   pnlUsername.Caption := objSignup.UsernameGeneration(sFirstname, sLastname);
 end;
 
-procedure TfrmSignup.btnOrganisationClick(Sender: TObject);
+procedure Tfrm_Signup.btnOrganisationClick(Sender: TObject);
 begin
   frm_Organisation.ShowModal;
 end;
 
-procedure TfrmSignup.btnSignupClick(Sender: TObject);
+procedure Tfrm_Signup.btnSignupClick(Sender: TObject);
 begin
   if objSignup.passwordvalidate(edtPasswordOriginal.Text,
     edtPasswordSecond.Text) = true then
@@ -76,7 +76,7 @@ begin
     objSignup.addPassword(edtPasswordOriginal.Text);
     objSignup.addEmailGoal(edtEmail.Text, edtPersonalgoal.Text);
     if objSignup.addUser = true then
-      frmSignup.Close;
+      frm_Signup.Close;
 end
   else
   begin
@@ -85,12 +85,12 @@ end
 
 end;
 
-procedure TfrmSignup.Button1Click(Sender: TObject);
+procedure Tfrm_Signup.Button1Click(Sender: TObject);
 begin
   frm_Cars.ShowModal;
 end;
 
-procedure TfrmSignup.ChkOrganisationClick(Sender: TObject);
+procedure Tfrm_Signup.ChkOrganisationClick(Sender: TObject);
 begin
   if ChkOrganisation.Checked then
   begin
@@ -105,7 +105,7 @@ begin
 
 end;
 
-procedure TfrmSignup.FormActivate(Sender: TObject);
+procedure Tfrm_Signup.FormActivate(Sender: TObject);
 begin
   objSignup := SignUp.create();
 end;

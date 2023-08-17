@@ -93,7 +93,7 @@ object frmOrganisation: TfrmOrganisation
     object Label1: TLabel
       Left = 7
       Top = 15
-      Width = 355
+      Width = 199
       Height = 23
       Align = alTop
       Caption = 'Create an Organisation:'
@@ -103,7 +103,6 @@ object frmOrganisation: TfrmOrganisation
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      ExplicitWidth = 199
     end
     object imgCreateOrganisation: TImage
       Left = 296
