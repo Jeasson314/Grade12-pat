@@ -110,11 +110,11 @@ object frm_Users: Tfrm_Users
         TabOrder = 6
       end
       object DBLookupComboBox1: TDBLookupComboBox
-        Left = 356
-        Top = 176
+        Left = 340
+        Top = 192
         Width = 145
         Height = 21
-        DataSource = DMCO2.dbSourceQuery
+        DataSource = DMCO2.dbSourceCarList
         ListSource = DMCO2.dbSourceQuery
         TabOrder = 7
       end

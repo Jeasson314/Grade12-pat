@@ -25,6 +25,8 @@ object frm_Users: Tfrm_Users
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'User update'
+      ExplicitLeft = 0
+      ExplicitTop = 16
       object btnGraph: TButton
         Left = 280
         Top = 260
@@ -74,49 +76,32 @@ object frm_Users: Tfrm_Users
         Left = 280
         Top = 17
         Width = 248
-        Height = 96
+        Height = 80
         TabOrder = 4
         Visible = False
         object Label1: TLabel
           Left = 16
-          Top = 14
+          Top = 28
           Width = 189
           Height = 13
           Caption = 'Please enter your cars current mileage:'
         end
         object edtMileage: TEdit
           Left = 16
-          Top = 63
+          Top = 47
           Width = 185
           Height = 21
           Hint = '123455'
           TabOrder = 0
         end
-        object cmbCarMiliage: TComboBox
-          Left = 16
-          Top = 36
-          Width = 145
-          Height = 21
-          TabOrder = 1
-          Text = 'cmbCarMiliage'
-        end
       end
       object btnAdd: TButton
         Left = 487
-        Top = 78
+        Top = 64
         Width = 34
         Height = 25
         Caption = 'ADD'
         TabOrder = 6
-      end
-      object DBLookupComboBox1: TDBLookupComboBox
-        Left = 356
-        Top = 176
-        Width = 145
-        Height = 21
-        DataSource = DMCO2.dbSourceQuery
-        ListSource = DMCO2.dbSourceQuery
-        TabOrder = 7
       end
     end
     object TabSheet2: TTabSheet

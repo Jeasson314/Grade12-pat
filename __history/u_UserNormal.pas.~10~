@@ -6,13 +6,11 @@ type
 UserData = class(tObject)
   Private
   fUsername:string;
-  fCarList:array of string;
   fUserID:integer;
   fisFirst:boolean;
   public
    constructor UserCreate(sUsername:string);
    function isFirstAccess:boolean;
-   procedure LoadCar;
 
 end;
 implementation
@@ -22,11 +20,6 @@ implementation
 function UserData.isFirstAccess: boolean;
 begin
 result:=fisFirst
-end;
-
-procedure UserData.LoadCar;
-begin
-
 end;
 
 constructor UserData.UserCreate(sUsername:string);

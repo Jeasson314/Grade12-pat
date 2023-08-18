@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Grids, DBGrids, StdCtrls, ComCtrls, ExtCtrls, u_SignIn, dm_co2,
-  u_UserNormal, u_Signup,u_graph, DBCtrls;
+  u_UserNormal, u_Signup,u_graph;
 
 type
   Tfrm_Users = class(TForm)
@@ -22,8 +22,6 @@ type
     edtMileage: TEdit;
     Label1: TLabel;
     btnAdd: TButton;
-    cmbCarMiliage: TComboBox;
-    DBLookupComboBox1: TDBLookupComboBox;
     procedure FormActivate(Sender: TObject);
     procedure btnGraphClick(Sender: TObject);
   private

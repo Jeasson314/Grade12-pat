@@ -35,14 +35,12 @@ object DMCO2: TDMCO2
     Top = 144
   end
   object ADOQuery: TADOQuery
-    ConnectionString = 
-      'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\13236\Down' +
-      'loads\Grade12-pat-main\Grade12-pat-main\Database\db_CO2.mdb;Pers' +
-      'ist Security Info=False'
+    Connection = con
     CursorType = ctStatic
+    DataSource = dbSourceCarList
     Parameters = <>
     SQL.Strings = (
-      'SELECT CarID,Make+'#39'  '#39'+Model  as MakeandModel FROM tblCar')
+      'SELECT CarID from tblCarList')
     Left = 80
     Top = 264
   end
