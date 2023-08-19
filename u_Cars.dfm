@@ -120,7 +120,10 @@ object frm_Cars: Tfrm_Cars
       Width = 559
       Height = 134
       Align = alTop
+      Ctl3D = False
       DataSource = DMCO2.DbSourceCar
+      DefaultDrawing = False
+      ParentCtl3D = False
       ReadOnly = True
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET

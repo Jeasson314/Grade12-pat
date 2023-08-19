@@ -19,6 +19,8 @@ type
     dbSourceUsers: TDataSource;
     ADOCarList: TADOTable;
     dbSourceCarList: TDataSource;
+    ADOFootprint: TADOTable;
+    dbSourceFootprint: TDataSource;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
@@ -52,6 +54,7 @@ begin
   AdoUsers.Active := True;
   ADOOrganisation.Active:=true;
   ADOCarList.Active:=true;
+  ADOFootprint.Active:=true;
   ADOQuery.Active:=true;
 end;
 

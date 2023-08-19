@@ -37,10 +37,9 @@ object DMCO2: TDMCO2
   object ADOQuery: TADOQuery
     Connection = con
     CursorType = ctStatic
-    DataSource = dbSourceCarList
     Parameters = <>
     SQL.Strings = (
-      'SELECT CarID from tblCarList')
+      'SELECT DISTINCT Make FROM tblCar')
     Left = 80
     Top = 264
   end
@@ -72,11 +71,24 @@ object DMCO2: TDMCO2
     Connection = con
     CursorType = ctStatic
     TableName = 'tblCarList'
-    Left = 88
-    Top = 200
+    Left = 16
+    Top = 312
   end
   object dbSourceCarList: TDataSource
     Left = 192
     Top = 208
+  end
+  object ADOFootprint: TADOTable
+    Connection = con
+    CursorType = ctStatic
+    TableDirect = True
+    TableName = 'tblFootprint'
+    Left = 80
+    Top = 320
+  end
+  object dbSourceFootprint: TDataSource
+    DataSet = ADOFootprint
+    Left = 184
+    Top = 320
   end
 end

@@ -12,6 +12,7 @@ type
     GroupBox1: TGroupBox;
     Button1: TButton;
     Series1: TBarSeries;
+    Series2: TBarSeries;
     procedure Button1Click(Sender: TObject);
   private
     { Private declarations }

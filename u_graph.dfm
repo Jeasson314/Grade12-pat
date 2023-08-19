@@ -36,6 +36,17 @@ object frm_Graph: Tfrm_Graph
         0000405F40FFFFFF1F0000000000605840000000200000000000C04240000000
         200000000000C05C4000000020}
     end
+    object Series2: TBarSeries
+      Marks.Arrow.Visible = True
+      Marks.Callout.Brush.Color = clBlack
+      Marks.Callout.Arrow.Visible = True
+      Marks.Visible = True
+      Gradient.Direction = gdTopBottom
+      XValues.Name = 'X'
+      XValues.Order = loAscending
+      YValues.Name = 'Bar'
+      YValues.Order = loNone
+    end
   end
   object GroupBox1: TGroupBox
     Left = 464

@@ -1,0 +1,94 @@
+object DMCO2: TDMCO2
+  OldCreateOrder = False
+  OnCreate = DataModuleCreate
+  Height = 368
+  Width = 422
+  object ADOUsers: TADOTable
+    Connection = con
+    CursorType = ctStatic
+    TableName = 'tblUsers'
+    Left = 88
+    Top = 24
+  end
+  object ADOCarsOld: TADOTable
+    Connection = con
+    CursorType = ctStatic
+    TableName = 'tblCar'
+    Left = 320
+    Top = 224
+  end
+  object ADOOrganisation: TADOTable
+    Connection = con
+    CursorType = ctStatic
+    TableName = 'tblOrganisation'
+    Left = 88
+    Top = 144
+  end
+  object DbSourceCar: TDataSource
+    DataSet = ADOCars
+    Left = 192
+    Top = 80
+  end
+  object dbSourceOrganisation: TDataSource
+    DataSet = ADOOrganisation
+    Left = 200
+    Top = 144
+  end
+  object ADOQuery: TADOQuery
+    Connection = con
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'Select * from tblFootprint')
+    Left = 80
+    Top = 264
+  end
+  object dbSourceQuery: TDataSource
+    DataSet = ADOQuery
+    Enabled = False
+    Left = 200
+    Top = 264
+  end
+  object ADOCars: TADOTable
+    Connection = con
+    CursorType = ctStatic
+    TableName = 'tblCar'
+    Left = 88
+    Top = 88
+  end
+  object con: TADOConnection
+    LoginPrompt = False
+    Mode = cmReadWrite
+    Provider = 'Microsoft.Jet.OLEDB.4.0'
+    Left = 24
+    Top = 96
+  end
+  object dbSourceUsers: TDataSource
+    DataSet = ADOUsers
+    Left = 176
+    Top = 32
+  end
+  object ADOCarList: TADOTable
+    Connection = con
+    CursorType = ctStatic
+    TableName = 'tblCarList'
+    Left = 16
+    Top = 312
+  end
+  object dbSourceCarList: TDataSource
+    Left = 192
+    Top = 208
+  end
+  object ADOFootprint: TADOTable
+    Connection = con
+    CursorType = ctStatic
+    TableDirect = True
+    TableName = 'tblFootprint'
+    Left = 80
+    Top = 320
+  end
+  object dbSourceFootprint: TDataSource
+    Left = 184
+    Top = 320
+  end
+end
