@@ -30,6 +30,8 @@ object frm_Users: Tfrm_Users
     ActivePage = TabSheet1
     Align = alClient
     TabOrder = 0
+    ExplicitWidth = 572
+    ExplicitHeight = 388
     object TabSheet1: TTabSheet
       Caption = 'User update'
       ExplicitLeft = 8
@@ -78,7 +80,6 @@ object frm_Users: Tfrm_Users
           Height = 25
           Caption = 'Delete'
           TabOrder = 0
-          OnClick = btnDeleteClick
         end
         object lookupUserMake: TDBLookupComboBox
           Left = 9
@@ -122,7 +123,7 @@ object frm_Users: Tfrm_Users
           DataSource = DMCO2.dbSourceFootprint
           TabOrder = 5
         end
-        object DateTimeFrom: TDateTimePicker
+        object DateTimePicker1: TDateTimePicker
           Left = 47
           Top = 288
           Width = 226
@@ -131,23 +132,22 @@ object frm_Users: Tfrm_Users
           Time = 45158.726671712960000000
           TabOrder = 6
         end
-        object DateTimeTo: TDateTimePicker
-          Left = 48
+        object DateTimePicker2: TDateTimePicker
+          Left = 50
           Top = 313
-          Width = 225
+          Width = 223
           Height = 21
           Date = 45158.726992094900000000
           Time = 45158.726992094900000000
           TabOrder = 7
         end
-        object btnFilter: TButton
-          Left = 0
-          Top = 343
-          Width = 134
+        object Button2: TButton
+          Left = 3
+          Top = 340
+          Width = 284
           Height = 39
-          Caption = 'Filter'
+          Caption = 'Button2'
           TabOrder = 8
-          OnClick = btnFilterClick
         end
         object RadioSort: TRadioGroup
           Left = 13
@@ -155,21 +155,13 @@ object frm_Users: Tfrm_Users
           Width = 185
           Height = 53
           Caption = 'Sort'
+          Color = clBtnFace
           Items.Strings = (
             'Ascending'
             'Descending')
           ParentBackground = False
           ParentColor = False
           TabOrder = 9
-        end
-        object btnSort: TButton
-          Left = 143
-          Top = 343
-          Width = 144
-          Height = 39
-          Caption = 'Sort'
-          TabOrder = 10
-          OnClick = btnSortClick
         end
       end
       object btnGraph: TButton
@@ -206,11 +198,12 @@ object frm_Users: Tfrm_Users
             Visible = True
           end>
       end
-      object pnlWarning: TPanel
-        Left = 282
+      object Panel1: TPanel
+        Left = 280
         Top = 17
         Width = 281
         Height = 41
+        Caption = 'Panel1'
         TabOrder = 2
       end
       object DBNavigator1: TDBNavigator
@@ -268,7 +261,6 @@ object frm_Users: Tfrm_Users
       Caption = 'TabSheet2'
       Enabled = False
       ImageIndex = 1
-      TabVisible = False
       ExplicitWidth = 564
       ExplicitHeight = 360
       object Button1: TButton

@@ -27,9 +27,12 @@ object frm_Users: Tfrm_Users
     Top = 0
     Width = 574
     Height = 521
-    ActivePage = TabSheet1
+    ActivePage = TabSheet2
     Align = alClient
     TabOrder = 0
+    Visible = False
+    ExplicitWidth = 572
+    ExplicitHeight = 388
     object TabSheet1: TTabSheet
       Caption = 'User update'
       ExplicitLeft = 8
@@ -268,7 +271,6 @@ object frm_Users: Tfrm_Users
       Caption = 'TabSheet2'
       Enabled = False
       ImageIndex = 1
-      TabVisible = False
       ExplicitWidth = 564
       ExplicitHeight = 360
       object Button1: TButton

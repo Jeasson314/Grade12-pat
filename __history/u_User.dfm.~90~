@@ -30,6 +30,8 @@ object frm_Users: Tfrm_Users
     ActivePage = TabSheet1
     Align = alClient
     TabOrder = 0
+    ExplicitWidth = 572
+    ExplicitHeight = 388
     object TabSheet1: TTabSheet
       Caption = 'User update'
       ExplicitLeft = 8
@@ -206,11 +208,12 @@ object frm_Users: Tfrm_Users
             Visible = True
           end>
       end
-      object pnlWarning: TPanel
-        Left = 282
+      object Panel1: TPanel
+        Left = 280
         Top = 17
         Width = 281
         Height = 41
+        Caption = 'Panel1'
         TabOrder = 2
       end
       object DBNavigator1: TDBNavigator
@@ -268,7 +271,6 @@ object frm_Users: Tfrm_Users
       Caption = 'TabSheet2'
       Enabled = False
       ImageIndex = 1
-      TabVisible = False
       ExplicitWidth = 564
       ExplicitHeight = 360
       object Button1: TButton

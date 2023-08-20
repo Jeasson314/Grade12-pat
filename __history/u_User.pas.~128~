@@ -14,7 +14,7 @@ type
     Button1: TButton;
     btnGraph: TButton;
     DBGridUsers: TDBGrid;
-    pnlWarning: TPanel;
+    Panel1: TPanel;
     pnlFirst: TPanel;
     edtMileage: TEdit;
     Label1: TLabel;
@@ -109,7 +109,7 @@ procedure Tfrm_Users.btnDeleteClick(Sender: TObject);
 begin
  //dmco2.ADOCars['CarID']
 
-
+objUserdata.CheckOrganisation;
  if objUserdata.CanDelete(dmco2.ADOFootprint['EmissionDate'])=true then
     dmco2.ADOFootprint.delete
     else showmessage('We were unable to delete the message, this may be due to it being out of deleteable time range')
@@ -191,11 +191,6 @@ end;
 procedure Tfrm_Users.FormActivate(Sender: TObject);
 begin
   objUserdata := UserData.Usercreate(u_Login.objSignin.AccessUsername);
-  objUserdata.CheckOrganisation;
-  if objUserdata.admin=true then
-    TabSheet2.tabvisible:=true;
-  if not WithinPastMonths(date,dmco2.ADOFootPrint['EmissionDate'],1) then
-    pnlWarning.Caption:='Please input your current electricity and Mileage';
   // objUserdata.LoadCar;
   UpdateLookup('WHERE tblCarList.UserID = ' + objUserdata.accessUserId + ';');
   lookupUserMake.enabled := true;

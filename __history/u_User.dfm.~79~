@@ -2,7 +2,7 @@ object frm_Users: Tfrm_Users
   Left = 400
   Top = 321
   Caption = 'frm_Users'
-  ClientHeight = 521
+  ClientHeight = 443
   ClientWidth = 574
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -26,10 +26,12 @@ object frm_Users: Tfrm_Users
     Left = 0
     Top = 0
     Width = 574
-    Height = 521
+    Height = 443
     ActivePage = TabSheet1
     Align = alClient
     TabOrder = 0
+    ExplicitWidth = 572
+    ExplicitHeight = 388
     object TabSheet1: TTabSheet
       Caption = 'User update'
       ExplicitLeft = 8
@@ -40,7 +42,7 @@ object frm_Users: Tfrm_Users
         Left = 271
         Top = 64
         Width = 290
-        Height = 382
+        Height = 304
         Caption = 'User Management'
         TabOrder = 5
         object Label2: TLabel
@@ -59,14 +61,14 @@ object frm_Users: Tfrm_Users
         end
         object Label8: TLabel
           Left = 13
-          Top = 288
+          Top = 240
           Width = 28
           Height = 13
           Caption = 'From:'
         end
         object Label5: TLabel
           Left = 13
-          Top = 307
+          Top = 267
           Width = 16
           Height = 13
           Caption = 'To:'
@@ -78,7 +80,6 @@ object frm_Users: Tfrm_Users
           Height = 25
           Caption = 'Delete'
           TabOrder = 0
-          OnClick = btnDeleteClick
         end
         object lookupUserMake: TDBLookupComboBox
           Left = 9
@@ -122,59 +123,28 @@ object frm_Users: Tfrm_Users
           DataSource = DMCO2.dbSourceFootprint
           TabOrder = 5
         end
-        object DateTimeFrom: TDateTimePicker
-          Left = 47
-          Top = 288
-          Width = 226
+        object DateTimePicker1: TDateTimePicker
+          Left = 50
+          Top = 240
+          Width = 186
           Height = 21
           Date = 45158.726671712960000000
           Time = 45158.726671712960000000
           TabOrder = 6
         end
-        object DateTimeTo: TDateTimePicker
-          Left = 48
-          Top = 313
-          Width = 225
+        object DateTimePicker2: TDateTimePicker
+          Left = 50
+          Top = 267
+          Width = 186
           Height = 21
           Date = 45158.726992094900000000
           Time = 45158.726992094900000000
           TabOrder = 7
         end
-        object btnFilter: TButton
-          Left = 0
-          Top = 343
-          Width = 134
-          Height = 39
-          Caption = 'Filter'
-          TabOrder = 8
-          OnClick = btnFilterClick
-        end
-        object RadioSort: TRadioGroup
-          Left = 13
-          Top = 220
-          Width = 185
-          Height = 53
-          Caption = 'Sort'
-          Items.Strings = (
-            'Ascending'
-            'Descending')
-          ParentBackground = False
-          ParentColor = False
-          TabOrder = 9
-        end
-        object btnSort: TButton
-          Left = 143
-          Top = 343
-          Width = 144
-          Height = 39
-          Caption = 'Sort'
-          TabOrder = 10
-          OnClick = btnSortClick
-        end
       end
       object btnGraph: TButton
         Left = 273
-        Top = 452
+        Top = 374
         Width = 290
         Height = 38
         Caption = 'Graph'
@@ -185,7 +155,7 @@ object frm_Users: Tfrm_Users
         Left = 0
         Top = 0
         Width = 265
-        Height = 443
+        Height = 368
         DataSource = DMCO2.dbSourceFootprint
         ReadOnly = True
         TabOrder = 1
@@ -206,26 +176,27 @@ object frm_Users: Tfrm_Users
             Visible = True
           end>
       end
-      object pnlWarning: TPanel
-        Left = 282
+      object Panel1: TPanel
+        Left = 280
         Top = 17
         Width = 281
         Height = 41
+        Caption = 'Panel1'
         TabOrder = 2
       end
       object DBNavigator1: TDBNavigator
-        Left = 11
-        Top = 465
+        Left = 3
+        Top = 374
         Width = 240
         Height = 25
         DataSource = DMCO2.dbSourceFootprint
         TabOrder = 4
       end
       object pnlFirst: TPanel
-        Left = -27
-        Top = 48
+        Left = -14
+        Top = 59
         Width = 292
-        Height = 125
+        Height = 309
         TabOrder = 3
         Visible = False
         object Label1: TLabel
@@ -268,7 +239,6 @@ object frm_Users: Tfrm_Users
       Caption = 'TabSheet2'
       Enabled = False
       ImageIndex = 1
-      TabVisible = False
       ExplicitWidth = 564
       ExplicitHeight = 360
       object Button1: TButton

@@ -2,7 +2,7 @@ unit u_UserNormal;
 
 interface
 
-uses dm_co2, sysutils,DateUtils;
+uses dm_co2, sysutils;
 
 type
   UserData = class(tObject)
@@ -12,14 +12,12 @@ type
     fUserID: integer;
     fisFirst: boolean;
     finOrganisation:Boolean;
-    fIsAdmin:boolean;
   public
     constructor UserCreate(sUsername: string);
     function isFirstAccess: boolean;
     function accessUserId: string;
     procedure CheckOrganisation;
-    function CanDelete(dRecordDate:tdate):boolean;
-    function Admin:boolean;
+
   end;
 
 implementation
@@ -29,20 +27,6 @@ implementation
 function UserData.accessUserId: string;
 begin
   result := inttostr(fUserID);
-end;
-
-function UserData.Admin: boolean;
-begin
-result:=fisAdmin;
-end;
-
-function UserData.CanDelete(dRecordDate: tdate): boolean;
-begin
-if (fInOrganisation=true) and (WithinPastDays(date,dmco2.ADOFootPrint['EmissionDate'],3))
-then result:=true
-else result:=false;
-if fInOrganisation=false then
-  result:=true;
 end;
 
 procedure UserData.CheckOrganisation;
@@ -57,8 +41,7 @@ begin
     begin
       if (ADOUsers['UserID'] = accessUserId) then
       begin
-    finOrganisation:= ADOUsers['OrganisationMembership'];
-    fisAdmin:=ADOUsers['Admin'];
+    finOrganisation:= ADOUsers['OrganisationMembership']
       end
       else
         ADOUsers.next;

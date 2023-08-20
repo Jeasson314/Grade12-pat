@@ -19,7 +19,10 @@ type
     function accessUserId: string;
     procedure CheckOrganisation;
     function CanDelete(dRecordDate:tdate):boolean;
-    function Admin:boolean;
+
+
+  public
+    constructor UserCreate(sUsername: string);
   end;
 
 implementation
@@ -29,11 +32,6 @@ implementation
 function UserData.accessUserId: string;
 begin
   result := inttostr(fUserID);
-end;
-
-function UserData.Admin: boolean;
-begin
-result:=fisAdmin;
 end;
 
 function UserData.CanDelete(dRecordDate: tdate): boolean;
