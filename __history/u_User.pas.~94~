@@ -31,7 +31,6 @@ type
     lookupUserMake: TDBLookupComboBox;
     ADOEmissionQuery: TADOQuery;
     DBSourceEmission: TDataSource;
-    Edit1: TEdit;
     procedure FormActivate(Sender: TObject);
     procedure btnGraphClick(Sender: TObject);
     procedure edtUpdateClick(Sender: TObject);

@@ -71,8 +71,8 @@ object DMCO2: TDMCO2
     Connection = con
     CursorType = ctStatic
     TableName = 'tblCarList'
-    Left = 16
-    Top = 312
+    Left = 72
+    Top = 200
   end
   object dbSourceCarList: TDataSource
     Left = 192

@@ -2,8 +2,8 @@ object frm_Users: Tfrm_Users
   Left = 400
   Top = 321
   Caption = 'frm_Users'
-  ClientHeight = 388
-  ClientWidth = 572
+  ClientHeight = 316
+  ClientWidth = 553
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -25,8 +25,8 @@ object frm_Users: Tfrm_Users
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 572
-    Height = 388
+    Width = 553
+    Height = 316
     ActivePage = TabSheet1
     Align = alClient
     TabOrder = 0
@@ -47,8 +47,8 @@ object frm_Users: Tfrm_Users
         Caption = 'Current Mileage:'
       end
       object btnGraph: TButton
-        Left = 271
-        Top = 328
+        Left = 258
+        Top = 260
         Width = 135
         Height = 29
         Caption = 'Graph'
@@ -58,9 +58,9 @@ object frm_Users: Tfrm_Users
       object DBGridUsers: TDBGrid
         Left = 0
         Top = 0
-        Width = 265
-        Height = 361
-        DataSource = DMCO2.dbSourceFootprint
+        Width = 257
+        Height = 289
+        DataSource = DMCO2.dbSourceQuery
         TabOrder = 1
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
@@ -91,8 +91,8 @@ object frm_Users: Tfrm_Users
         TabOrder = 5
       end
       object pnlFirst: TPanel
-        Left = 3
-        Top = 34
+        Left = -4
+        Top = 23
         Width = 248
         Height = 96
         TabOrder = 4
@@ -112,14 +112,12 @@ object frm_Users: Tfrm_Users
           Hint = '123455'
           TabOrder = 0
         end
-        object LookupAddNew: TDBLookupComboBox
+        object DBLookupComboBox1: TDBLookupComboBox
           Left = 16
           Top = 36
           Width = 145
           Height = 21
-          KeyField = 'CarListID'
-          ListField = 'Model'
-          ListSource = DBSourceUserQuery
+          ListSource = DMCO2.dbSourceQuery
           TabOrder = 1
         end
         object btnAdd: TButton
@@ -129,7 +127,6 @@ object frm_Users: Tfrm_Users
           Height = 25
           Caption = 'ADD'
           TabOrder = 2
-          OnClick = btnAddClick
         end
       end
       object edtUpdate: TButton
@@ -141,24 +138,12 @@ object frm_Users: Tfrm_Users
         TabOrder = 6
         OnClick = edtUpdateClick
       end
-      object lookupUserMake: TDBLookupComboBox
+      object DBLookupComboBox2: TDBLookupComboBox
         Left = 280
         Top = 64
         Width = 145
         Height = 21
-        Enabled = False
-        KeyField = 'CarListID'
-        ListField = 'Model'
-        ListSource = DBSourceUserQuery
         TabOrder = 7
-      end
-      object Edit1: TEdit
-        Left = 271
-        Top = 224
-        Width = 121
-        Height = 21
-        TabOrder = 8
-        Text = 'Edit1'
       end
     end
     object TabSheet2: TTabSheet
@@ -179,22 +164,12 @@ object frm_Users: Tfrm_Users
     Connection = DMCO2.con
     DataSource = DMCO2.dbSourceCarList
     Parameters = <>
-    Left = 480
-    Top = 88
+    Left = 448
+    Top = 248
   end
   object DBSourceUserQuery: TDataSource
     DataSet = ADOUsersQuery
-    Left = 480
-    Top = 136
-  end
-  object ADOEmissionQuery: TADOQuery
-    Connection = DMCO2.con
-    Parameters = <>
-    Left = 424
-    Top = 40
-  end
-  object DBSourceEmission: TDataSource
-    Left = 456
-    Top = 32
+    Left = 496
+    Top = 248
   end
 end

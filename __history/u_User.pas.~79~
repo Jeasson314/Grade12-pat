@@ -31,7 +31,6 @@ type
     lookupUserMake: TDBLookupComboBox;
     ADOEmissionQuery: TADOQuery;
     DBSourceEmission: TDataSource;
-    Edit1: TEdit;
     procedure FormActivate(Sender: TObject);
     procedure btnGraphClick(Sender: TObject);
     procedure edtUpdateClick(Sender: TObject);
@@ -65,20 +64,7 @@ begin
     while not(ADOCarList.eof) and (bFound = false) do
     begin
       if (ADOCarList['UserID'] = objUserdata.accessUserId)
-       and ADOCarList['CarID']=  then
-      begin
-        ADOCarList.edit;
-        ADOCarList['CurrentMileage'] := strtoint(edtMileage.text);
-        ADOCarList.post;
-        bFound := true;
-      end
-      else
-        ADOCarList.next;
-end;
-    while not(ADOCarList.eof) and (bFound = false) do
-    begin
-      if (ADOCarList['UserID'] = objUserdata.accessUserId)
-       and (ADOCarList['CarID']= ) then
+      { and ADOCarList['CarID']= } then
       begin
         ADOCarList.edit;
         ADOCarList['CurrentMileage'] := strtoint(edtMileage.text);
@@ -108,36 +94,17 @@ begin
 
     iEmission := iElectricity * 1060;
     sSql := 'WHERE tblCarList.UserID = ' + objUserdata.accessUserId;
-    sSql := sSql + ' AND Model =' + quotedstr(lookupUserMake.text) + ';';
+    sSql := sSql + 'AND Model =' + lookupUserMake.text + ';';
     UpdateLookup(sSql);
     iKilometer := iKilometer - ADOUsersQuery['Mileage'];
-    iEmission := iEmission + ((ADOUsersQuery['Emissions'] * iKilometer)/1000);
+    iEmission := iEmission + (ADOUsersQuery['Emissions'] * iKilometer);
+
+    bFound := false;
     with dmco2 do
     begin
-  ADOFootprint.insert;
-  ADOFootprint['UserID']:=objUserdata.accessUserId;
-  ADOFootPrint['EmissionDate']:=date;
-  ADOFootprint['Emission']:=  iEmission;
-  ADOFootprint.post;
+
+      end;
     end;
-  bFound := false;
-  with dmco2 do
-  begin
-    ADOCarList.first;
-    while not(ADOCarList.eof) and (bFound = false) do
-    begin
-      if (ADOCarList['UserID'] = objUserdata.accessUserId)
-      and (ADOCarList['CarID']= ADOUsersQuery['CarID']) then
-      begin
-        ADOCarList.edit;
-        ADOCarList['CurrentMileage'] := strtoint(edtMileageMain.text);
-        ADOCarList.post;
-        bFound := true;
-      end
-      else
-        ADOCarList.next;
-    end;
-end;
   except
     showmessage('Their was an error trying to update your carbon foortprint');
   end;
@@ -170,9 +137,7 @@ procedure Tfrm_Users.UpdateLookup(sQuery: string);
 begin
   ADOUsersQuery.sql.clear;
   ADOUsersQuery.sql.add(
-    'SELECT tblCarList.CarListID AS CarListId,tblCarList.CurrentMileage AS Mileage, tblCar.CarID AS CarID, tblCar.Make AS Make, tblCar.Model AS Model, tblCar.[CO2 Emissions(g/km)] AS Emissions'
-    + ' FROM tblCar INNER JOIN tblCarList ON tblCar.CarID = tblCarList.CarID '+
-    sQuery);
+    'SELECT tblCarList.CarListID AS CarListId,tblCarList.CurrentMileage AS Mileage, tblCar.Make AS Make, tblCar.Model AS Model, tblCar.[CO2 Emissions(g/km)] AS Emissions' + 'FROM tblCar INNER JOIN tblCarList ON tblCar.CarID = tblCarList.CarID;');
   { ' WHERE tblCarsList.UserID = 12;' + objUserdata.accessUserId+';' }
   ADOUsersQuery.Open;
 end;

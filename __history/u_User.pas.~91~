@@ -31,7 +31,6 @@ type
     lookupUserMake: TDBLookupComboBox;
     ADOEmissionQuery: TADOQuery;
     DBSourceEmission: TDataSource;
-    Edit1: TEdit;
     procedure FormActivate(Sender: TObject);
     procedure btnGraphClick(Sender: TObject);
     procedure edtUpdateClick(Sender: TObject);
@@ -65,20 +64,7 @@ begin
     while not(ADOCarList.eof) and (bFound = false) do
     begin
       if (ADOCarList['UserID'] = objUserdata.accessUserId)
-       and ADOCarList['CarID']=  then
-      begin
-        ADOCarList.edit;
-        ADOCarList['CurrentMileage'] := strtoint(edtMileage.text);
-        ADOCarList.post;
-        bFound := true;
-      end
-      else
-        ADOCarList.next;
-end;
-    while not(ADOCarList.eof) and (bFound = false) do
-    begin
-      if (ADOCarList['UserID'] = objUserdata.accessUserId)
-       and (ADOCarList['CarID']= ) then
+      { and ADOCarList['CarID']= } then
       begin
         ADOCarList.edit;
         ADOCarList['CurrentMileage'] := strtoint(edtMileage.text);
@@ -111,7 +97,7 @@ begin
     sSql := sSql + ' AND Model =' + quotedstr(lookupUserMake.text) + ';';
     UpdateLookup(sSql);
     iKilometer := iKilometer - ADOUsersQuery['Mileage'];
-    iEmission := iEmission + ((ADOUsersQuery['Emissions'] * iKilometer)/1000);
+    iEmission := iEmission + (ADOUsersQuery['Emissions'] * iKilometer);
     with dmco2 do
     begin
   ADOFootprint.insert;

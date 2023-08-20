@@ -30,8 +30,12 @@ object frm_Users: Tfrm_Users
     ActivePage = TabSheet1
     Align = alClient
     TabOrder = 0
+    ExplicitWidth = 553
+    ExplicitHeight = 316
     object TabSheet1: TTabSheet
       Caption = 'User update'
+      ExplicitWidth = 545
+      ExplicitHeight = 288
       object Label2: TLabel
         Left = 280
         Top = 85
@@ -92,7 +96,7 @@ object frm_Users: Tfrm_Users
       end
       object pnlFirst: TPanel
         Left = 3
-        Top = 34
+        Top = 117
         Width = 248
         Height = 96
         TabOrder = 4
@@ -152,19 +156,13 @@ object frm_Users: Tfrm_Users
         ListSource = DBSourceUserQuery
         TabOrder = 7
       end
-      object Edit1: TEdit
-        Left = 271
-        Top = 224
-        Width = 121
-        Height = 21
-        TabOrder = 8
-        Text = 'Edit1'
-      end
     end
     object TabSheet2: TTabSheet
       Caption = 'TabSheet2'
       Enabled = False
       ImageIndex = 1
+      ExplicitWidth = 545
+      ExplicitHeight = 288
       object Button1: TButton
         Left = 256
         Top = 136
@@ -179,22 +177,12 @@ object frm_Users: Tfrm_Users
     Connection = DMCO2.con
     DataSource = DMCO2.dbSourceCarList
     Parameters = <>
-    Left = 480
-    Top = 88
+    Left = 392
+    Top = 248
   end
   object DBSourceUserQuery: TDataSource
     DataSet = ADOUsersQuery
-    Left = 480
-    Top = 136
-  end
-  object ADOEmissionQuery: TADOQuery
-    Connection = DMCO2.con
-    Parameters = <>
-    Left = 424
-    Top = 40
-  end
-  object DBSourceEmission: TDataSource
-    Left = 456
-    Top = 32
+    Left = 496
+    Top = 248
   end
 end
