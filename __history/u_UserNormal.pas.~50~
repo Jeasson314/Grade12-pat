@@ -17,7 +17,6 @@ type
     constructor UserCreate(sUsername: string);
     function isFirstAccess: boolean;
     function accessUserId: string;
-    function AccessOrganisationID:integer;
     procedure CheckOrganisation;
     function CanDelete(dRecordDate: tdate): boolean;
     function Admin: boolean;
@@ -26,11 +25,6 @@ type
 implementation
 
 { UserData }
-
-function UserData.AccessOrganisationID: integer;
-begin
-result:= fOrganisationId;
-end;
 
 function UserData.accessUserId: string;
 begin

@@ -47,14 +47,6 @@ type
     RadioDisplay: TRadioGroup;
     ADOAdminQuery: TADOQuery;
     DBSourceAdminQuery: TDataSource;
-    GroupBox3: TGroupBox;
-    btnAdminSort: TButton;
-    cmbSort: TComboBox;
-    Database: TGroupBox;
-    Statistics: TGroupBox;
-    RadioGroup1: TRadioGroup;
-    Button1: TButton;
-    Edit1: TEdit;
     procedure FormActivate(Sender: TObject);
     procedure btnGraphClick(Sender: TObject);
     procedure edtUpdateClick(Sender: TObject);
@@ -137,21 +129,18 @@ begin
   if RadioDisplay.itemindex = 0 then
     UpdateAdmin(
       'Select Username,First_Name,Last_Name,Carbon_Footprint,[Last Updated],Goal,Email'
-        + ' FROM tblUsers WHERE (OrganisationID = '
-        + inttostr(objUserdata.AccessOrganisationID) + ');');
+        + 'FROM tblUsers WHERE (OrganisationID = ' + quotedstr
+        (inttostr(objUserdata.AccessOrganisationID)) + ');');
   if RadioDisplay.itemindex = 1 then
     UpdateAdmin(
       'SELECT tblUsers.Username AS Username, tblFootprint.EmissionDate AS [Emission Date], tblFootprint.Emission AS [Emission Amount]'
-        +
-        ' FROM tblUsers INNER JOIN tblFootprint ON tblUsers.UserID = tblFootprint.UserID'
-        + ' WHERE (tblUsers.OrganisationID = ' +
-        inttostr(objUserdata.AccessOrganisationID)
-        + ');');
+        + ' FROM tblUsers INNER JOIN tblFootprint ON tblUsers.UserID = tblFootprint.UserID'
+        + ' WHERE (tblUsers.OrganisationID = ' + quotedstr(inttostr(objUserdata.AccessOrganisationID)) + ');');
   if RadioDisplay.itemindex = 2 then
-    UpdateAdmin(
-      'SELECT tblUsers.Username AS username, tblCar.Make AS Make, tblCar.Model AS Model '
-        + 'FROM tblCar INNER JOIN (tblUsers INNER JOIN tblCarList ON tblUsers.UserID = tblCarList.UserID) ON tblCar.CarID = tblCarList.CarID '
-        + 'WHERE (OrganisationID = ' + inttostr(objUserdata.AccessOrganisationID) + ');');
+    UpdateAdmin('SELECT tblUsers.Username AS username, tblCar.Make AS Make, tblCar.Model AS Model '
++ 'FROM tblCar INNER JOIN (tblUsers INNER JOIN tblCarList ON tblUsers.UserID = tblCarList.UserID) ON tblCar.CarID = tblCarList.CarID '
++ 'WHERE (OrganisationID = ' + quotedstr
+        (inttostr(objUserdata.AccessOrganisationID)) + ');');
 
 end;
 
@@ -248,7 +237,7 @@ begin
 
 end;
 
-procedure Tfrm_Users.UpdateAdmin(sSQL:string);
+procedure Tfrm_Users.UpdateAdmin(sSQL);
 begin
   ADOAdminQuery.sql.clear;
   ADOAdminQuery.sql.add(sSQL);

@@ -29,7 +29,7 @@ implementation
 
 function UserData.AccessOrganisationID: integer;
 begin
-result:= fOrganisationId;
+
 end;
 
 function UserData.accessUserId: string;

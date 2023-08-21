@@ -54,7 +54,6 @@ type
     Statistics: TGroupBox;
     RadioGroup1: TRadioGroup;
     Button1: TButton;
-    Edit1: TEdit;
     procedure FormActivate(Sender: TObject);
     procedure btnGraphClick(Sender: TObject);
     procedure edtUpdateClick(Sender: TObject);

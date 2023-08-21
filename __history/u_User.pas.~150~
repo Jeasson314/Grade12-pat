@@ -47,14 +47,6 @@ type
     RadioDisplay: TRadioGroup;
     ADOAdminQuery: TADOQuery;
     DBSourceAdminQuery: TDataSource;
-    GroupBox3: TGroupBox;
-    btnAdminSort: TButton;
-    cmbSort: TComboBox;
-    Database: TGroupBox;
-    Statistics: TGroupBox;
-    RadioGroup1: TRadioGroup;
-    Button1: TButton;
-    Edit1: TEdit;
     procedure FormActivate(Sender: TObject);
     procedure btnGraphClick(Sender: TObject);
     procedure edtUpdateClick(Sender: TObject);
@@ -67,7 +59,7 @@ type
     procedure UpdateLookup(sQuery: string);
     procedure UpdateEmission;
     procedure UpdateUserDate;
-    procedure UpdateAdmin(sSQL: string);
+    procedure UpdateAdmin(sSQL:string);
     { Private declarations }
   public
     { Public declarations }
@@ -86,7 +78,7 @@ uses u_Login;
 procedure Tfrm_Users.btnAddClick(Sender: TObject);
 var
   bFound: boolean;
-  sSQL: string;
+  sSql: string;
 begin
   try
     bFound := false;
@@ -108,10 +100,10 @@ begin
           ADOCarList.next;
       end;
       UpdateUserDate;
-      sSQL := 'WHERE tblCarList.UserID = ' + objUserdata.accessUserId;
-      sSQL := sSQL + ' AND Model =' + quotedstr(lookupUserMake.text)
+      sSql := 'WHERE tblCarList.UserID = ' + objUserdata.accessUserId;
+      sSql := sSql + ' AND Model =' + quotedstr(lookupUserMake.text)
         + 'AND Mileage = Null;';
-      UpdateLookup(sSQL);
+      UpdateLookup(sSql);
       if ADOUsersQuery['CarID'].isNull then
         pnlFirst.visible := false;
     end;
@@ -134,25 +126,8 @@ end;
 
 procedure Tfrm_Users.btnDisplayClick(Sender: TObject);
 begin
-  if RadioDisplay.itemindex = 0 then
-    UpdateAdmin(
-      'Select Username,First_Name,Last_Name,Carbon_Footprint,[Last Updated],Goal,Email'
-        + ' FROM tblUsers WHERE (OrganisationID = '
-        + inttostr(objUserdata.AccessOrganisationID) + ');');
-  if RadioDisplay.itemindex = 1 then
-    UpdateAdmin(
-      'SELECT tblUsers.Username AS Username, tblFootprint.EmissionDate AS [Emission Date], tblFootprint.Emission AS [Emission Amount]'
-        +
-        ' FROM tblUsers INNER JOIN tblFootprint ON tblUsers.UserID = tblFootprint.UserID'
-        + ' WHERE (tblUsers.OrganisationID = ' +
-        inttostr(objUserdata.AccessOrganisationID)
-        + ');');
-  if RadioDisplay.itemindex = 2 then
-    UpdateAdmin(
-      'SELECT tblUsers.Username AS username, tblCar.Make AS Make, tblCar.Model AS Model '
-        + 'FROM tblCar INNER JOIN (tblUsers INNER JOIN tblCarList ON tblUsers.UserID = tblCarList.UserID) ON tblCar.CarID = tblCarList.CarID '
-        + 'WHERE (OrganisationID = ' + inttostr(objUserdata.AccessOrganisationID) + ');');
-
+if RadioDisplay.itemindex = 0 then
+  UpdateAdmin('Select Username,First_Name,Last_Name,Carbon_Footprint,Last Updated,Goal,Email FROM tblUsers WHERE OrganisationID ='+quotedstr());
 end;
 
 procedure Tfrm_Users.btnFilterClick(Sender: TObject);
@@ -184,7 +159,7 @@ end;
 procedure Tfrm_Users.edtUpdateClick(Sender: TObject);
 var
   iElectricity, iKilometer, iEmission: integer;
-  sSQL: string;
+  sSql: string;
   bFound: boolean;
 begin
   try
@@ -192,9 +167,9 @@ begin
     iKilometer := strtoint(edtMileageMain.text);
 
     iEmission := iElectricity * 1060;
-    sSQL := 'WHERE tblCarList.UserID = ' + objUserdata.accessUserId;
-    sSQL := sSQL + ' AND Model =' + quotedstr(lookupUserMake.text) + ';';
-    UpdateLookup(sSQL);
+    sSql := 'WHERE tblCarList.UserID = ' + objUserdata.accessUserId;
+    sSql := sSql + ' AND Model =' + quotedstr(lookupUserMake.text) + ';';
+    UpdateLookup(sSql);
     iKilometer := iKilometer - ADOUsersQuery['Mileage'];
     iEmission := iEmission + ((ADOUsersQuery['Emissions'] * iKilometer) / 1000);
     with dmco2 do
@@ -248,7 +223,7 @@ begin
 
 end;
 
-procedure Tfrm_Users.UpdateAdmin(sSQL:string);
+procedure Tfrm_Users.UpdateAdmin(sSQL);
 begin
   ADOAdminQuery.sql.clear;
   ADOAdminQuery.sql.add(sSQL);
@@ -266,7 +241,8 @@ begin
   ADOUsersQuery.sql.clear;
   ADOUsersQuery.sql.add(
     'SELECT tblCarList.CarListID AS CarListId,tblCarList.CurrentMileage AS Mileage,'
-      + 'tblCar.CarID AS CarID, tblCar.Make AS Make, tblCar.Model AS Model, tblCar.[CO2 Emissions(g/km)] AS Emissions' + ' FROM tblCar INNER JOIN tblCarList ON tblCar.CarID = tblCarList.CarID ' + sQuery);
+    + 'tblCar.CarID AS CarID, tblCar.Make AS Make, tblCar.Model AS Model, tblCar.[CO2 Emissions(g/km)] AS Emissions'
+     + ' FROM tblCar INNER JOIN tblCarList ON tblCar.CarID = tblCarList.CarID ' + sQuery);
   ADOUsersQuery.Open;
 end;
 

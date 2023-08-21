@@ -47,14 +47,6 @@ type
     RadioDisplay: TRadioGroup;
     ADOAdminQuery: TADOQuery;
     DBSourceAdminQuery: TDataSource;
-    GroupBox3: TGroupBox;
-    btnAdminSort: TButton;
-    cmbSort: TComboBox;
-    Database: TGroupBox;
-    Statistics: TGroupBox;
-    RadioGroup1: TRadioGroup;
-    Button1: TButton;
-    Edit1: TEdit;
     procedure FormActivate(Sender: TObject);
     procedure btnGraphClick(Sender: TObject);
     procedure edtUpdateClick(Sender: TObject);
@@ -63,6 +55,7 @@ type
     procedure btnFilterClick(Sender: TObject);
     procedure btnSortClick(Sender: TObject);
     procedure btnDisplayClick(Sender: TObject);
+    procedure PageControl1Change(Sender: TObject);
   private
     procedure UpdateLookup(sQuery: string);
     procedure UpdateEmission;
@@ -144,14 +137,14 @@ begin
       'SELECT tblUsers.Username AS Username, tblFootprint.EmissionDate AS [Emission Date], tblFootprint.Emission AS [Emission Amount]'
         +
         ' FROM tblUsers INNER JOIN tblFootprint ON tblUsers.UserID = tblFootprint.UserID'
-        + ' WHERE (tblUsers.OrganisationID = ' +
-        inttostr(objUserdata.AccessOrganisationID)
+        + ' WHERE (tblUsers.OrganisationID = ' + quotedstr
+        (inttostr(objUserdata.AccessOrganisationID))
         + ');');
   if RadioDisplay.itemindex = 2 then
     UpdateAdmin(
       'SELECT tblUsers.Username AS username, tblCar.Make AS Make, tblCar.Model AS Model '
         + 'FROM tblCar INNER JOIN (tblUsers INNER JOIN tblCarList ON tblUsers.UserID = tblCarList.UserID) ON tblCar.CarID = tblCarList.CarID '
-        + 'WHERE (OrganisationID = ' + inttostr(objUserdata.AccessOrganisationID) + ');');
+        + 'WHERE (OrganisationID = ' + quotedstr(inttostr(objUserdata.AccessOrganisationID)) + ');');
 
 end;
 
@@ -246,6 +239,11 @@ begin
     else
     pnlFirst.Visible := false; }
 
+end;
+
+procedure Tfrm_Users.PageControl1Change(Sender: TObject);
+begin
+showmessage('Show')
 end;
 
 procedure Tfrm_Users.UpdateAdmin(sSQL:string);
