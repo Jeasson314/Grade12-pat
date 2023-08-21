@@ -11,20 +11,15 @@ type
     PageControl1: TPageControl;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
-    Button1: TButton;
     btnGraph: TButton;
     DBGridUsers: TDBGrid;
     pnlWarning: TPanel;
     pnlFirst: TPanel;
     edtMileage: TEdit;
     Label1: TLabel;
-    ADOUsersQuery: TADOQuery;
-    DBSourceUserQuery: TDataSource;
     LookupAddNew: TDBLookupComboBox;
     Label3: TLabel;
     btnAdd: TButton;
-    ADOEmissionQuery: TADOQuery;
-    DBSourceEmission: TDataSource;
     DBNavigator1: TDBNavigator;
     GroupBox1: TGroupBox;
     btnDelete: TButton;
@@ -42,6 +37,13 @@ type
     btnFilter: TButton;
     RadioSort: TRadioGroup;
     btnSort: TButton;
+    DBSourceEmission: TDataSource;
+    ADOUsersQuery: TADOQuery;
+    DBSourceUserQuery: TDataSource;
+    DBGrid1: TDBGrid;
+    ADOEmissionQuery: TADOQuery;
+    GroupBox2: TGroupBox;
+    Button1: TButton;
     procedure FormActivate(Sender: TObject);
     procedure btnGraphClick(Sender: TObject);
     procedure edtUpdateClick(Sender: TObject);
@@ -190,23 +192,20 @@ end;
 
 procedure Tfrm_Users.FormActivate(Sender: TObject);
 begin
-  objUserdata := UserData.Usercreate(u_Login.objSignin.AccessUsername);
+   objUserdata := UserData.Usercreate(u_Login.objSignin.AccessUsername);
   objUserdata.CheckOrganisation;
   if objUserdata.admin=true then
-    TabSheet2.tabvisible:=true;
+   TabSheet2.tabVisible:=true;
   if not WithinPastMonths(date,dmco2.ADOFootPrint['EmissionDate'],1) then
     pnlWarning.Caption:='Please input your current electricity and Mileage';
   // objUserdata.LoadCar;
   UpdateLookup('WHERE tblCarList.UserID = ' + objUserdata.accessUserId + ';');
   lookupUserMake.enabled := true;
-  if objUserdata.isFirstAccess = true then
+  {if objUserdata.isFirstAccess = true then
     pnlFirst.Visible := true
   else
-    pnlFirst.Visible := false;
+    pnlFirst.Visible := false;}
 
-  { DMCO2.runSQL(
-    'SELECT Distinct EmissionDate,Emission FROM tblFootprint WHERE UserID=' +
-    objUserdata.accessUserId); }
 
 end;
 

@@ -8,6 +8,7 @@ type
   UserData = class(tObject)
   Private
     fUsername: string;
+    fArrCarList: array of array of integer;
     fUserID: integer;
     fisFirst: boolean;
     finOrganisation: boolean;
@@ -61,7 +62,7 @@ begin
       begin
         finOrganisation := ADOUsers['OrganisationMembership'];
         fIsAdmin := ADOUsers['Admin'];
-        bFound := true;
+        bFound:=true;
       end
       else
         ADOUsers.next;
@@ -79,12 +80,13 @@ begin
     bFound := false;
     while not(ADOUsers.eof) and (bFound = false) do
     begin
+      showmessage(inttostr(fUserID));
       if (ADOUsers['UserID'] = fUserID) then
       begin
-        if ADOUsers.FieldValues['Last Updated'].isNull = true then
+        if ADOUsers['Last Updated'].isNull then
         begin
           result := true;
-          bFound := true;
+          bFound := false;
         end;
       end
       else
@@ -99,7 +101,7 @@ var
 begin
   with dmco2 do
   begin
-    bFound := false;
+  bfound:=false;
     fUsername := sUsername;
     ADOUsers.first;
     while not(ADOUsers.eof) and (bFound = false) do
@@ -113,7 +115,7 @@ begin
         ADOUsers.next;
     end;
   end;
-  // showmessage('hello');
+  //showmessage('hello');
 
 end;
 

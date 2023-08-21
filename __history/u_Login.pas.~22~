@@ -4,20 +4,23 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs,u_SignIn, StdCtrls,u_Signup;
+  Dialogs,u_SignIn, StdCtrls,u_Signup,WideStrings,u_User;
 
 type
-  TForm1 = class(TForm)
-    edtPassword: TEdit;
-    btnSignin: TButton;
+  Tfrm_Login = class(TForm)
+    GroupBox1: TGroupBox;
     Label1: TLabel;
     Label2: TLabel;
+    edtUsername: TEdit;
+    edtPassword: TEdit;
+    btnSignin: TButton;
     Button1: TButton;
     CHKCookie: TCheckBox;
-    edtUsername: TEdit;
     procedure btnSigninClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure CHKCookieClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -25,7 +28,7 @@ type
   end;
 
 var
-  Form1: TForm1;
+  frm_Login: Tfrm_Login;
   objSignin: SignIn;
   tfCookie: textfile;
 
@@ -33,7 +36,7 @@ implementation
 
 {$R *.dfm}
 
-procedure TForm1.btnSigninClick(Sender: TObject);
+procedure Tfrm_Login.btnSigninClick(Sender: TObject);
 var
   sHashed_password, sUsername: string;
 begin
@@ -41,30 +44,47 @@ begin
   try
     objSignin.SetLogin(edtUsername.Text, edtPassword.Text);
     if objSignin.PasswordCheck = true then
-
-      finally
-        {if edtUsername.Text = '' then
+    begin
+       frm_users.ShowModal;
+       //frm_Login.Close;
+    end
+    else
+    MessageDlg('Please check your username and password.', mtWarning, [mbOk],
+        0);
+      except
+        if edtUsername.Text = '' then
           MessageDlg('Please type in a username or create an account.',
             mtWarning, [mbOk], 0);
         if edtPassword.Text = '' then
           MessageDlg('Please type in a password.', mtWarning, [mbOk], 0);
-        edtPassword.Color := clRed}
+        edtPassword.Color := clRed;
       end;
     // showmessage((hash(edtPassword.Text)));
   end;
 
-  procedure TForm1.Button1Click(Sender: TObject);
+  procedure Tfrm_Login.Button1Click(Sender: TObject);
 begin
-frmSignup.ShowModal;
+frm_Signup.ShowModal;
 end;
 
-procedure TForm1.FormActivate(Sender: TObject);
+procedure Tfrm_Login.CHKCookieClick(Sender: TObject);
+begin
+if chkcookie.Checked then
+begin
+rewrite(tfCookie);
+writeln(tfCookie,edtUsername.Text);
+writeln(tfCookie,edtPassword.Text);
+closefile(tfCookie);
+end;
+end;
+
+procedure Tfrm_Login.FormActivate(Sender: TObject);
   var sReadln,path:string;
   begin
     try
-    path:=ExpandFileName(ExtractFileDir(Application.ExeName)) + '\Textfile\tfUserCookie.txt;';
+    path:=ExpandFileName(ExtractFileDir(Application.ExeName)) + '\Textfile\tfUserCookie.txt';
       objSignin := SignIn.create();
-      assignfile(tfCookie,path );
+      assignfile(tfCookie,path);
       reset(tfCookie);
       readln(tfCookie,sReadln);
       if  sReadln= '' then
@@ -80,4 +100,9 @@ procedure TForm1.FormActivate(Sender: TObject);
         end;
     end;
 
-end.
+eprocedure Tfrm_Login.FormCreate(Sender: TObject);
+begin
+
+end;
+
+nd.

@@ -61,7 +61,7 @@ begin
       begin
         finOrganisation := ADOUsers['OrganisationMembership'];
         fIsAdmin := ADOUsers['Admin'];
-        bFound := true;
+        bFound:=true;
       end
       else
         ADOUsers.next;
@@ -81,7 +81,7 @@ begin
     begin
       if (ADOUsers['UserID'] = fUserID) then
       begin
-        if ADOUsers.FieldValues['Last Updated'].isNull = true then
+        if ADOUsers['Last Updated'].isNull =true then
         begin
           result := true;
           bFound := true;
@@ -99,7 +99,7 @@ var
 begin
   with dmco2 do
   begin
-    bFound := false;
+  bfound:=false;
     fUsername := sUsername;
     ADOUsers.first;
     while not(ADOUsers.eof) and (bFound = false) do
@@ -113,7 +113,7 @@ begin
         ADOUsers.next;
     end;
   end;
-  // showmessage('hello');
+  //showmessage('hello');
 
 end;
 

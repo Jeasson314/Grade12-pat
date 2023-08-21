@@ -81,7 +81,7 @@ begin
     begin
       if (ADOUsers['UserID'] = fUserID) then
       begin
-        if ADOUsers.FieldValues['Last Updated'].isNull = true then
+        if ADOUsers['Last Updated'].isNull = true then
         begin
           result := true;
           bFound := true;
