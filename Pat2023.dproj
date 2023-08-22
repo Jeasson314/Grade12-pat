@@ -121,6 +121,7 @@
 						<Source Name="MainSource">Pat2023.dpr</Source>
 					</Source>
 				</Delphi.Personality>
+				<ModelSupport>False</ModelSupport>
 			</BorlandProject>
 			<ProjectFileVersion>12</ProjectFileVersion>
 		</ProjectExtensions>

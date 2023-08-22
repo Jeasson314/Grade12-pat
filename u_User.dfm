@@ -27,15 +27,11 @@ object frm_Users: Tfrm_Users
     Top = 0
     Width = 997
     Height = 523
-    ActivePage = TabSheet2
+    ActivePage = TabSheet1
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 574
-    ExplicitHeight = 521
     object TabSheet1: TTabSheet
       Caption = 'User update'
-      ExplicitWidth = 566
-      ExplicitHeight = 493
       object GroupBox1: TGroupBox
         Left = 271
         Top = 64
@@ -80,15 +76,14 @@ object frm_Users: Tfrm_Users
           TabOrder = 0
           OnClick = btnDeleteClick
         end
-        object lookupUserMake: TDBLookupComboBox
-          Left = 9
+        object lookupUserModel: TDBLookupComboBox
+          Left = 13
           Top = 13
           Width = 145
           Height = 21
-          Enabled = False
-          KeyField = 'CarListID'
+          KeyField = ' Model'
           ListField = 'Model'
-          ListSource = DMCO2.dbSourceCarList
+          ListSource = DMCO2.dbSourceQueryCar
           TabOrder = 1
         end
         object edtElectricity: TEdit
@@ -222,8 +217,8 @@ object frm_Users: Tfrm_Users
         TabOrder = 4
       end
       object pnlFirst: TPanel
-        Left = -18
-        Top = 64
+        Left = 271
+        Top = 61
         Width = 292
         Height = 337
         TabOrder = 3
@@ -248,13 +243,14 @@ object frm_Users: Tfrm_Users
           Top = 36
           Width = 145
           Height = 21
-          KeyField = 'CarListID'
-          ListField = 'Model'
+          KeyField = 'Make'
+          ListField = 'Make'
+          ListSource = DMCO2.dbSourceQueryCar
           TabOrder = 1
         end
         object btnAdd: TButton
           Left = 207
-          Top = 63
+          Top = 56
           Width = 34
           Height = 25
           Caption = 'ADD'
@@ -266,9 +262,6 @@ object frm_Users: Tfrm_Users
     object TabSheet2: TTabSheet
       Caption = 'TabSheet2'
       ImageIndex = 1
-      ExplicitLeft = 8
-      ExplicitTop = 28
-      ExplicitHeight = 493
       object DBGrid1: TDBGrid
         AlignWithMargins = True
         Left = 0
@@ -311,6 +304,7 @@ object frm_Users: Tfrm_Users
           Width = 192
           Height = 105
           Caption = 'RadioDisplay'
+          Color = clBtnFace
           Items.Strings = (
             'Members'
             'Organisation Footprint'
@@ -335,7 +329,7 @@ object frm_Users: Tfrm_Users
         TabOrder = 2
         object cmbSort: TComboBox
           Left = 16
-          Top = 38
+          Top = 30
           Width = 225
           Height = 24
           TabOrder = 0
@@ -346,7 +340,7 @@ object frm_Users: Tfrm_Users
         end
         object btnAdminSort: TButton
           Left = 16
-          Top = 68
+          Top = 60
           Width = 225
           Height = 40
           Caption = 'Sort'
@@ -366,6 +360,14 @@ object frm_Users: Tfrm_Users
         Font.Style = []
         ParentFont = False
         TabOrder = 3
+        object Edit1: TEdit
+          Left = 38
+          Top = 39
+          Width = 121
+          Height = 21
+          TabOrder = 0
+          Text = 'Edit1'
+        end
       end
       object Statistics: TGroupBox
         Left = 751
@@ -380,32 +382,35 @@ object frm_Users: Tfrm_Users
         Font.Style = []
         ParentFont = False
         TabOrder = 4
+        object RadioGroup1: TRadioGroup
+          Left = 13
+          Top = 16
+          Width = 209
+          Height = 57
+          Caption = 'RadioGroup1'
+          Items.Strings = (
+            'User'
+            'Organsiation')
+          TabOrder = 0
+        end
+        object Button1: TButton
+          Left = 48
+          Top = 106
+          Width = 75
+          Height = 25
+          Caption = 'Button1'
+          TabOrder = 1
+        end
       end
     end
   end
-  object RadioGroup1: TRadioGroup
+  object ComboBox1: TComboBox
     Left = 768
-    Top = 284
+    Top = 342
     Width = 209
-    Height = 87
-    Caption = 'RadioGroup1'
-    TabOrder = 1
-  end
-  object Button1: TButton
-    Left = 768
-    Top = 424
-    Width = 75
-    Height = 25
-    Caption = 'Button1'
-    TabOrder = 2
-  end
-  object Edit1: TEdit
-    Left = 536
-    Top = 303
-    Width = 121
     Height = 21
-    TabOrder = 3
-    Text = 'Edit1'
+    TabOrder = 1
+    Text = 'ComboBox1'
   end
   object DBSourceEmission: TDataSource
     Left = 16
@@ -425,20 +430,20 @@ object frm_Users: Tfrm_Users
   object ADOEmissionQuery: TADOQuery
     Connection = DMCO2.con
     Parameters = <>
-    Left = 16
-    Top = 352
+    Left = 24
+    Top = 152
   end
   object ADOAdminQuery: TADOQuery
     Connection = DMCO2.con
     Parameters = <>
     SQL.Strings = (
       'Select  * from tblUsers')
-    Left = 40
-    Top = 72
+    Left = 16
+    Top = 192
   end
   object DBSourceAdminQuery: TDataSource
     DataSet = ADOAdminQuery
-    Left = 40
-    Top = 136
+    Left = 8
+    Top = 256
   end
 end

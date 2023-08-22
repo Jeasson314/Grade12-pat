@@ -23,7 +23,7 @@ type
     DBNavigator1: TDBNavigator;
     GroupBox1: TGroupBox;
     btnDelete: TButton;
-    lookupUserMake: TDBLookupComboBox;
+    lookupUserModel: TDBLookupComboBox;
     Label2: TLabel;
     edtElectricity: TEdit;
     Label4: TLabel;
@@ -52,9 +52,10 @@ type
     cmbSort: TComboBox;
     Database: TGroupBox;
     Statistics: TGroupBox;
+    Edit1: TEdit;
     RadioGroup1: TRadioGroup;
     Button1: TButton;
-    Edit1: TEdit;
+    ComboBox1: TComboBox;
     procedure FormActivate(Sender: TObject);
     procedure btnGraphClick(Sender: TObject);
     procedure edtUpdateClick(Sender: TObject);
@@ -109,7 +110,7 @@ begin
       end;
       UpdateUserDate;
       sSQL := 'WHERE tblCarList.UserID = ' + objUserdata.accessUserId;
-      sSQL := sSQL + ' AND Model =' + quotedstr(lookupUserMake.text)
+      sSQL := sSQL + ' AND Model =' + quotedstr(lookupUserModel.text)
         + 'AND Mileage = Null;';
       UpdateLookup(sSQL);
       if ADOUsersQuery['CarID'].isNull then
@@ -160,9 +161,9 @@ begin
   with dmco2 do
   begin
     ADOFootprint.filtered := false;
-    ADOFootprint.filter := '(StartDate>=' + quotedstr
-      (DateTimeToStr(DateTimeFrom.Date))
-      + ') and (EndDate <' + quotedstr(DateTimeToStr(DateTimeTo.Date)) + ')';
+    ADOFootprint.filter := 'EmissionDate >= ' + quotedstr
+      (FormatDateTime('dd/mm/yyyy', DateTimeFrom.Date))
+      + ' and EmissionDate < ' + quotedstr(FormatDateTime('dd/mm/yyyy', DateTimeTo.Date));
     ADOFootprint.filtered := true;
 
   end;
@@ -176,7 +177,7 @@ end;
 procedure Tfrm_Users.btnSortClick(Sender: TObject);
 begin
   if RadioSort.itemindex = 0 then
-    dmco2.ADOFootprint.sort := 'EmissionDate AESC';
+    dmco2.ADOFootprint.sort := 'EmissionDate ASC';
   if RadioSort.itemindex = 1 then
     dmco2.ADOFootprint.sort := 'EmissionDate DESC';
 end;
@@ -193,7 +194,7 @@ begin
 
     iEmission := iElectricity * 1060;
     sSQL := 'WHERE tblCarList.UserID = ' + objUserdata.accessUserId;
-    sSQL := sSQL + ' AND Model =' + quotedstr(lookupUserMake.text) + ';';
+    sSQL := sSQL + ' AND tblCar.Model =' + quotedstr(lookupUserModel.text) + ';';
     UpdateLookup(sSQL);
     iKilometer := iKilometer - ADOUsersQuery['Mileage'];
     iEmission := iEmission + ((ADOUsersQuery['Emissions'] * iKilometer) / 1000);
@@ -233,6 +234,9 @@ procedure Tfrm_Users.FormActivate(Sender: TObject);
 begin
   ADOAdminQuery.active := true;
   objUserdata := UserData.Usercreate(u_Login.objSignin.AccessUsername);
+  dmCO2.runCar(OBJUserData.accessUserId);
+  dmco2.dbSourceQueryCar.Enabled:=false;
+  dmco2.dbSourceQueryCar.Enabled:=true;
   objUserdata.CheckOrganisation;
   if objUserdata.admin = true then
     TabSheet2.tabVisible := true;
@@ -240,11 +244,11 @@ begin
     pnlWarning.Caption := 'Please input your current electricity and Mileage';
   // objUserdata.LoadCar;
   UpdateLookup('WHERE tblCarList.UserID = ' + objUserdata.accessUserId + ';');
-  lookupUserMake.enabled := true;
-  { if objUserdata.isFirstAccess = true then
+  lookupUserModel.enabled := true;
+  if objUserdata.isFirstAccess = true then
     pnlFirst.Visible := true
     else
-    pnlFirst.Visible := false; }
+    pnlFirst.Visible := false;
 
 end;
 

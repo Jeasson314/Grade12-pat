@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs,u_SignIn, StdCtrls,u_Signup,WideStrings,u_User;
+  Dialogs,u_SignIn, StdCtrls,u_Signup,WideStrings,u_User,dm_co2,u_passwordhasher;
 
 type
   Tfrm_Login = class(TForm)
@@ -34,6 +34,8 @@ var
 implementation
 
 {$R *.dfm}
+
+
 
 procedure Tfrm_Login.btnSigninClick(Sender: TObject);
 var

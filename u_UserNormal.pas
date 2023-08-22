@@ -83,18 +83,18 @@ begin
   with dmco2 do
   begin
     ADOUsers.first;
+    result:=false;
     bFound := false;
     while not(ADOUsers.eof) and (bFound = false) do
     begin
       if (ADOUsers['UserID'] = fUserID) then
       begin
-        if ADOUsers.FieldValues['Last Updated'].isNull = true then
+        if ADOUsers.fieldbyname('Last Updated').isnull then
         begin
           result := true;
           bFound := true;
         end;
-      end
-      else
+      end;
         ADOUsers.next;
     end;
   end;

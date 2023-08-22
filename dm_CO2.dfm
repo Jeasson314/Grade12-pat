@@ -91,4 +91,16 @@ object DMCO2: TDMCO2
     Left = 184
     Top = 320
   end
+  object ADOQueryCar: TADOQuery
+    Connection = con
+    Parameters = <>
+    SQL.Strings = (
+      'SELECT *  FROM tblCar')
+    Left = 296
+    Top = 104
+  end
+  object dbSourceQueryCar: TDataSource
+    Left = 304
+    Top = 160
+  end
 end
