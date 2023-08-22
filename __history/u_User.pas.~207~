@@ -56,7 +56,7 @@ type
     RadioStatistics: TRadioGroup;
     btnStatistics: TButton;
     cmbStatistics: TComboBox;
-    RadioSortAdmin: TRadioGroup;
+    RadioGroup1: TRadioGroup;
     procedure FormActivate(Sender: TObject);
     procedure btnGraphClick(Sender: TObject);
     procedure edtUpdateClick(Sender: TObject);
@@ -128,36 +128,16 @@ end;
 
 procedure Tfrm_Users.btnAdminSortClick(Sender: TObject);
 begin
-  case cmbSort.itemindex of
-    0:
-      begin
-        if RadioSortAdmin.itemindex = 0 then
-          ADOAdminQuery.sort := 'Username DESC';
-        if RadioSortAdmin.itemindex = 1 then
-          ADOAdminQuery.sort := 'Username ASC';
-      end;
-    1:
-      begin
-        if RadioSortAdmin.itemindex = 0 then
-          ADOAdminQuery.sort := 'First_Name DESC';
-        if RadioSortAdmin.itemindex = 1 then
-          ADOAdminQuery.sort := 'First_Name ASC';
-      end;
-    2:
-      begin
-        if RadioSortAdmin.itemindex = 0 then
-          ADOAdminQuery.sort := 'Last_Name DESC';
-        if RadioSortAdmin.itemindex = 1 then
-          ADOAdminQuery.sort := 'Last_Name ASC';
-      end;
-    3:
-      begin
-        if RadioSortAdmin.itemindex = 0 then
-          ADOAdminQuery.sort := 'Last Updated DESC';
-        if RadioSortAdmin.itemindex = 1 then
-          ADOAdminQuery.sort := 'Last Updated ASC';
-      end;
-  end;
+case cmbSort.itemindex of
+   0:  if RadioSort.itemindex = 0 then
+    dmco2.ADOFootprint.sort := 'EmissionDate ASC';
+  if RadioSort.itemindex = 1 then
+    dmco2.ADOFootprint.sort := 'EmissionDate DESC';
+   1:
+   2:
+   3:
+
+end;
 end;
 
 procedure Tfrm_Users.btnDeleteClick(Sender: TObject);

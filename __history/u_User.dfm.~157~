@@ -345,31 +345,16 @@ object frm_Users: Tfrm_Users
           TabOrder = 0
           Text = 'cmbSort'
           Items.Strings = (
-            'Username'
-            'First Name'
-            'Last Name'
-            'Last Updated')
+            'Ascending'
+            'Descending')
         end
         object btnAdminSort: TButton
-          Left = 15
-          Top = 148
+          Left = 16
+          Top = 108
           Width = 225
           Height = 40
           Caption = 'Sort'
           TabOrder = 1
-          OnClick = btnAdminSortClick
-        end
-        object RadioSortAdmin: TRadioGroup
-          Left = 15
-          Top = 60
-          Width = 226
-          Height = 82
-          Caption = 'RadioSortAdmin'
-          ItemIndex = 0
-          Items.Strings = (
-            'Descending'
-            'Ascending')
-          TabOrder = 2
         end
       end
       object Database: TGroupBox

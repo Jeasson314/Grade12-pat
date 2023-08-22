@@ -56,7 +56,6 @@ type
     RadioStatistics: TRadioGroup;
     btnStatistics: TButton;
     cmbStatistics: TComboBox;
-    RadioSortAdmin: TRadioGroup;
     procedure FormActivate(Sender: TObject);
     procedure btnGraphClick(Sender: TObject);
     procedure edtUpdateClick(Sender: TObject);
@@ -67,7 +66,6 @@ type
     procedure btnDisplayClick(Sender: TObject);
     procedure PageControl1Change(Sender: TObject);
     procedure btnStatisticsClick(Sender: TObject);
-    procedure btnAdminSortClick(Sender: TObject);
   private
     procedure UpdateLookup(sQuery: string);
     procedure UpdateEmission;
@@ -123,40 +121,6 @@ begin
 
   except
     Showmessage('Their was a failure entering your vehicle mileage');
-  end;
-end;
-
-procedure Tfrm_Users.btnAdminSortClick(Sender: TObject);
-begin
-  case cmbSort.itemindex of
-    0:
-      begin
-        if RadioSortAdmin.itemindex = 0 then
-          ADOAdminQuery.sort := 'Username DESC';
-        if RadioSortAdmin.itemindex = 1 then
-          ADOAdminQuery.sort := 'Username ASC';
-      end;
-    1:
-      begin
-        if RadioSortAdmin.itemindex = 0 then
-          ADOAdminQuery.sort := 'First_Name DESC';
-        if RadioSortAdmin.itemindex = 1 then
-          ADOAdminQuery.sort := 'First_Name ASC';
-      end;
-    2:
-      begin
-        if RadioSortAdmin.itemindex = 0 then
-          ADOAdminQuery.sort := 'Last_Name DESC';
-        if RadioSortAdmin.itemindex = 1 then
-          ADOAdminQuery.sort := 'Last_Name ASC';
-      end;
-    3:
-      begin
-        if RadioSortAdmin.itemindex = 0 then
-          ADOAdminQuery.sort := 'Last Updated DESC';
-        if RadioSortAdmin.itemindex = 1 then
-          ADOAdminQuery.sort := 'Last Updated ASC';
-      end;
   end;
 end;
 
@@ -336,10 +300,6 @@ begin
   else
     pnlFirst.visible := false;
 
-  UpdateAdmin(
-    'Select Username,First_Name,Last_Name,Carbon_Footprint,[Last Updated],Goal,Email'
-      + ' FROM tblUsers WHERE (OrganisationID = ' + inttostr
-      (objUserdata.AccessOrganisationID) + ');');
 end;
 
 procedure Tfrm_Users.PageControl1Change(Sender: TObject);

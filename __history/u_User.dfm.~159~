@@ -359,12 +359,12 @@ object frm_Users: Tfrm_Users
           TabOrder = 1
           OnClick = btnAdminSortClick
         end
-        object RadioSortAdmin: TRadioGroup
+        object RadioGroup1: TRadioGroup
           Left = 15
           Top = 60
           Width = 226
           Height = 82
-          Caption = 'RadioSortAdmin'
+          Caption = 'RadioGroup1'
           ItemIndex = 0
           Items.Strings = (
             'Descending'
