@@ -1,9 +1,8 @@
 unit dm_CO2;
-
-interface
+interface
 
 uses
-  SysUtils, Classes, DB, ADODB, FMTBcd, SqlExpr, WideStrings, Dialogs,Forms;
+  SysUtils, Windows, Classes, DB, ADODB, FMTBcd, SqlExpr, WideStrings, Dialogs, Forms, StdCtrls;
 
 type
   TDMCO2 = class(TDataModule)
@@ -23,13 +22,18 @@ type
     dbSourceFootprint: TDataSource;
     ADOQueryCar: TADOQuery;
     dbSourceQueryCar: TDataSource;
+    dbSourceCarQuerAdd: TDataSource;
+    ADOQueryADD: TADOQuery;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
+    procedure fillCombobox(toFill : TComboBox; data : TAdoQuery );
     procedure runSQL(sSql: string);
-    procedure runCar(sSQL:string);
+    procedure runCar(sSql: string);
+    procedure runCarAdd(sSql: string);
+
   end;
 
 var
@@ -46,36 +50,56 @@ var
 begin
   con.Connected := False;
   try
-  path := ExpandFileName(ExtractFileDir(Application.ExeName)) + '\Database\db_CO2.mdb;';
-  con.ConnectionString := 'Provider=Microsoft.Jet.OLEDB.4.0;' +
-    'User ID=Admin;Data Source=' + path;
+    path := ExpandFileName(ExtractFileDir(Application.ExeName))
+      + '\Database\db_CO2.mdb;';
+    con.ConnectionString := 'Provider=Microsoft.Jet.OLEDB.4.0;' +
+      'User ID=Admin;Data Source=' + path;
   except
-   showMessage('Error - Unable to find database at: '+path);
+    showMessage('Error - Unable to find database at: ' + path);
   end;
   con.Connected := True;
   ADOCars.active := True;
-  AdoUsers.Active := True;
-  ADOOrganisation.Active:=true;
-  ADOCarList.Active:=true;
-  ADOFootprint.Active:=true;
-  ADOQuery.Active:=true;
-  ADOQueryCar.Active:=true;
+  ADOUsers.active := True;
+  ADOOrganisation.active := True;
+  ADOCarList.active := True;
+  ADOFootprint.active := True;
+  ADOQuery.active := True;
+  ADOQueryCar.active := True;
 end;
 
-procedure TDMCO2.runCar(sSQL: string);
+procedure TDMCO2.fillCombobox(toFill: TComboBox; data: TAdoQuery);
 begin
-ADOQueryCar.SQL.Clear;
-ADOQueryCar.SQL.Add('SELECT tblCar.Make AS Make, tblCar.Model AS Model '
-+ 'FROM tblCar INNER JOIN tblCarList ON tblCar.CarID = tblCarList.CarID WHERE tblCarList.UserID = ' + sSQL);
-ADOQueryCar.Open;
+  toFill.Items.Clear;
+  data.First;
+  while NOT data.Eof do
+   begin
+    toFill.Items.Add(''+data.FieldByName('Model').AsString);
+    data.Next;
+   end;
+end;
+
+procedure TDMCO2.runCar(sSql: string);
+begin
+  ADOQueryCar.SQL.Clear;
+  ADOQueryCar.SQL.Add('SELECT tblCar.Make AS Make, tblCar.Model AS Model ' +
+      'FROM tblCar INNER JOIN tblCarList ON tblCar.CarID = tblCarList.CarID WHERE tblCarList.UserID = ' + sSql);
+  ADOQueryCar.Open;
+end;
+
+procedure TDMCO2.runCarAdd(sSql: string);
+begin
+  ADOQueryCar.SQL.Clear;
+  ADOQueryCar.SQL.Add('SELECT tblCar.Make AS Make, tblCar.Model AS Model ' +
+      'FROM tblCar INNER JOIN tblCarList ON tblCar.CarID = tblCarList.CarID WHERE tblCarList.UserID = ' + sSql);
+  ADOQueryCar.Open;
 end;
 
 procedure TDMCO2.runSQL(sSql: string);
 begin
-  showmessage(sSql);
+  showMessage(sSql);
 
   ADOQuery.close;
-  ADOQuery.SQL.clear;
+  ADOQuery.SQL.Clear;
   ADOQuery.SQL.Add(sSql);
   ADOQuery.Open;
 

@@ -1,7 +1,7 @@
 object DMCO2: TDMCO2
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Height = 368
+  Height = 544
   Width = 422
   object ADOUsers: TADOTable
     Connection = con
@@ -14,8 +14,8 @@ object DMCO2: TDMCO2
     Connection = con
     CursorType = ctStatic
     TableName = 'tblCar'
-    Left = 320
-    Top = 224
+    Left = 312
+    Top = 176
   end
   object ADOOrganisation: TADOTable
     Connection = con
@@ -96,11 +96,23 @@ object DMCO2: TDMCO2
     Parameters = <>
     SQL.Strings = (
       'SELECT *  FROM tblCar')
-    Left = 296
-    Top = 104
+    Left = 72
+    Top = 432
   end
   object dbSourceQueryCar: TDataSource
-    Left = 304
-    Top = 160
+    Left = 184
+    Top = 432
+  end
+  object dbSourceCarQuerAdd: TDataSource
+    Left = 192
+    Top = 368
+  end
+  object ADOQueryADD: TADOQuery
+    Connection = con
+    Parameters = <>
+    SQL.Strings = (
+      'SELECT *  FROM tblCar')
+    Left = 80
+    Top = 376
   end
 end

@@ -27,20 +27,16 @@ object frm_Users: Tfrm_Users
     Top = 0
     Width = 1004
     Height = 523
-    ActivePage = TabSheet2
+    ActivePage = tabSheetUser
     Align = alClient
     TabOrder = 0
     OnChange = PageControl1Change
-    ExplicitWidth = 997
     object tabSheetUser: TTabSheet
       Caption = 'User update'
-      ExplicitLeft = 8
-      ExplicitTop = 28
-      ExplicitWidth = 988
       object GroupBox1: TGroupBox
         Left = 271
         Top = 64
-        Width = 290
+        Width = 554
         Height = 382
         Caption = 'User Management'
         TabOrder = 5
@@ -81,29 +77,19 @@ object frm_Users: Tfrm_Users
           TabOrder = 0
           OnClick = btnDeleteClick
         end
-        object lookupUserModel: TDBLookupComboBox
-          Left = 13
-          Top = 13
-          Width = 145
-          Height = 21
-          KeyField = ' Model'
-          ListField = 'Model'
-          ListSource = DMCO2.dbSourceQueryCar
-          TabOrder = 1
-        end
         object edtElectricity: TEdit
           Left = 9
           Top = 58
           Width = 185
           Height = 21
-          TabOrder = 2
+          TabOrder = 1
         end
         object edtMileageMain: TEdit
           Left = 9
           Top = 104
           Width = 185
           Height = 21
-          TabOrder = 3
+          TabOrder = 2
         end
         object edtUpdate: TButton
           Left = 9
@@ -111,7 +97,7 @@ object frm_Users: Tfrm_Users
           Width = 75
           Height = 25
           Caption = 'Update'
-          TabOrder = 4
+          TabOrder = 3
           OnClick = edtUpdateClick
         end
         object DBEdit1: TDBEdit
@@ -120,7 +106,7 @@ object frm_Users: Tfrm_Users
           Width = 185
           Height = 21
           DataSource = DMCO2.dbSourceFootprint
-          TabOrder = 5
+          TabOrder = 4
         end
         object DateTimeFrom: TDateTimePicker
           Left = 47
@@ -129,7 +115,7 @@ object frm_Users: Tfrm_Users
           Height = 21
           Date = 45158.726671712960000000
           Time = 45158.726671712960000000
-          TabOrder = 6
+          TabOrder = 5
         end
         object DateTimeTo: TDateTimePicker
           Left = 48
@@ -138,7 +124,7 @@ object frm_Users: Tfrm_Users
           Height = 21
           Date = 45158.726992094900000000
           Time = 45158.726992094900000000
-          TabOrder = 7
+          TabOrder = 6
         end
         object btnFilter: TButton
           Left = 0
@@ -146,7 +132,7 @@ object frm_Users: Tfrm_Users
           Width = 134
           Height = 39
           Caption = 'Filter'
-          TabOrder = 8
+          TabOrder = 7
           OnClick = btnFilterClick
         end
         object RadioSort: TRadioGroup
@@ -161,7 +147,7 @@ object frm_Users: Tfrm_Users
             'Descending')
           ParentBackground = False
           ParentColor = False
-          TabOrder = 9
+          TabOrder = 8
         end
         object btnSort: TButton
           Left = 143
@@ -169,8 +155,15 @@ object frm_Users: Tfrm_Users
           Width = 144
           Height = 39
           Caption = 'Sort'
-          TabOrder = 10
+          TabOrder = 9
           OnClick = btnSortClick
+        end
+        object CmbCars: TComboBox
+          Left = 3
+          Top = 13
+          Width = 191
+          Height = 21
+          TabOrder = 10
         end
       end
       object btnGraph: TButton
@@ -223,8 +216,8 @@ object frm_Users: Tfrm_Users
         TabOrder = 4
       end
       object pnlFirst: TPanel
-        Left = 271
-        Top = 64
+        Left = 63
+        Top = 47
         Width = 292
         Height = 337
         TabOrder = 3
@@ -244,33 +237,28 @@ object frm_Users: Tfrm_Users
           Hint = '123455'
           TabOrder = 0
         end
-        object LookupAddNew: TDBLookupComboBox
-          Left = 16
-          Top = 36
-          Width = 145
-          Height = 21
-          KeyField = 'Make'
-          ListField = 'Make'
-          ListSource = DMCO2.dbSourceQueryCar
-          TabOrder = 1
-        end
         object btnAdd: TButton
           Left = 207
           Top = 56
           Width = 34
           Height = 25
           Caption = 'ADD'
-          TabOrder = 2
+          TabOrder = 1
           OnClick = btnAddClick
+        end
+        object cmbCarsAdd: TComboBox
+          Left = 16
+          Top = 36
+          Width = 185
+          Height = 21
+          TabOrder = 2
+          Text = 'cmbCarsAdd'
         end
       end
     end
     object TabSheet2: TTabSheet
       Caption = 'TabSheet2'
       ImageIndex = 1
-      ExplicitLeft = 8
-      ExplicitTop = 28
-      ExplicitWidth = 562
       object DBGrid1: TDBGrid
         AlignWithMargins = True
         Left = 0
