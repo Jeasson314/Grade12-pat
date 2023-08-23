@@ -1,0 +1,36 @@
+unit u_graph;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, TeEngine, Series, StdCtrls, ExtCtrls, TeeProcs, Chart, DB, ADODB,dm_co2;
+
+type
+  Tfrm_Graph = class(TForm)
+    ChartCo2: TChart;
+    GroupBox1: TGroupBox;
+    Button1: TButton;
+    Series1: TBarSeries;
+    ADOGraphQuery: TADOQuery;
+    ADOGraphQuerySource: TDataSource;
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_Graph: Tfrm_Graph;
+
+implementation
+
+{$R *.dfm}
+
+procedure Tfrm_Graph.Button1Click(Sender: TObject);
+begin
+//series1.Add('100','January',clBlue)
+end;
+
+end.

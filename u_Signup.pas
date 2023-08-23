@@ -1,5 +1,6 @@
 unit u_Signup;
-interface
+
+interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
@@ -53,62 +54,98 @@ implementation
 
 {$R *.dfm}
 
+// Handler for the "Generate Name" button click
 procedure Tfrm_Signup.btnGenerate_nameClick(Sender: TObject);
 var
   sFirstname, sLastname: string;
 begin
-  sFirstname := edtFirst_name.Text;
-  sLastname := edtLast_name.Text;
+  try
+    // Get input values for generating a username
+    sFirstname := edtFirst_name.Text;
+    sLastname := edtLast_name.Text;
 
-  pnlUsername.Caption := objSignup.UsernameGeneration(sFirstname, sLastname);
+    // Generate and display the generated username
+    pnlUsername.Caption := objSignup.UsernameGeneration(sFirstname, sLastname);
+  except
+    showmessage('There was an error trying to generate a username');
+  end;
 end;
 
+// Handler for the "Organisation" button click
 procedure Tfrm_Signup.btnOrganisationClick(Sender: TObject);
 begin
-  frm_Organisation.ShowModal;
+  try
+    // Show the Organisation form as a modal dialog
+    frm_Organisation.ShowModal;
+  except
+    showmessage('There was an error trying to show the Organisation form');
+  end;
 end;
 
+// Handler for the "Sign Up" button click
 procedure Tfrm_Signup.btnSignupClick(Sender: TObject);
 begin
-  if objSignup.passwordvalidate(edtPasswordOriginal.Text,
-    edtPasswordSecond.Text) = true then
-begin
-    objSignup.addPassword(edtPasswordOriginal.Text);
-    objSignup.addEmailGoal(edtEmail.Text, edtPersonalgoal.Text);
-    if objSignup.addUser = true then
-      frm_Signup.Close;
-end
-  else
-  begin
-    MessageDlg('Please check your password', mtWarning, [mbOk], 0);
+  try
+    // Validate passwords, add password and email/goal information to the signup object
+    if objSignup.passwordvalidate(edtPasswordOriginal.Text, edtPasswordSecond.Text) = true then
+    begin
+      objSignup.addPassword(edtPasswordOriginal.Text);
+      objSignup.addEmailGoal(edtEmail.Text, edtPersonalgoal.Text);
+      // If user is successfully added, close the signup form
+      if objSignup.addUser = true then
+        frm_Signup.Close;
+    end
+    else
+    begin
+      MessageDlg('Please check your password', mtWarning, [mbOk], 0);
+    end;
+  except
+    showmessage('There was an error trying to sign you up');
   end;
-
 end;
 
+// Handler for the "Add Car" button click
 procedure Tfrm_Signup.Button1Click(Sender: TObject);
 begin
-  frm_Cars.ShowModal;
+  try
+    // Show the Cars form as a modal dialog
+    frm_Cars.ShowModal;
+  finally
+    showmessage('There was an error trying to display the car form');
+  end;
 end;
 
+// Handler for the "Organisation" checkbox click
 procedure Tfrm_Signup.ChkOrganisationClick(Sender: TObject);
 begin
-  if ChkOrganisation.Checked then
-  begin
-    pnlOrganisation.Visible := true;
-    objSignup.IsMember(true);
-  end
-  else
-  begin
-    objSignup.IsMember(false);
-    pnlOrganisation.Visible := false;
+  try
+    // Toggle visibility of the organisation panel and update signup object
+    if ChkOrganisation.Checked then
+    begin
+      pnlOrganisation.Visible := true;
+      objSignup.IsMember(true);
+    end
+    else
+    begin
+      objSignup.IsMember(false);
+      pnlOrganisation.Visible := false;
+    end;
+  except
+    showmessage('There was an error trying to select if you were a member or not');
   end;
-
 end;
 
+// Handler for the form's "Activate" event
 procedure Tfrm_Signup.FormActivate(Sender: TObject);
 begin
-  objSignup := SignUp.create();
+  try
+    // Create an instance of the SignUp class
+    objSignup := SignUp.create();
+  except
+    showmessage('There was an error trying to create objSignup');
+  end;
 end;
 
 end.
+
 

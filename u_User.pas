@@ -4,13 +4,14 @@ unit u_User;
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Grids, DBGrids, StdCtrls, ComCtrls, ExtCtrls, u_SignIn, dm_co2,
-  u_UserNormal, u_Signup, u_graph, DBCtrls, DB, ADODB, Mask, DateUtils;
+  u_UserNormal, u_Signup, u_graph, DBCtrls, DB, ADODB, Mask, DateUtils,
+  pngimage;
 
 type
   Tfrm_Users = class(TForm)
     PageControl1: TPageControl;
     tabSheetUser: TTabSheet;
-    TabSheet2: TTabSheet;
+    Admin: TTabSheet;
     btnGraph: TButton;
     DBGridUsers: TDBGrid;
     pnlWarning: TPanel;
@@ -38,7 +39,7 @@ type
     DBSourceEmission: TDataSource;
     ADOUsersQuery: TADOQuery;
     DBSourceUserQuery: TDataSource;
-    DBGrid1: TDBGrid;
+    DBGridAdmin: TDBGrid;
     ADOEmissionQuery: TADOQuery;
     GroupBox2: TGroupBox;
     btnDisplay: TButton;
@@ -50,13 +51,20 @@ type
     cmbSort: TComboBox;
     Database: TGroupBox;
     Statistics: TGroupBox;
-    Edit1: TEdit;
     RadioStatistics: TRadioGroup;
     btnStatistics: TButton;
     cmbStatistics: TComboBox;
     RadioSortAdmin: TRadioGroup;
     CmbCars: TComboBox;
     cmbCarsAdd: TComboBox;
+    btnAdminEdit: TButton;
+    DBNavigator2: TDBNavigator;
+    edtEdit: TEdit;
+    btnDeleteAdmin: TButton;
+    Label6: TLabel;
+    DataSource1: TDataSource;
+    imgAddCar: TImage;
+    btnGraphAdmin: TButton;
     procedure FormActivate(Sender: TObject);
     procedure btnGraphClick(Sender: TObject);
     procedure edtUpdateClick(Sender: TObject);
@@ -68,6 +76,8 @@ type
     procedure PageControl1Change(Sender: TObject);
     procedure btnStatisticsClick(Sender: TObject);
     procedure btnAdminSortClick(Sender: TObject);
+    procedure DBGridAdminCellClick(Column: TColumn);
+    procedure btnDeleteAdminClick(Sender: TObject);
   private
     procedure UpdateLookup(sQuery: string);
     procedure UpdateEmission;
@@ -122,7 +132,12 @@ begin
     end;
 
   except
-    Showmessage('Their was a failure entering your vehicle mileage');
+  if CmbCars.text='' then
+  showmessage('Please select your car');
+  if edtMileage.text='' then
+
+
+    Showmessage('Their was a failure entering your vehicle first mileage');
   end;
 end;
 
@@ -160,15 +175,37 @@ begin
   end;
 end;
 
+procedure Tfrm_Users.btnDeleteAdminClick(Sender: TObject);
+var
+  idelete: integer;
+begin
+  { idelete := MessageDlg('Do you want to delete this record', mtWarning,
+    mbOKCancel, 0);
+    if idelete = mrOK then
+    begin
+    if objUserdata.CanDelete(DBSourceAdminQuery) = true then
+    dmco2.ADOFootprint.delete
+    else
+    Showmessage(
+    'We were unable to delete the message, this may be due to it being out of deleteable time range')
+    end; }
+end;
+
 procedure Tfrm_Users.btnDeleteClick(Sender: TObject);
+var
+  idelete: integer;
 begin
   // dmco2.ADOCars['CarID']
-
-  if objUserdata.CanDelete(dmco2.ADOFootprint['EmissionDate']) = true then
-    dmco2.ADOFootprint.delete
-  else
-    Showmessage(
-      'We were unable to delete the message, this may be due to it being out of deleteable time range')
+  idelete := MessageDlg('Do you want to delete this record', mtWarning,
+    mbOKCancel, 0);
+  if idelete = mrOK then
+  begin
+    if objUserdata.CanDelete(dmco2.ADOFootprint['EmissionDate']) = true then
+      dmco2.ADOFootprint.delete
+    else
+      Showmessage(
+        'We were unable to delete the message, this may be due to it being out of deleteable time range')
+  end;
 end;
 
 procedure Tfrm_Users.btnDisplayClick(Sender: TObject);
@@ -265,24 +302,29 @@ begin
   end;
 end;
 
+procedure Tfrm_Users.DBGridAdminCellClick(Column: TColumn);
+begin
+  { edtEdit:=DBSourceAdminQuery; }
+end;
+
 procedure Tfrm_Users.edtUpdateClick(Sender: TObject);
 var
   iElectricity, iKilometer, iEmission: integer;
   sSQL: string;
   bFound: boolean;
-  rEmission:real;
-  begin
+  rEmission: real;
+begin
   try
     iElectricity := strtoint(edtElectricity.text);
     iKilometer := strtoint(edtMileageMain.text);
 
-    rEmission := iElectricity * 1060;
+    iEmission := iElectricity * 1060;
     sSQL := 'WHERE tblCarList.UserID = ' + objUserdata.accessUserId;
-    sSQL := sSQL + ' AND tblCar.Model =' + quotedstr(CmbCars.text)
-      + ';';
+    sSQL := sSQL + ' AND tblCar.Model =' + quotedstr(CmbCars.text) + ';';
     UpdateLookup(sSQL);
     iKilometer := iKilometer - ADOUsersQuery['Mileage'];
-    rEmission := (rEmission + (ADOUsersQuery['Emissions'] * iKilometer) / 1000);
+    iEmission := (iEmission + (ADOUsersQuery['Emissions'] * iKilometer));
+    rEmission := iEmission / 1000;
     with dmco2 do
     begin
       ADOFootprint.insert;
@@ -311,28 +353,32 @@ var
     end;
     UpdateUserDate;
   except
+  {if iElectricity='' then
+  showmessage('Please input a value in the edit');}
+
     Showmessage('Their was an error trying to update your carbon foortprint');
   end;
 end;
 
 procedure Tfrm_Users.FormActivate(Sender: TObject);
+var
+  path: string;
 begin
   ADOAdminQuery.active := true;
 
   objUserdata := UserData.Usercreate(u_Login.objSignin.AccessUsername);
 
-
   dmco2.runCar(objUserdata.accessUserId);
   dmco2.runCarAdd(objUserdata.accessUserId);
   dmco2.fillCombobox(CmbCars, dmco2.ADOQueryCar);
   dmco2.fillCombobox(cmbCarsAdd, dmco2.ADOQueryCar);
-//  dmco2.dbSourceQueryCar.Enabled := false;
-//  dmco2.dbSourceQueryCar.Enabled := true;
+  // dmco2.dbSourceQueryCar.Enabled := false;
+  // dmco2.dbSourceQueryCar.Enabled := true;
   objUserdata.CheckOrganisation;
-  if objUserdata.admin = true then
-    TabSheet2.tabVisible := true
+  if objUserdata.Admin = true then
+    Admin.tabVisible := true
   else
-    TabSheet2.tabVisible := false;
+    Admin.tabVisible := false;
   if not WithinPastMonths(Date, dmco2.ADOFootprint['EmissionDate'], 1) then
     pnlWarning.Caption := 'Please input your current electricity and Mileage';
   // objUserdata.LoadCar;
@@ -342,7 +388,9 @@ begin
     pnlFirst.visible := true
   else
     pnlFirst.visible := false;
-
+  path := ExpandFileName(ExtractFileDir(Application.ExeName))
+    + '\images\AddCar.png';
+  imgAddCar.picture.loadfromfile(path);
   UpdateAdmin(
     'Select Username,First_Name,Last_Name,Carbon_Footprint,[Last Updated],Goal,Email'
       + ' FROM tblUsers WHERE (OrganisationID = ' + inttostr
