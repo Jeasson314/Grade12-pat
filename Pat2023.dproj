@@ -58,7 +58,7 @@
 				<Form>frm_Cars</Form>
 			</DCCReference>
 			<DCCReference Include="u_organisation.pas">
-				<Form>frmOrganisation</Form>
+				<Form>frm_Organisation</Form>
 			</DCCReference>
 			<DCCReference Include="u_User.pas">
 				<Form>frm_Users</Form>
@@ -67,6 +67,7 @@
 				<Form>frm_Graph</Form>
 			</DCCReference>
 			<DCCReference Include="u_UserNormal.pas"/>
+			<DCCReference Include="u_passwordhasher.pas"/>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>

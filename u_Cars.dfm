@@ -123,7 +123,13 @@ object frm_Cars: Tfrm_Cars
       Ctl3D = False
       DataSource = DMCO2.DbSourceCar
       DefaultDrawing = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
       ParentCtl3D = False
+      ParentFont = False
       ReadOnly = True
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET

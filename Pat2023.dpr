@@ -7,10 +7,11 @@ uses
   u_SignIn in 'u_SignIn.pas',
   u_Signup in 'u_Signup.pas' {frm_Signup},
   u_Cars in 'u_Cars.pas' {frm_Cars},
-  u_organisation in 'u_organisation.pas' {frmOrganisation},
+  u_organisation in 'u_organisation.pas' {frm_Organisation},
   u_User in 'u_User.pas' {frm_Users},
   u_graph in 'u_graph.pas' {frm_Graph},
-  u_UserNormal in 'u_UserNormal.pas';
+  u_UserNormal in 'u_UserNormal.pas',
+  u_passwordhasher in 'u_passwordhasher.pas';
 
 {$R *.res}
 begin
@@ -20,7 +21,7 @@ begin
   Application.CreateForm(TDMCO2, DMCO2);
   Application.CreateForm(Tfrm_Signup, frm_Signup);
   Application.CreateForm(Tfrm_Cars, frm_Cars);
-  Application.CreateForm(TfrmOrganisation, frm_Organisation);
+  Application.CreateForm(Tfrm_Organisation, frm_Organisation);
   Application.CreateForm(Tfrm_Users, frm_Users);
   Application.CreateForm(Tfrm_Graph, frm_Graph);
   Application.Run;

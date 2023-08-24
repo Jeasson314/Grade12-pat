@@ -7,7 +7,7 @@ uses
   Dialogs, StdCtrls, Grids, DBGrids, dm_CO2, ExtCtrls, jpeg, pngimage, ComCtrls;
 
 type
-  TfrmOrganisation = class(TForm)
+  Tfrm_Organisation = class(TForm)
     GroupBox1: TGroupBox;
     DBGrid1: TDBGrid;
     Panel1: TPanel;
@@ -41,7 +41,7 @@ type
   end;
 
 var
-  frm_Organisation: TfrmOrganisation;
+  frm_Organisation: Tfrm_Organisation;
 
 implementation
 
@@ -50,7 +50,7 @@ uses u_Signup;
 {$R *.dfm}
 
 // Handler for clicking the "Add Organisation" button
-procedure TfrmOrganisation.btnAddOrganisationClick(Sender: TObject);
+procedure Tfrm_Organisation.btnAddOrganisationClick(Sender: TObject);
 begin
   // Close the current form and update the signup form's display
   frm_organisation.Close;
@@ -58,7 +58,7 @@ begin
 end;
 
 // Handler for clicking the "Search" button
-procedure TfrmOrganisation.btnSearchClick(Sender: TObject);
+procedure Tfrm_Organisation.btnSearchClick(Sender: TObject);
 begin
   try
     // Apply a filter to the ADOOrganisation dataset based on the entered search text
@@ -76,7 +76,7 @@ begin
 end;
 
 // Function to check if an organisation already exists in the database
-function TfrmOrganisation.dbCheck(sOrganisation: string): boolean;
+function Tfrm_Organisation.dbCheck(sOrganisation: string): boolean;
 begin
   result := True;
   with dmCO2 do
@@ -96,7 +96,7 @@ begin
 end;
 
 // Handler for the form's "Activate" event
-procedure TfrmOrganisation.FormActivate(Sender: TObject);
+procedure Tfrm_Organisation.FormActivate(Sender: TObject);
 begin
   // Load and display images
   imgSelectOrganisation.Picture.LoadFromFile('.\images\Health.png');
@@ -106,7 +106,7 @@ begin
 end;
 
 // Handler for clicking the "Create Organisation" image
-procedure TfrmOrganisation.imgCreateOrganisationClick(Sender: TObject);
+procedure Tfrm_Organisation.imgCreateOrganisationClick(Sender: TObject);
 var
   sOrganisation: string;
   iEmission: integer;
@@ -142,7 +142,7 @@ begin
 end;
 
 // Handler for clicking the "Select Organisation" image
-procedure TfrmOrganisation.imgSelectOrganisationClick(Sender: TObject);
+procedure Tfrm_Organisation.imgSelectOrganisationClick(Sender: TObject);
 begin
   try
     // Add organisation details to the signup object and update the display

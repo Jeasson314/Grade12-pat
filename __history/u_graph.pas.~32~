@@ -1,0 +1,82 @@
+unit u_graph;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, TeEngine, Series, StdCtrls, ExtCtrls, TeeProcs, Chart, DB, ADODB,
+  dm_co2, ComCtrls, u_UserNormal;
+
+type
+  Tfrm_Graph = class(TForm)
+    ChartCo2: TChart;
+    Series1: TBarSeries;
+    ADOGraphQuery: TADOQuery;
+    ADOGraphQuerySource: TDataSource;
+    TabSheet1: TTabSheet;
+    GroupBox1: TGroupBox;
+    btnUpdateGraph: TButton;
+    RadioGraph: TRadioGroup;
+    DateTimeTo: TDateTimePicker;
+    pnlDate: TPanel;
+    pagecontrol: TPageControl;
+    DateTimeFrom: TDateTimePicker;
+    procedure btnUpdateGraphClick(Sender: TObject);
+    procedure RadioGraphClick(Sender: TObject);
+  private
+    procedure UpdateGraphs(sField1, sfield2: string);
+    procedure UpdateQuery(sSQL:string);
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_Graph: Tfrm_Graph;
+
+implementation
+
+{$R *.dfm}
+
+procedure Tfrm_Graph.btnUpdateGraphClick(Sender: TObject);
+begin
+case radioGraph.ItemIndex of
+    0:begin
+    UpdateQuery('SELECT EmissionDate AS Emission, Emission FROM tblFootPrint WHERE UserID = '+ objUserdata.accessUserId);
+     DateTimeFrom.DateTime
+    end;
+    1:pnldate.Visible:=false;
+
+end;
+UpdateQuery('SELECT * FROM');
+end;
+
+procedure Tfrm_Graph.RadioGraphClick(Sender: TObject);
+begin
+case radioGraph.ItemIndex of
+    0:pnldate.Visible:=true;
+    1:pnldate.Visible:=false;
+
+end;
+end;
+
+procedure Tfrm_Graph.UpdateGraphs(sField1, sField2: string);
+begin
+  with Series1 do
+  begin
+    datasource := ADOGraphQuery;
+    xlabelssource := sField1;
+    YValues.Valuesource := sField2;
+    checkdatasource;
+  end;
+
+end;
+
+procedure Tfrm_Graph.UpdateQuery(sSQL: string);
+begin
+ ADOGraphQuery.SQL.Clear;
+ ADOGraphQuery.SQL.Add(sSQL);
+ ADOGraphQuery.open;
+end;
+
+end.

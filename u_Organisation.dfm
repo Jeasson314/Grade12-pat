@@ -1,7 +1,7 @@
-object frmOrganisation: TfrmOrganisation
+object frm_Organisation: Tfrm_Organisation
   Left = 0
   Top = 0
-  Caption = 'frmOrganisation'
+  Caption = 'frm_Organisation'
   ClientHeight = 371
   ClientWidth = 364
   Color = clBtnFace

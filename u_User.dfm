@@ -33,12 +33,10 @@ object frm_Users: Tfrm_Users
     OnChange = PageControl1Change
     object tabSheetUser: TTabSheet
       Caption = 'User update'
-      ExplicitLeft = 8
-      ExplicitTop = 28
       object GroupBox1: TGroupBox
         Left = 271
         Top = 64
-        Width = 554
+        Width = 306
         Height = 382
         Caption = 'User Management'
         TabOrder = 5
@@ -485,7 +483,7 @@ object frm_Users: Tfrm_Users
           Left = 14
           Top = 56
           Width = 219
-          Height = 21
+          Height = 24
           TabOrder = 2
           Text = 'edtEdit'
         end

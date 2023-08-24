@@ -21,6 +21,9 @@ object frm_Login: Tfrm_Login
     Width = 393
     Height = 312
     Caption = 'GroupBox1'
+    Color = clWhite
+    ParentBackground = False
+    ParentColor = False
     TabOrder = 0
     object Label1: TLabel
       Left = 106

@@ -60,5 +60,6 @@
     <File Path="u_graph.pas"/>
     <File Path="u_graph.dfm"/>
     <File Path="u_UserNormal.pas"/>
+    <File Path="u_passwordhasher.pas"/>
   </ProjectSortOrder>
 </BorlandProject>
