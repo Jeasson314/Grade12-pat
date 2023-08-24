@@ -13,42 +13,13 @@ object frm_Graph: Tfrm_Graph
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
-  object ChartCo2: TChart
-    Left = 0
-    Top = -8
-    Width = 465
-    Height = 433
-    Title.Text.Strings = (
-      'TChart')
-    TabOrder = 0
-    PrintMargins = (
-      15
-      7
-      15
-      7)
-    object Series1: TBarSeries
-      Marks.Arrow.Visible = True
-      Marks.Callout.Brush.Color = clBlack
-      Marks.Callout.Arrow.Visible = True
-      Marks.Visible = True
-      Gradient.Direction = gdTopBottom
-      XValues.Name = 'X'
-      XValues.Order = loAscending
-      YValues.Name = 'Bar'
-      YValues.Order = loNone
-      Data = {
-        02060000000000000000001440000000200000000000205C4000000020000000
-        0000405F40FFFFFF1F0000000000605840000000200000000000C04240FFFFFF
-        1F0000000000C05C40FFFFFF1F}
-    end
-  end
   object pagecontrol: TPageControl
     Left = 463
     Top = 0
     Width = 223
     Height = 425
     ActivePage = TabSheet1
-    TabOrder = 1
+    TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'TabSheet1'
       object GroupBox1: TGroupBox
@@ -107,6 +78,52 @@ object frm_Graph: Tfrm_Graph
           end
         end
       end
+    end
+  end
+  object DBChart1: TDBChart
+    Left = 0
+    Top = 0
+    Width = 441
+    Height = 249
+    PrintProportional = False
+    Title.Text.Strings = (
+      'TDBChart')
+    View3DOptions.Elevation = 315
+    View3DOptions.Orthogonal = False
+    View3DOptions.Perspective = 0
+    View3DOptions.Rotation = 360
+    TabOrder = 1
+    PrintMargins = (
+      16
+      25
+      14
+      24)
+    object SeriesFootPrint: TBarSeries
+      Marks.Arrow.Visible = True
+      Marks.Callout.Brush.Color = clBlack
+      Marks.Callout.Arrow.Visible = True
+      Marks.Shadow.Color = 8618883
+      Marks.Visible = True
+      DataSource = ADOGraphQuery
+      BarWidthPercent = 20
+      Dark3D = False
+      Gradient.Direction = gdTopBottom
+      Shadow.Color = 8553090
+      XValues.Name = 'X'
+      XValues.Order = loAscending
+      YValues.Name = 'Bar'
+      YValues.Order = loNone
+    end
+    object SeriesPie: TPieSeries
+      Marks.Arrow.Visible = True
+      Marks.Callout.Brush.Color = clBlack
+      Marks.Callout.Arrow.Visible = True
+      Marks.Visible = True
+      DataSource = ADOGraphQuery
+      Gradient.Direction = gdRadial
+      OtherSlice.Legend.Visible = False
+      PieValues.Name = 'Pie'
+      PieValues.Order = loNone
     end
   end
   object ADOGraphQuery: TADOQuery

@@ -1,10 +1,10 @@
-unit u_graph;
+﻿unit u_graph;
 interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, TeEngine, Series, StdCtrls, ExtCtrls, TeeProcs, Chart, DB, ADODB,
-  dm_co2, ComCtrls, u_UserNormal, DBChart;
+  dm_co2, ComCtrls, u_UserNormal, DBChart, Grids, DBGrids;
 
 type
   Tfrm_Graph = class(TForm)
@@ -20,6 +20,7 @@ type
     DateTimeFrom: TDateTimePicker;
     DBChart1: TDBChart;
     Series1: TBarSeries;
+    Series2: TPieSeries;
     procedure btnUpdateGraphClick(Sender: TObject);
     procedure RadioGraphClick(Sender: TObject);
   private
@@ -44,19 +45,22 @@ begin
   case RadioGraph.ItemIndex of
     0:
       begin
-        UpdateQuery('SELECT EmissionDate, Emission FROM tblFootPrint WHERE (UserID = ' +
+      Series1.Visible:=true;;
+        UpdateQuery(
+          'SELECT EmissionDate, Emission FROM tblFootPrint WHERE (UserID = ' +
             objUserdata.accessUserId + ') AND (EmissionDate BETWEEN #' +
-            FormatDateTime('yyyy/mm/dd',
-            DateTimeFrom.Date) + '# AND #' + FormatDateTime('yyyy/mm/dd',
+            FormatDateTime('yyyy/mm/dd',DateTimeFrom.Date)
+             + '# AND #' + FormatDateTime('yyyy/mm/dd',
             DateTimeTo.Date) + '#);');
         UpdateGraphs('EmissionDate', 'Emission')
         // DateTimeFrom.DateTime
       end;
-    1:
+    1:begin
+    Series1.Visible:=false;
       pnlDate.Visible := false;
 
+    end;
   end;
-  UpdateQuery('SELECT * FROM');
 end;
 
 procedure Tfrm_Graph.RadioGraphClick(Sender: TObject);
@@ -74,7 +78,7 @@ procedure Tfrm_Graph.UpdateGraphs(sField1, sfield2: string);
 begin
   with Series1 do
   begin
-    datasource := ADOGraphQuerySource;
+    datasource := ADOGraphQuery;
     xlabelssource := sField1;
     YValues.Valuesource := sfield2;
     checkdatasource;

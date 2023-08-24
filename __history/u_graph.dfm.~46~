@@ -81,24 +81,49 @@ object frm_Graph: Tfrm_Graph
     end
   end
   object DBChart1: TDBChart
-    Left = 8
-    Top = 8
+    Left = 0
+    Top = 0
     Width = 441
     Height = 249
+    PrintProportional = False
     Title.Text.Strings = (
       'TDBChart')
+    View3DOptions.Elevation = 315
+    View3DOptions.Orthogonal = False
+    View3DOptions.Perspective = 0
+    View3DOptions.Rotation = 360
     TabOrder = 1
-    object Series1: TBarSeries
+    PrintMargins = (
+      16
+      25
+      14
+      24)
+    object SeriesFootPrint: TBarSeries
+      Marks.Arrow.Visible = True
+      Marks.Callout.Brush.Color = clBlack
+      Marks.Callout.Arrow.Visible = True
+      Marks.Shadow.Color = 8618883
+      Marks.Visible = True
+      DataSource = ADOGraphQuery
+      BarWidthPercent = 20
+      Dark3D = False
+      Gradient.Direction = gdTopBottom
+      Shadow.Color = 8553090
+      XValues.Name = 'X'
+      XValues.Order = loAscending
+      YValues.Name = 'Bar'
+      YValues.Order = loNone
+    end
+    object Series2: TPieSeries
       Marks.Arrow.Visible = True
       Marks.Callout.Brush.Color = clBlack
       Marks.Callout.Arrow.Visible = True
       Marks.Visible = True
       DataSource = ADOGraphQuery
-      Gradient.Direction = gdTopBottom
-      XValues.Name = 'X'
-      XValues.Order = loAscending
-      YValues.Name = 'Bar'
-      YValues.Order = loNone
+      Gradient.Direction = gdRadial
+      OtherSlice.Legend.Visible = False
+      PieValues.Name = 'Pie'
+      PieValues.Order = loNone
     end
   end
   object ADOGraphQuery: TADOQuery
