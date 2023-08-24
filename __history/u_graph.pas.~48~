@@ -4,7 +4,7 @@ unit u_graph;
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, TeEngine, Series, StdCtrls, ExtCtrls, TeeProcs, Chart, DB, ADODB,
-  dm_co2, ComCtrls, u_UserNormal, DBChart, Grids, DBGrids;
+  dm_co2, ComCtrls, u_UserNormal, DBChart;
 
 type
   Tfrm_Graph = class(TForm)
@@ -57,6 +57,7 @@ begin
       pnlDate.Visible := false;
 
   end;
+  UpdateQuery('SELECT * FROM');
 end;
 
 procedure Tfrm_Graph.RadioGraphClick(Sender: TObject);
@@ -74,7 +75,7 @@ procedure Tfrm_Graph.UpdateGraphs(sField1, sfield2: string);
 begin
   with Series1 do
   begin
-    datasource := ADOGraphQuery;
+    datasource := ADOGraphQuerySource;
     xlabelssource := sField1;
     YValues.Valuesource := sfield2;
     checkdatasource;

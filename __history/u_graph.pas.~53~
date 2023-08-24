@@ -45,10 +45,10 @@ begin
     0:
       begin
         UpdateQuery(
-          'SELECT EmissionDate, Emission FROM tblFootPrint WHERE (UserID = ' +
-            objUserdata.accessUserId + ') AND (EmissionDate BETWEEN #' +
+          'SELECT DISTINCT EmissionDate, Emission FROM tblFootPrint WHERE (UserID = ' +
+            objUserdata.accessUserId + ') AND (EmissionDate >= #' +
             FormatDateTime('yyyy/mm/dd',DateTimeFrom.Date)
-             + '# AND #' + FormatDateTime('yyyy/mm/dd',
+             + '#) AND (EmissionDate <= #' + FormatDateTime('yyyy/mm/dd',
             DateTimeTo.Date) + '#);');
         UpdateGraphs('EmissionDate', 'Emission')
         // DateTimeFrom.DateTime
@@ -57,6 +57,7 @@ begin
       pnlDate.Visible := false;
 
   end;
+  //UpdateQuery('SELECT * FROM');
 end;
 
 procedure Tfrm_Graph.RadioGraphClick(Sender: TObject);
@@ -74,7 +75,7 @@ procedure Tfrm_Graph.UpdateGraphs(sField1, sfield2: string);
 begin
   with Series1 do
   begin
-    datasource := ADOGraphQuery;
+    datasource := ADOGraphQuerySource;
     xlabelssource := sField1;
     YValues.Valuesource := sfield2;
     checkdatasource;

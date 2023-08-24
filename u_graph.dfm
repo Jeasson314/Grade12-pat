@@ -85,15 +85,24 @@ object frm_Graph: Tfrm_Graph
     Top = 8
     Width = 441
     Height = 249
+    PrintProportional = False
     Title.Text.Strings = (
       'TDBChart')
     TabOrder = 1
+    PrintMargins = (
+      16
+      25
+      14
+      24)
     object Series1: TBarSeries
       Marks.Arrow.Visible = True
       Marks.Callout.Brush.Color = clBlack
       Marks.Callout.Arrow.Visible = True
+      Marks.Shadow.Color = 8618883
       Marks.Visible = True
       DataSource = ADOGraphQuery
+      BarWidthPercent = 20
+      Dark3D = False
       Gradient.Direction = gdTopBottom
       XValues.Name = 'X'
       XValues.Order = loAscending

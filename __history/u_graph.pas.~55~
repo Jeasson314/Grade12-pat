@@ -74,7 +74,7 @@ procedure Tfrm_Graph.UpdateGraphs(sField1, sfield2: string);
 begin
   with Series1 do
   begin
-    datasource := ADOGraphQuery;
+    datasource := ADOGraphQuerySource;
     xlabelssource := sField1;
     YValues.Valuesource := sfield2;
     checkdatasource;
