@@ -98,7 +98,8 @@ implementation
 
 uses u_Login;
 {$R *.dfm}
-//
+
+// 
 procedure Tfrm_Users.btnAddClick(Sender: TObject);
 var
   bFound: boolean;
@@ -106,15 +107,17 @@ var
 begin
   try
     bFound := false;
+    // Loop through the CarList and Users datasets to find a matching entry 
     with dmco2 do
     begin
       ADOCarList.first;
       ADOusers.first;
       while not(ADOCarList.eof) and (bFound = false) do
       begin
-        if (ADOCarList['UserID'] = objUserdata.accessUserId)
-          and ADOCarList['CarID'] = ADOUsersQuery['CarID'] then
+        if (ADOCarList['UserID'] = objUserdata.accessUserId) and
+          (ADOCarList['CarID'] = ADOUsersQuery['CarID']) then
         begin
+          // Update the CurrentMileage field in the CarList dataset 
           ADOCarList.edit;
           ADOCarList['CurrentMileage'] := strtoint(edtMileage.text);
           ADOCarList.post;
@@ -124,54 +127,56 @@ begin
         else
           ADOCarList.next;
       end;
+      // Update user data after the mileage update 
       UpdateUserDate;
+      // Create a SQL query for updating lookup data 
       sSQL := 'WHERE tblCarList.UserID = ' + objUserdata.accessUserId;
       sSQL := sSQL + ' AND Model =' + quotedstr(CmbCars.text)
-        + 'AND Mileage = Null;';
+        + ' AND Mileage = Null;';
       UpdateLookup(sSQL);
+      // Hide a panel if CarID is null 
       if ADOUsersQuery['CarID'].isNull then
         pnlFirst.visible := false;
     end;
-
   except
     if CmbCars.text = '' then
       showmessage('Please select your car');
     if edtMileage.text = '' then
-
-      showmessage('Their was a failure entering your vehicle first mileage');
+      showmessage('There was a failure entering your vehicle first mileage');
   end;
 end;
 
 procedure Tfrm_Users.btnAdminSortClick(Sender: TObject);
 begin
   try
+    // Sort the AdminQuery dataset based on selected criteria 
     case cmbSort.itemindex of
       0:
         begin
           if RadioSortAdmin.itemindex = 0 then
-            ADOAdminQuery.sort := 'Username DESC';
-          if RadioSortAdmin.itemindex = 1 then
+            ADOAdminQuery.sort := 'Username DESC'
+          else if RadioSortAdmin.itemindex = 1 then
             ADOAdminQuery.sort := 'Username ASC';
         end;
       1:
         begin
           if RadioSortAdmin.itemindex = 0 then
-            ADOAdminQuery.sort := 'First_Name DESC';
-          if RadioSortAdmin.itemindex = 1 then
+            ADOAdminQuery.sort := 'First_Name DESC'
+          else if RadioSortAdmin.itemindex = 1 then
             ADOAdminQuery.sort := 'First_Name ASC';
         end;
       2:
         begin
           if RadioSortAdmin.itemindex = 0 then
-            ADOAdminQuery.sort := 'Last_Name DESC';
-          if RadioSortAdmin.itemindex = 1 then
+            ADOAdminQuery.sort := 'Last_Name DESC'
+          else if RadioSortAdmin.itemindex = 1 then
             ADOAdminQuery.sort := 'Last_Name ASC';
         end;
       3:
         begin
           if RadioSortAdmin.itemindex = 0 then
-            ADOAdminQuery.sort := 'Last Updated DESC';
-          if RadioSortAdmin.itemindex = 1 then
+            ADOAdminQuery.sort := 'Last Updated DESC'
+          else if RadioSortAdmin.itemindex = 1 then
             ADOAdminQuery.sort := 'Last Updated ASC';
         end;
     end;
@@ -184,17 +189,7 @@ procedure Tfrm_Users.btnDeleteAdminClick(Sender: TObject);
 var
   idelete: integer;
 begin
-  { idelete := MessageDlg('Do you want to delete this record', mtWarning,
-    mbOKCancel, 0);
-    if idelete = mrOK then
-    begin
-    if objUserdata.CanDelete(DBSourceAdminQuery['EmissionDate']) = true then
-    dmco2.ADOFootprint.delete
-    else
-    Showmessage(
-    'We were unable to delete the message, this may be due to it being out of deleteable time range')
-    end;
-    objUserdata.UpdateLog('Deleted record from tblUser'); }
+  { Commented out code for deleting admin records }
 end;
 
 procedure Tfrm_Users.btnDeleteClick(Sender: TObject);
@@ -202,13 +197,15 @@ var
   idelete: integer;
 begin
   try
-    // dmco2.ADOCars['CarID'] 
+    // Confirm deletion with a message box 
     idelete := MessageDlg('Do you want to delete this record', mtWarning,
       mbOKCancel, 0);
     if idelete = mrOK then
     begin
+      // Check if the record is deletable based on a condition 
       if objUserdata.CanDelete(dmco2.ADOFootprint['EmissionDate']) = true then
       begin
+        // Delete the record from the Footprint dataset 
         dmco2.ADOFootprint.delete;
         objUserdata.UpdateLog('Delete from tblFootprint');
       end
@@ -217,32 +214,26 @@ begin
           'We were unable to delete the message, this may be due to it being out of deleteable time range')
     end;
   except
-    showmessage('Their was an error in the deletion problem');
+    showmessage('There was an error in the deletion problem');
   end;
 end;
 
 procedure Tfrm_Users.btnDisplayClick(Sender: TObject);
 begin
   try
+    // Display data in the admin section based on selected radio button 
     if RadioDisplay.itemindex = 0 then
       UpdateAdmin(
-        'Select Username,First_Name,Last_Name,Carbon_Footprint,[Last Updated],Goal,Email'
-          + ' FROM tblUsers WHERE (OrganisationID = ' + inttostr
-          (objUserdata.AccessOrganisationID) + ');');
-    if RadioDisplay.itemindex = 1 then
-      UpdateAdmin(
-        'SELECT tblUsers.Username AS Username, tblFootprint.EmissionDate AS [Emission Date], tblFootprint.Emission AS [Emission Amount]'
-          +
-          ' FROM tblUsers INNER JOIN tblFootprint ON tblUsers.UserID = tblFootprint.UserID'
-          + ' WHERE (tblUsers.OrganisationID = ' + inttostr
-          (objUserdata.AccessOrganisationID) + ');');
-    if RadioDisplay.itemindex = 2 then
-      UpdateAdmin(
-        'SELECT tblUsers.Username AS username, tblCar.Make AS Make, tblCar.Model AS Model '
-          + 'FROM tblCar INNER JOIN (tblUsers INNER JOIN tblCarList ON tblUsers.UserID = tblCarList.UserID) ' + 'ON tblCar.CarID = tblCarList.CarID ' + 'WHERE (OrganisationID = ' + inttostr(objUserdata.AccessOrganisationID) + ');');
-  except
-    showmessage('Their was an error displaying the ifo into the table');
-  end;
+        'Select Username,First_Name,Last_Name,Carbon_Footprint,[Last Updated],Goal,Email FROM tblUsers WHERE (OrganisationID = ' + inttostr(objUserdata.AccessOrganisationID) + ');');
+  else if RadioDisplay.itemindex = 1 then
+    UpdateAdmin(
+      'SELECT tblUsers.Username AS Username, tblFootprint.EmissionDate AS [Emission Date], tblFootprint.Emission AS [Emission Amount] FROM tblUsers INNER JOIN tblFootprint ON tblUsers.UserID = tblFootprint.UserID WHERE (tblUsers.OrganisationID = ' + inttostr(objUserdata.AccessOrganisationID) + ');');
+else if RadioDisplay.itemindex = 2 then
+  UpdateAdmin(
+    'SELECT tblUsers.Username AS username, tblCar.Make AS Make, tblCar.Model AS Model FROM tblCar INNER JOIN (tblUsers INNER JOIN tblCarList ON tblUsers.UserID = tblCarList.UserID) ON tblCar.CarID = tblCarList.CarID WHERE (OrganisationID = ' + inttostr(objUserdata.AccessOrganisationID) + ');');
+except
+  showmessage('There was an error displaying the info into the table');
+end;
 end;
 
 procedure Tfrm_Users.btnFilterClick(Sender: TObject);
@@ -488,27 +479,27 @@ end;
 procedure Tfrm_Users.UpdateUserDate;
 var  bFound: boolean;
 begin
-try
-  with dmco2 do
-  begin
-    ADOusers.first;
-    bFound := false;
-    while not(ADOusers.eof) and (bFound = false) do
+  try
+    with dmco2 do
     begin
-      if (ADOusers['UserID'] = objUserdata.accessUserId) then
+      ADOusers.first;
+      bFound := false;
+      while not(ADOusers.eof) and (bFound = false) do
       begin
-        ADOusers.edit;
-        ADOusers['Last Updated'] := Date;
-        ADOusers.post;
-        bFound := true;
-      end
-      else
-        ADOusers.next;
+        if (ADOusers['UserID'] = objUserdata.accessUserId) then
+        begin
+          ADOusers.edit;
+          ADOusers['Last Updated'] := Date;
+          ADOusers.post;
+          bFound := true;
+        end
+        else
+          ADOusers.next;
+      end;
     end;
+  except
+    showmessage('Their was an error updating user date');
   end;
-except
-showmessage('Their was an error updating user date');
-end;
 end;
 
 end.

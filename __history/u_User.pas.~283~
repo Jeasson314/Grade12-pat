@@ -98,7 +98,7 @@ implementation
 
 uses u_Login;
 {$R *.dfm}
-//
+
 procedure Tfrm_Users.btnAddClick(Sender: TObject);
 var
   bFound: boolean;
@@ -202,7 +202,7 @@ var
   idelete: integer;
 begin
   try
-    // dmco2.ADOCars['CarID'] 
+    // dmco2.ADOCars['CarID']
     idelete := MessageDlg('Do you want to delete this record', mtWarning,
       mbOKCancel, 0);
     if idelete = mrOK then
@@ -239,112 +239,114 @@ begin
     if RadioDisplay.itemindex = 2 then
       UpdateAdmin(
         'SELECT tblUsers.Username AS username, tblCar.Make AS Make, tblCar.Model AS Model '
-          + 'FROM tblCar INNER JOIN (tblUsers INNER JOIN tblCarList ON tblUsers.UserID = tblCarList.UserID) ' + 'ON tblCar.CarID = tblCarList.CarID ' + 'WHERE (OrganisationID = ' + inttostr(objUserdata.AccessOrganisationID) + ');');
+          + 'FROM tblCar INNER JOIN (tblUsers INNER JOIN tblCarList ON tblUsers.UserID = tblCarList.UserID) '
+          + 'ON tblCar.CarID = tblCarList.CarID ' + 'WHERE (OrganisationID = '
+          + inttostr(objUserdata.AccessOrganisationID) + ');');
   except
-    showmessage('Their was an error displaying the ifo into the table');
+showmessage('Their was an error displaying the ifo into the table');
   end;
 end;
 
 procedure Tfrm_Users.btnFilterClick(Sender: TObject);
 begin
-  try
-    with dmco2 do
-    begin
-      ADOFootprint.filtered := false;
-      ADOFootprint.filter := 'EmissionDate >= ' + quotedstr
-        (FormatDateTime('dd/mm/yyyy', DateTimeFrom.Date))
-        + ' and EmissionDate < ' + quotedstr(FormatDateTime('dd/mm/yyyy',
-          DateTimeTo.Date));
-      ADOFootprint.filtered := true;
-    end;
-  except
-    showmessage('Their was an error filtering from your selected dates');
+try
+  with dmco2 do
+  begin
+    ADOFootprint.filtered := false;
+    ADOFootprint.filter := 'EmissionDate >= ' + quotedstr
+      (FormatDateTime('dd/mm/yyyy', DateTimeFrom.Date))
+      + ' and EmissionDate < ' + quotedstr(FormatDateTime('dd/mm/yyyy',
+        DateTimeTo.Date));
+    ADOFootprint.filtered := true;
   end;
+except
+showmessage('Their was an error filtering from your selected dates');
+end;
 end;
 
 procedure Tfrm_Users.btnGraphAdminClick(Sender: TObject);
 begin
-  try
-    frm_Graph.ShowModal;
-  except
-    showmessage('Their was error showing the graph form');
-  end;
+try
+  frm_Graph.ShowModal;
+except
+showmessage('Their was error showing the graph form');
+end;
 end;
 
 procedure Tfrm_Users.btnGraphClick(Sender: TObject);
 begin
-  try
-    frm_Graph.ShowModal;
-  except
-    showmessage('Their was error showing the graph form');
-  end;
+try
+  frm_Graph.ShowModal;
+except
+showmessage('Their was error showing the graph form');
+end;
 end;
 
 procedure Tfrm_Users.btnSortClick(Sender: TObject);
 begin
-  try
-    if RadioSort.itemindex = 0 then
-      dmco2.ADOFootprint.sort := 'EmissionDate ASC';
-    if RadioSort.itemindex = 1 then
-      dmco2.ADOFootprint.sort := 'EmissionDate DESC';
-  except
-    showmessage('Their was error trying to sort');
-  end;
+try
+  if RadioSort.itemindex = 0 then
+    dmco2.ADOFootprint.sort := 'EmissionDate ASC';
+  if RadioSort.itemindex = 1 then
+    dmco2.ADOFootprint.sort := 'EmissionDate DESC';
+except
+showmessage('Their was error trying to sort');
+end;
 end;
 
 procedure Tfrm_Users.btnStatisticsClick(Sender: TObject);
 begin
-  try
-    if RadioStatistics.itemindex = 0 then
-    begin
-      case cmbStatistics.itemindex of
-        0:
-          UpdateAdmin('SELECT AVG(Emission) AS Average ' +
-              ' FROM tblUsers INNER JOIN tblFootprint ON tblUsers.UserID = tblFootprint.UserID '
-              + ' WHERE tblUsers.Username = ' + quotedstr
-              (ADOAdminQuery['Username']) + ';');
-        1:
-          UpdateAdmin('SELECT MIN(Emission) AS Minimum ' +
-              ' FROM tblUsers INNER JOIN tblFootprint ON tblUsers.UserID = tblFootprint.UserID '
-              + ' WHERE tblUsers.Username = ' + quotedstr
-              (ADOAdminQuery['Username']) + ';');
-        2:
-          UpdateAdmin('SELECT MAX(Emission) AS Maximum ' +
-              ' FROM tblUsers INNER JOIN tblFootprint ON tblUsers.UserID = tblFootprint.UserID '
-              + ' WHERE tblUsers.Username = ' + quotedstr
-              (ADOAdminQuery['Username']) + ';')
-      end;
-
+try
+  if RadioStatistics.itemindex = 0 then
+  begin
+    case cmbStatistics.itemindex of
+      0:
+        UpdateAdmin('SELECT AVG(Emission) AS Average ' +
+            ' FROM tblUsers INNER JOIN tblFootprint ON tblUsers.UserID = tblFootprint.UserID '
+            + ' WHERE tblUsers.Username = ' + quotedstr
+            (ADOAdminQuery['Username']) + ';');
+      1:
+        UpdateAdmin('SELECT MIN(Emission) AS Minimum ' +
+            ' FROM tblUsers INNER JOIN tblFootprint ON tblUsers.UserID = tblFootprint.UserID '
+            + ' WHERE tblUsers.Username = ' + quotedstr
+            (ADOAdminQuery['Username']) + ';');
+      2:
+        UpdateAdmin('SELECT MAX(Emission) AS Maximum ' +
+            ' FROM tblUsers INNER JOIN tblFootprint ON tblUsers.UserID = tblFootprint.UserID '
+            + ' WHERE tblUsers.Username = ' + quotedstr
+            (ADOAdminQuery['Username']) + ';')
     end;
-    if RadioStatistics.itemindex = 1 then
-    begin
-      case cmbStatistics.itemindex of
-        0:
-          UpdateAdmin('SELECT AVG(Emission) AS Average ' +
-              ' FROM tblUsers INNER JOIN tblFootprint ON tblUsers.UserID = tblFootprint.UserID '
-              + ' WHERE tblUsers.OrganisationID = ' + inttostr
-              (objUserdata.AccessOrganisationID) + ';');
-        1:
-          UpdateAdmin('SELECT MIN(Emission) AS Minimum ' +
-              ' FROM tblUsers INNER JOIN tblFootprint ON tblUsers.UserID = tblFootprint.UserID '
-              + ' WHERE tblUsers.OrganisationID = ' + inttostr
-              (objUserdata.AccessOrganisationID) + ';');
-        2:
-          UpdateAdmin('SELECT MAX(Emission) AS Maximum ' +
-              ' FROM tblUsers INNER JOIN tblFootprint ON tblUsers.UserID = tblFootprint.UserID '
-              + ' WHERE tblUsers.OrganisationID = ' + inttostr
-              (objUserdata.AccessOrganisationID) + ';')
-      end;
 
-    end;
-  except
-    showmessage('There was an error displaying to statistics');
   end;
+  if RadioStatistics.itemindex = 1 then
+  begin
+    case cmbStatistics.itemindex of
+      0:
+        UpdateAdmin('SELECT AVG(Emission) AS Average ' +
+            ' FROM tblUsers INNER JOIN tblFootprint ON tblUsers.UserID = tblFootprint.UserID '
+            + ' WHERE tblUsers.OrganisationID = ' + inttostr
+            (objUserdata.AccessOrganisationID) + ';');
+      1:
+        UpdateAdmin('SELECT MIN(Emission) AS Minimum ' +
+            ' FROM tblUsers INNER JOIN tblFootprint ON tblUsers.UserID = tblFootprint.UserID '
+            + ' WHERE tblUsers.OrganisationID = ' + inttostr
+            (objUserdata.AccessOrganisationID) + ';');
+      2:
+        UpdateAdmin('SELECT MAX(Emission) AS Maximum ' +
+            ' FROM tblUsers INNER JOIN tblFootprint ON tblUsers.UserID = tblFootprint.UserID '
+            + ' WHERE tblUsers.OrganisationID = ' + inttostr
+            (objUserdata.AccessOrganisationID) + ';')
+    end;
+
+  end;
+except
+showmessage('There was an error displaying to statistics');
+end;
 end;
 
 procedure Tfrm_Users.DBGridAdminCellClick(Column: TColumn);
 begin
-  // edtEdit.text:=DBSourceAdminQuery; 
+  // edtEdit.text:=DBSourceAdminQuery;
 end;
 
 procedure Tfrm_Users.edtUpdateClick(Sender: TObject);
@@ -420,7 +422,6 @@ procedure Tfrm_Users.FormActivate(Sender: TObject);
 var
   path: string;
 begin
-
   ADOAdminQuery.active := true;
 
   objUserdata := UserData.Usercreate(u_Login.objSignin.AccessUsername);
@@ -429,8 +430,8 @@ begin
   dmco2.runCarAdd(objUserdata.accessUserId);
   dmco2.fillCombobox(CmbCars, dmco2.ADOQueryCar);
   dmco2.fillCombobox(cmbCarsAdd, dmco2.ADOQueryCar);
-  // dmco2.dbSourceQueryCar.Enabled := false; 
-  // dmco2.dbSourceQueryCar.Enabled := true; 
+  // dmco2.dbSourceQueryCar.Enabled := false;
+  // dmco2.dbSourceQueryCar.Enabled := true;
   objUserdata.CheckOrganisation;
   if objUserdata.Admin = true then
     Admin.tabVisible := true
@@ -438,7 +439,7 @@ begin
     Admin.tabVisible := false;
   if not WithinPastMonths(Date, dmco2.ADOFootprint['EmissionDate'], 1) then
     pnlWarning.Caption := 'Please input your current electricity and Mileage';
-  // objUserdata.LoadCar; 
+  // objUserdata.LoadCar;
   UpdateLookup('WHERE tblCarList.UserID = ' + objUserdata.accessUserId + ';');
   CmbCars.Enabled := true;
   if objUserdata.isFirstAccess = true then
@@ -468,27 +469,23 @@ end;
 
 procedure Tfrm_Users.UpdateEmission;
 begin
-  // ADOEmissionQuery.sql.clear; 
-  // ADOEmissionQuery.sql.add(); 
+  // ADOEmissionQuery.sql.clear;
+  // ADOEmissionQuery.sql.add();
 end;
 
 procedure Tfrm_Users.UpdateLookup(sQuery: string);
 begin
-  try
-    ADOUsersQuery.sql.clear;
-    ADOUsersQuery.sql.add(
-      'SELECT tblCarList.CarListID AS CarListId,tblCarList.CurrentMileage AS Mileage,'
-        + 'tblCar.CarID AS CarID, tblCar.Make AS Make, tblCar.Model AS Model, tblCar.[CO2 Emissions(g/km)] AS Emissions' + ' FROM tblCar INNER JOIN tblCarList ON tblCar.CarID = tblCarList.CarID ' + sQuery);
-    ADOUsersQuery.Open;
-  except
-    showmessage('Their was an error with the sql statement');
-  end;
+  ADOUsersQuery.sql.clear;
+  ADOUsersQuery.sql.add(
+    'SELECT tblCarList.CarListID AS CarListId,tblCarList.CurrentMileage AS Mileage,'
+      + 'tblCar.CarID AS CarID, tblCar.Make AS Make, tblCar.Model AS Model, tblCar.[CO2 Emissions(g/km)] AS Emissions' + ' FROM tblCar INNER JOIN tblCarList ON tblCar.CarID = tblCarList.CarID ' + sQuery);
+  ADOUsersQuery.Open;
 end;
 
 procedure Tfrm_Users.UpdateUserDate;
-var  bFound: boolean;
+var
+  bFound: boolean;
 begin
-try
   with dmco2 do
   begin
     ADOusers.first;
@@ -506,9 +503,6 @@ try
         ADOusers.next;
     end;
   end;
-except
-showmessage('Their was an error updating user date');
-end;
 end;
 
 end.

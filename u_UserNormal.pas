@@ -60,6 +60,7 @@ var
   bFound: boolean;
   // sUs
 begin
+try
   with dmco2 do
   begin
     ADOUsers.first;
@@ -76,6 +77,9 @@ begin
         ADOUsers.next;
     end;
   end;
+except
+showmessage('Their was an error finding admin');
+end;
 end;
 
 function UserData.isFirstAccess: boolean;
@@ -106,7 +110,7 @@ procedure UserData.UpdateLog(sLog: string);
 var path:string;
 begin
 //path:='';
-assignfile(tfLog,'.\Textfile\tfLog.txt');
+assignfile(tfLog,'.\Textfile\tfLog.txt'); //DB Logger
 reset(tfLog);
 showmessage(sLog+'by:'+fUsername+'At'+Datetostr(date)+Timetostr(time));
 writeln(tfLog,sLog+' by '+fUsername+' At '+Datetostr(date)+' '+Timetostr(time));
@@ -134,7 +138,6 @@ begin
         ADOUsers.next;
     end;
   end;
-  // showmessage('hello');
 
 end;
 

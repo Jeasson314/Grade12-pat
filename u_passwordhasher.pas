@@ -1515,7 +1515,7 @@ begin
   sOrginal_password := fpassword;
   repeat
     chrPassword := sOrginal_password[1];
-    iFirst := ord(chrPassword) - 32;
+    iFirst := ord(chrPassword) - 32;  //convert to ascii
     chrPassword := sOrginal_password[2];
     iSecond := ord(chrPassword) - 32;
     delete(sOrginal_password, 1, 2);

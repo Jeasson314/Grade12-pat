@@ -98,7 +98,7 @@ implementation
 
 uses u_Login;
 {$R *.dfm}
-//
+
 procedure Tfrm_Users.btnAddClick(Sender: TObject);
 var
   bFound: boolean;
@@ -488,7 +488,6 @@ end;
 procedure Tfrm_Users.UpdateUserDate;
 var  bFound: boolean;
 begin
-try
   with dmco2 do
   begin
     ADOusers.first;
@@ -506,9 +505,6 @@ try
         ADOusers.next;
     end;
   end;
-except
-showmessage('Their was an error updating user date');
-end;
 end;
 
 end.

@@ -98,7 +98,7 @@ implementation
 
 uses u_Login;
 {$R *.dfm}
-//
+
 procedure Tfrm_Users.btnAddClick(Sender: TObject);
 var
   bFound: boolean;
@@ -474,21 +474,21 @@ end;
 
 procedure Tfrm_Users.UpdateLookup(sQuery: string);
 begin
-  try
-    ADOUsersQuery.sql.clear;
-    ADOUsersQuery.sql.add(
-      'SELECT tblCarList.CarListID AS CarListId,tblCarList.CurrentMileage AS Mileage,'
-        + 'tblCar.CarID AS CarID, tblCar.Make AS Make, tblCar.Model AS Model, tblCar.[CO2 Emissions(g/km)] AS Emissions' + ' FROM tblCar INNER JOIN tblCarList ON tblCar.CarID = tblCarList.CarID ' + sQuery);
-    ADOUsersQuery.Open;
-  except
-    showmessage('Their was an error with the sql statement');
-  end;
+try
+  ADOUsersQuery.sql.clear;
+  ADOUsersQuery.sql.add(
+    'SELECT tblCarList.CarListID AS CarListId,tblCarList.CurrentMileage AS Mileage,'
+      + 'tblCar.CarID AS CarID, tblCar.Make AS Make, tblCar.Model AS Model, tblCar.[CO2 Emissions(g/km)] AS Emissions' + ' FROM tblCar INNER JOIN tblCarList ON tblCar.CarID = tblCarList.CarID ' + sQuery);
+  ADOUsersQuery.Open;
+except
+showmessage('Their was an error with the sql statement');
+end;
 end;
 
 procedure Tfrm_Users.UpdateUserDate;
-var  bFound: boolean;
+var
+  bFound: boolean;
 begin
-try
   with dmco2 do
   begin
     ADOusers.first;
@@ -506,9 +506,6 @@ try
         ADOusers.next;
     end;
   end;
-except
-showmessage('Their was an error updating user date');
-end;
 end;
 
 end.
