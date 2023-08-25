@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs,u_SignIn, StdCtrls,u_Signup,WideStrings,u_User,dm_co2,u_passwordhasher;
+  Dialogs, u_SignIn, StdCtrls, u_Signup, WideStrings, u_User, dm_co2,
+  u_passwordhasher;
 
 type
   Tfrm_Login = class(TForm)
@@ -16,10 +17,13 @@ type
     btnSignin: TButton;
     Button1: TButton;
     CHKCookie: TCheckBox;
+
+
     procedure btnSigninClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure CHKCookieClick(Sender: TObject);
+
   private
     { Private declarations }
   public
@@ -35,70 +39,85 @@ implementation
 
 {$R *.dfm}
 
-
-
+// Handler for the "Sign In" button click
 procedure Tfrm_Login.btnSigninClick(Sender: TObject);
 var
   sHashed_password, sUsername: string;
 begin
-
   try
+    // Set the login credentials in the SignIn object
     objSignin.SetLogin(edtUsername.Text, edtPassword.Text);
+
+    // Check if the provided password matches the stored password
     if objSignin.PasswordCheck = true then
     begin
-       frm_users.ShowModal;
-       //frm_Login.Close;
+      frm_users.ShowModal; // Show the user profile form
     end
     else
-    MessageDlg('Please check your username and password.', mtWarning, [mbOk],
-        0);
-      except
-        if edtUsername.Text = '' then
-          MessageDlg('Please type in a username or create an account.',
-            mtWarning, [mbOk], 0);
-        if edtPassword.Text = '' then
-          MessageDlg('Please type in a password.', mtWarning, [mbOk], 0);
-        edtPassword.Color := clRed;
-      end;
-    // showmessage((hash(edtPassword.Text)));
+      MessageDlg('Please check your username and password.', mtWarning, [mbOk], 0);
+  except
+    // Handle exceptions and provide appropriate error messages
+    if edtUsername.Text = '' then
+      MessageDlg('Please type in a username or create an account.', mtWarning, [mbOk], 0);
+    if edtPassword.Text = '' then
+      MessageDlg('Please type in a password.', mtWarning, [mbOk], 0);
+    edtPassword.Color := clRed;
   end;
-
-  procedure Tfrm_Login.Button1Click(Sender: TObject);
-begin
-frm_Signup.ShowModal;
 end;
 
+// Handler for the "Create Account" button click
+procedure Tfrm_Login.Button1Click(Sender: TObject);
+begin
+  try
+    frm_Signup.ShowModal; // Show the signup form
+  except
+    showmessage('There was an error showing the Sign up form');
+  end;
+end;
+
+// Handler for the "Remember Me" checkbox click
 procedure Tfrm_Login.CHKCookieClick(Sender: TObject);
 begin
-if chkcookie.Checked then
-begin
-rewrite(tfCookie);
-writeln(tfCookie,edtUsername.Text);
-writeln(tfCookie,edtPassword.Text);
-closefile(tfCookie);
-end;
-end;
-
-procedure Tfrm_Login.FormActivate(Sender: TObject);
-  var sReadln,path:string;
-  begin
-    try
-    path:=ExpandFileName(ExtractFileDir(Application.ExeName)) + '\Textfile\tfUserCookie.txt';
-      objSignin := SignIn.create();
-      assignfile(tfCookie,path);
-      reset(tfCookie);
-      readln(tfCookie,sReadln);
-      if  sReadln= '' then
-          exit
-
-      else
-      edtUsername.Text:=sReadln;
-      readln(tfCookie,sReadln);
-      edtPassword.text:=sReadln;
-      closefile(tfCookie)
-        finally
-
-        end;
+  try
+    if CHKCookie.Checked then
+    begin
+      // Write the username and password to a text file for remembering
+      rewrite(tfCookie);
+      writeln(tfCookie, edtUsername.Text);
+      writeln(tfCookie, edtPassword.Text);
+      closefile(tfCookie);
     end;
+  except
+    showmessage('There was an error adding a query');
+  end;
+end;
+
+// Handler for the form's "Activate" event
+procedure Tfrm_Login.FormActivate(Sender: TObject);
+var
+  sReadln, path: string;
+begin
+  try
+    // Set up the path to the text file for remembering user login
+    path := ExpandFileName(ExtractFileDir(Application.ExeName)) + '\Textfile\tfUserCookie.txt';
+
+    // Initialize the SignIn object and read saved login details from the text file
+    objSignin := SignIn.create();
+    assignfile(tfCookie, path);
+    reset(tfCookie);
+    readln(tfCookie, sReadln);
+
+    // Set the saved username
+    if sReadln <> '' then
+      edtUsername.Text := sReadln;
+
+    readln(tfCookie, sReadln);
+    edtPassword.Text := sReadln;
+    closefile(tfCookie);
+  finally
+    // Clean up resources
+  end;
+end;
 
 end.
+

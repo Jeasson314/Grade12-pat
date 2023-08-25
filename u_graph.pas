@@ -1,10 +1,10 @@
-unit u_graph;
+unit u_Graph;
 interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, TeEngine, Series, StdCtrls, ExtCtrls, TeeProcs, Chart, DB, ADODB,
-  dm_co2, ComCtrls, u_UserNormal, DBChart, Grids, DBGrids;
+  dm_co2, ComCtrls, u_UserNormal, DBChart, Grids, DBGrids, Spin;
 
 type
   Tfrm_Graph = class(TForm)
@@ -16,17 +16,32 @@ type
     RadioGraph: TRadioGroup;
     DateTimeTo: TDateTimePicker;
     pnlDate: TPanel;
-    pagecontrol: TPageControl;
+    User: TPageControl;
     DateTimeFrom: TDateTimePicker;
     DBChart1: TDBChart;
     SeriesFootPrint: TBarSeries;
     SeriesPie: TPieSeries;
+    TabSheet2: TTabSheet;
+    GroupBox2: TGroupBox;
+    RadioAdmin: TRadioGroup;
+    btnUpdateAdminGraph: TButton;
+    Label2: TLabel;
+    pnlYear: TPanel;
+    Label1: TLabel;
+    spinYear: TSpinEdit;
+
+    // Event handlers
     procedure btnUpdateGraphClick(Sender: TObject);
     procedure RadioGraphClick(Sender: TObject);
+    procedure btnUpdateAdminGraphClick(Sender: TObject);
+    procedure RadioAdminClick(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+
   private
     procedure UpdateGraphs(sField1, sfield2: string);
     procedure UpdateQuery(sSQL: string);
-    { Private declarations }
+    procedure UpdatePieGraph(sField1, sfield2: string);
+
   public
     { Public declarations }
   end;
@@ -38,70 +53,146 @@ implementation
 
 {$R *.dfm}
 
-uses u_User;
+uses
+  u_User;
 
-procedure Tfrm_Graph.btnUpdateGraphClick(Sender: TObject);
+// Handler for the "Update Admin Graph" button click
+procedure Tfrm_Graph.btnUpdateAdminGraphClick(Sender: TObject);
 begin
-  case RadioGraph.ItemIndex of
-    0:
-      begin
-        SeriesPie.Visible := false;
-        SeriesFootPrint.Visible := true;
-        UpdateQuery(
-          'SELECT EmissionDate, Emission FROM tblFootPrint WHERE (UserID = ' +
-            objUserdata.accessUserId + ') AND (EmissionDate BETWEEN #' +
-            FormatDateTime('yyyy/mm/dd',
-            DateTimeFrom.Date) + '# AND #' + FormatDateTime('yyyy/mm/dd',
-            DateTimeTo.Date) + '#);');
-        UpdateGraphs('EmissionDate', 'Emission');
-        // DateTimeFrom.DateTime
-      end;
-    1:
-      begin
-        SeriesFootPrint.Visible := false;
-        SeriesPie.Visible := true;
-        UpdateQuery(
-          'SELECT tblCar.Model AS Model,tblCar.[CO2 Emissions(g/km)] AS Emission FROM tblCar INNER JOIN tblCarList'
-          +' ON tblCar.CarID = tblCarList.CarID WHERE tblCarList.UserID = '
-           + objUserdata.accessUserId +';');
-        with SeriesPie do
+  try
+    case RadioAdmin.ItemIndex of
+      0:
         begin
-        datasource := ADOGraphQuery;
-        pievalues
-        checkdatasource;
+          SeriesPie.Visible := True;
+          SeriesFootPrint.Visible := False;
+          UpdateQuery('SELECT Carbon_Footprint, Username FROM tblUsers' +
+              ' WHERE OrganisationID = ' + IntToStr
+              (objUserdata.AccessOrganisationID) + ';');
+          UpdatePieGraph('Username', 'Carbon_Footprint');
         end;
-      end;
+      1:
+        begin
+          SeriesPie.Visible := False;
+          SeriesFootPrint.Visible := True;
+          UpdateQuery(
+            'SELECT Sum(tblFootprint.Emission) AS SumOfEmission, Month(tblFootprint.EmissionDate) AS EmissionDate '
+              +
+              'FROM tblUsers INNER JOIN tblFootprint ON tblUsers.UserID = tblFootprint.UserID '
+              + 'WHERE (((tblUsers.OrganisationID) = ' + IntToStr
+              (objUserdata.AccessOrganisationID) +
+              ')) AND (Year(tblFootprint.EmissionDate) = ' + IntToStr
+              (spinYear.Value) +
+              ') GROUP BY Month(tblFootprint.EmissionDate);');
+          UpdateGraphs('EmissionDate', 'SumOfEmission');
+        end;
+    end;
+  except
+    ShowMessage('There was an error trying to load the graph.');
   end;
 end;
 
+// Handler for the "Update Graph" button click
+procedure Tfrm_Graph.btnUpdateGraphClick(Sender: TObject);
+begin
+  try
+    case RadioGraph.ItemIndex of
+      0:
+        begin
+          SeriesPie.Visible := False;
+          SeriesFootPrint.Visible := True;
+          UpdateQuery(
+            'SELECT EmissionDate, Emission FROM tblFootPrint WHERE (UserID = '
+              + objUserdata.AccessUserId + ') AND (EmissionDate BETWEEN #' +
+              FormatDateTime('yyyy/mm/dd',
+              DateTimeFrom.Date) + '# AND #' + FormatDateTime('yyyy/mm/dd',
+              DateTimeTo.Date) + '#);');
+          UpdateGraphs('EmissionDate', 'Emission');
+        end;
+      1:
+        begin
+          SeriesFootPrint.Visible := False;
+          SeriesPie.Visible := True;
+          UpdateQuery(
+            'SELECT tblCar.Model AS Model, tblCar.[CO2 Emissions(g/km)] AS Emission FROM tblCar INNER JOIN tblCarList '
+              +
+              'ON tblCar.CarID = tblCarList.CarID WHERE tblCarList.UserID = ' + objUserdata.AccessUserId + ';');
+          UpdatePieGraph('Model', 'Emission');
+        end;
+    end;
+  except
+    ShowMessage('There was an error trying to load the graph.');
+  end;
+end;
+
+// Handler for the form's "Activate" event
+procedure Tfrm_Graph.FormActivate(Sender: TObject);
+begin
+  try
+    if objUserdata.Admin = True then
+      TabSheet2.TabVisible := True
+    else
+      TabSheet2.TabVisible := False;
+  except
+    ShowMessage('Failed to handle tab visibility.');
+  end;
+end;
+
+// Handler for the Admin radio button group click
+procedure Tfrm_Graph.RadioAdminClick(Sender: TObject);
+begin
+  try
+    case RadioAdmin.ItemIndex of
+      0:
+        pnlDate.Visible := True;
+      1:
+        pnlDate.Visible := False;
+    end;
+  except
+    ShowMessage('Failed to handle the error.');
+  end;
+end;
+
+// Handler for the Graph radio button group click
 procedure Tfrm_Graph.RadioGraphClick(Sender: TObject);
 begin
   case RadioGraph.ItemIndex of
     0:
-      pnlDate.Visible := true;
+      pnlYear.Visible := True;
     1:
-      pnlDate.Visible := false;
-
+      pnlYear.Visible := False;
   end;
 end;
 
+// Update the bar graph data
 procedure Tfrm_Graph.UpdateGraphs(sField1, sfield2: string);
 begin
   with SeriesFootPrint do
   begin
-    datasource := ADOGraphQuery;
-    xlabelssource := sField1;
-    YValues.Valuesource := sfield2;
-    checkdatasource;
+    DataSource := ADOGraphQuery;
+    XLabelsSource := sField1;
+    YValues.ValueSource := sfield2;
+    CheckDataSource;
   end;
-
 end;
 
+// Update the pie chart data
+procedure Tfrm_Graph.UpdatePieGraph(sField1, sfield2: string);
+begin
+  with SeriesPie do
+  begin
+    DataSource := ADOGraphQuery;
+    PieValues.ValueSource := sfield2;
+    XLabelsSource := sField1;
+    CheckDataSource;
+  end;
+end;
+
+// Update the SQL query for the ADOQuery
 procedure Tfrm_Graph.UpdateQuery(sSQL: string);
 begin
   ADOGraphQuery.SQL.Clear;
   ADOGraphQuery.SQL.Add(sSQL);
-  ADOGraphQuery.open;
+  ADOGraphQuery.Open;
 end;
 
 end.

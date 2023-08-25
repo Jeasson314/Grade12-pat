@@ -114,55 +114,13 @@ object frm_Cars: Tfrm_Cars
       ParentFont = False
       ExplicitWidth = 136
     end
-    object DBGridModel: TDBGrid
-      Left = 7
-      Top = 38
-      Width = 559
-      Height = 134
-      Align = alTop
-      Ctl3D = False
-      DataSource = DMCO2.DbSourceCar
-      DefaultDrawing = False
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentCtl3D = False
-      ParentFont = False
-      ReadOnly = True
-      TabOrder = 0
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Tahoma'
-      TitleFont.Style = []
-      Columns = <
-        item
-          Expanded = False
-          FieldName = 'Make'
-          Width = 150
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'Model'
-          Width = 150
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'CO2 Emissions(g/km)'
-          Visible = True
-        end>
-    end
     object Panel1: TPanel
       Left = 7
       Top = 174
       Width = 559
       Height = 71
       Align = alBottom
-      TabOrder = 1
+      TabOrder = 0
       object imgAddV: TImage
         Left = 267
         Top = 32
@@ -205,6 +163,36 @@ object frm_Cars: Tfrm_Cars
         TabOrder = 3
         OnClick = btnSearchClick
       end
+    end
+    object girdCars: TDBGrid
+      Left = 8
+      Top = 40
+      Width = 545
+      Height = 136
+      DataSource = DMCO2.DbSourceCar
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clNone
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'Make'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Model'
+          Visible = True
+        end>
     end
   end
   object GroupBox3: TGroupBox

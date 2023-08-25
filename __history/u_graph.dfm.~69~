@@ -1,0 +1,231 @@
+object frm_Graph: Tfrm_Graph
+  Left = 0
+  Top = 0
+  Caption = 'frm_Graph'
+  ClientHeight = 422
+  ClientWidth = 673
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object User: TPageControl
+    Left = 436
+    Top = 0
+    Width = 237
+    Height = 425
+    ActivePage = TabSheet2
+    TabOrder = 0
+    object TabSheet1: TTabSheet
+      Caption = 'User'
+      object Label2: TLabel
+        Left = 96
+        Top = 192
+        Width = 31
+        Height = 13
+        Caption = 'Label2'
+      end
+      object GroupBox1: TGroupBox
+        Left = 0
+        Top = 0
+        Width = 229
+        Height = 397
+        Align = alClient
+        Caption = 'GroupBox1'
+        TabOrder = 0
+        ExplicitLeft = -3
+        ExplicitTop = 40
+        object btnUpdateGraph: TButton
+          Left = 7
+          Top = 175
+          Width = 212
+          Height = 42
+          Caption = 'Update Graph'
+          TabOrder = 0
+          OnClick = btnUpdateGraphClick
+        end
+        object RadioGraph: TRadioGroup
+          Left = 16
+          Top = 22
+          Width = 185
+          Height = 59
+          Caption = 'Choose which data you want output:'
+          ItemIndex = 0
+          Items.Strings = (
+            'Emission Graph'
+            'Car Emission')
+          TabOrder = 1
+          OnClick = RadioGraphClick
+        end
+        object pnlDate: TPanel
+          Left = 3
+          Top = 87
+          Width = 212
+          Height = 82
+          TabOrder = 2
+          object DateTimeTo: TDateTimePicker
+            Left = 7
+            Top = 48
+            Width = 186
+            Height = 21
+            Date = 45162.707229641200000000
+            Time = 45162.707229641200000000
+            TabOrder = 0
+          end
+          object DateTimeFrom: TDateTimePicker
+            Left = 7
+            Top = 8
+            Width = 186
+            Height = 21
+            Date = 45162.707342662030000000
+            Time = 45162.707342662030000000
+            TabOrder = 1
+          end
+        end
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'Admin'
+      ImageIndex = 1
+      ExplicitLeft = 11
+      ExplicitTop = 28
+      object GroupBox2: TGroupBox
+        Left = 0
+        Top = 0
+        Width = 229
+        Height = 397
+        Align = alClient
+        Caption = 'GroupBox2'
+        TabOrder = 0
+        ExplicitLeft = 5
+        ExplicitTop = 11
+        ExplicitWidth = 221
+        ExplicitHeight = 394
+        object RadioAdmin: TRadioGroup
+          Left = 9
+          Top = 19
+          Width = 216
+          Height = 54
+          Caption = 'Choose what data:'
+          Items.Strings = (
+            'User Display'
+            'Organisation by Month')
+          TabOrder = 0
+          OnClick = RadioAdminClick
+        end
+        object btnUpdateAdminGraph: TButton
+          Left = 14
+          Top = 154
+          Width = 204
+          Height = 39
+          Caption = 'Update Graph'
+          TabOrder = 1
+          OnClick = btnUpdateAdminGraphClick
+        end
+        object pnlYear: TPanel
+          Left = 11
+          Top = 79
+          Width = 207
+          Height = 69
+          TabOrder = 2
+          object Label1: TLabel
+            Left = 8
+            Top = 8
+            Width = 114
+            Height = 13
+            Caption = 'Choose year to display:'
+          end
+          object spinYear: TSpinEdit
+            Left = 4
+            Top = 27
+            Width = 121
+            Height = 22
+            MaxValue = 0
+            MinValue = 0
+            TabOrder = 0
+            Value = 0
+          end
+        end
+      end
+    end
+  end
+  object DBChart1: TDBChart
+    Left = 0
+    Top = 0
+    Width = 441
+    Height = 249
+    PrintProportional = False
+    Title.Text.Strings = (
+      'TDBChart')
+    DepthAxis.Automatic = False
+    DepthAxis.AutomaticMaximum = False
+    DepthAxis.AutomaticMinimum = False
+    DepthAxis.Maximum = 0.169999999999999800
+    DepthAxis.Minimum = -0.830000000000000300
+    DepthTopAxis.Automatic = False
+    DepthTopAxis.AutomaticMaximum = False
+    DepthTopAxis.AutomaticMinimum = False
+    DepthTopAxis.Maximum = 0.169999999999999800
+    DepthTopAxis.Minimum = -0.830000000000000300
+    LeftAxis.Automatic = False
+    LeftAxis.AutomaticMaximum = False
+    LeftAxis.AutomaticMinimum = False
+    RightAxis.Automatic = False
+    RightAxis.AutomaticMaximum = False
+    RightAxis.AutomaticMinimum = False
+    View3DOptions.Elevation = 315
+    View3DOptions.Orthogonal = False
+    View3DOptions.Perspective = 0
+    View3DOptions.Rotation = 360
+    TabOrder = 1
+    PrintMargins = (
+      16
+      25
+      14
+      24)
+    object SeriesFootPrint: TBarSeries
+      Marks.Arrow.Visible = True
+      Marks.Callout.Brush.Color = clBlack
+      Marks.Callout.Arrow.Visible = True
+      Marks.Shadow.Color = 8618883
+      Marks.Visible = True
+      DataSource = ADOGraphQuery
+      BarWidthPercent = 45
+      Dark3D = False
+      Gradient.Direction = gdTopBottom
+      Shadow.Color = 8684676
+      XValues.Name = 'X'
+      XValues.Order = loAscending
+      YValues.Name = 'Bar'
+      YValues.Order = loNone
+    end
+    object SeriesPie: TPieSeries
+      Marks.Arrow.Visible = True
+      Marks.Callout.Brush.Color = clBlack
+      Marks.Callout.Arrow.Visible = True
+      Marks.Visible = True
+      DataSource = ADOGraphQuery
+      Gradient.Direction = gdRadial
+      OtherSlice.Legend.Visible = False
+      PieValues.Name = 'Pie'
+      PieValues.Order = loNone
+    end
+  end
+  object ADOGraphQuery: TADOQuery
+    Connection = DMCO2.con
+    Parameters = <>
+    SQL.Strings = (
+      'Select * from tblFootPrint')
+    Left = 408
+    Top = 320
+  end
+  object ADOGraphQuerySource: TDataSource
+    DataSet = ADOGraphQuery
+    Left = 408
+    Top = 368
+  end
+end

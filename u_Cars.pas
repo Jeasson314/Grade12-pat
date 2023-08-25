@@ -21,7 +21,6 @@ type
     Label4: TLabel;
     adoListMakes: TADOQuery;
     dsListMakes: TDataSource;
-    DBGridModel: TDBGrid;
     Panel1: TPanel;
     lookupMake: TDBLookupComboBox;
     edtSearch: TEdit;
@@ -32,6 +31,7 @@ type
     redoutCars: TRichEdit;
     btnCompleteCar: TButton;
     Label5: TLabel;
+    girdCars: TDBGrid;
 
     procedure FormActivate(Sender: TObject);
     procedure btnSearchClick(Sender: TObject);
