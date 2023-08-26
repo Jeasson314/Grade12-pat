@@ -334,7 +334,7 @@ begin
     begin
       case cmbStatistics.itemindex of
         0:
-          UpdateAdmin('SELECT Round(AVG(Emission),2) AS Average ' +
+          UpdateAdmin('SELECT AVG(Emission) AS Average ' +
               'FROM tblUsers INNER JOIN tblFootprint ON tblUsers.UserID = tblFootprint.UserID '
               + 'WHERE tblUsers.OrganisationID = ' + inttostr
               (objUserdata.AccessOrganisationID) + ';'); // Query to calculate average emission for the selected organisation

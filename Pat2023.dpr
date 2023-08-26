@@ -2,16 +2,16 @@ program Pat2023;
 
 uses
   Forms,
-  u_Login in 'u_Login.pas' {frm_Login},
-  dm_CO2 in 'dm_CO2.pas' {DMCO2: TDataModule},
-  u_SignIn in 'u_SignIn.pas',
-  u_Signup in 'u_Signup.pas' {frm_Signup},
-  u_Cars in 'u_Cars.pas' {frm_Cars},
-  u_organisation in 'u_organisation.pas' {frm_Organisation},
-  u_User in 'u_User.pas' {frm_Users},
-  u_graph in 'u_graph.pas' {frm_Graph},
-  u_UserNormal in 'u_UserNormal.pas',
-  u_passwordhasher in 'u_passwordhasher.pas';
+  u_Login in '.\Units\u_Login.pas' {frm_Login},
+  dm_CO2 in '.\Units\dm_CO2.pas' {DMCO2: TDataModule},
+  u_SignIn in '.\Units\u_SignIn.pas',
+  u_Signup in '.\Units\u_Signup.pas' {frm_Signup},
+  u_Cars in '.\Units\u_Cars.pas' {frm_Cars},
+  u_organisation in '.\Units\u_organisation.pas' {frm_Organisation},
+  u_User in '.\Units\u_User.pas' {frm_Users},
+  u_graph in '.\Units\u_graph.pas' {frm_Graph},
+  u_UserNormal in '.\Units\u_UserNormal.pas',
+  u_passwordhasher in '.\Units\u_passwordhasher.pas';
 
 {$R *.res}
 begin

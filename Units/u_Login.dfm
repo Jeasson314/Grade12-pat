@@ -20,6 +20,7 @@ object frm_Login: Tfrm_Login
     Top = -7
     Width = 393
     Height = 312
+    Caption = 'GroupBox1'
     Color = clWhite
     ParentBackground = False
     ParentColor = False

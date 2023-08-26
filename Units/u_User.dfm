@@ -3,7 +3,7 @@ object frm_Users: Tfrm_Users
   Top = 165
   Caption = 'frm_Users'
   ClientHeight = 523
-  ClientWidth = 1014
+  ClientWidth = 1004
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -25,16 +25,14 @@ object frm_Users: Tfrm_Users
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 1014
+    Width = 1004
     Height = 523
     ActivePage = Admin
     Align = alClient
     TabOrder = 0
     OnChange = PageControl1Change
-    ExplicitWidth = 1004
     object tabSheetUser: TTabSheet
       Caption = 'User update'
-      ExplicitWidth = 996
       object GroupBox1: TGroupBox
         Left = 271
         Top = 64
@@ -343,7 +341,6 @@ object frm_Users: Tfrm_Users
     object Admin: TTabSheet
       Caption = 'Admin'
       ImageIndex = 1
-      ExplicitWidth = 996
       object DBGridAdmin: TDBGrid
         AlignWithMargins = True
         Left = 0

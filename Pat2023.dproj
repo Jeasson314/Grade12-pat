@@ -43,31 +43,31 @@
 			<DelphiCompile Include="Pat2023.dpr">
 				<MainSource>MainSource</MainSource>
 			</DelphiCompile>
-			<DCCReference Include="u_Login.pas">
+			<DCCReference Include="Units\u_Login.pas">
 				<Form>frm_Login</Form>
 			</DCCReference>
-			<DCCReference Include="dm_CO2.pas">
+			<DCCReference Include="Units\dm_CO2.pas">
 				<Form>DMCO2</Form>
 				<DesignClass>TDataModule</DesignClass>
 			</DCCReference>
-			<DCCReference Include="u_SignIn.pas"/>
-			<DCCReference Include="u_Signup.pas">
+			<DCCReference Include="Units\u_SignIn.pas"/>
+			<DCCReference Include="Units\u_Signup.pas">
 				<Form>frm_Signup</Form>
 			</DCCReference>
-			<DCCReference Include="u_Cars.pas">
+			<DCCReference Include="Units\u_Cars.pas">
 				<Form>frm_Cars</Form>
 			</DCCReference>
-			<DCCReference Include="u_organisation.pas">
+			<DCCReference Include="Units\u_organisation.pas">
 				<Form>frm_Organisation</Form>
 			</DCCReference>
-			<DCCReference Include="u_User.pas">
+			<DCCReference Include="Units\u_User.pas">
 				<Form>frm_Users</Form>
 			</DCCReference>
-			<DCCReference Include="u_graph.pas">
+			<DCCReference Include="Units\u_graph.pas">
 				<Form>frm_Graph</Form>
 			</DCCReference>
-			<DCCReference Include="u_UserNormal.pas"/>
-			<DCCReference Include="u_passwordhasher.pas"/>
+			<DCCReference Include="Units\u_UserNormal.pas"/>
+			<DCCReference Include="Units\u_passwordhasher.pas"/>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>
