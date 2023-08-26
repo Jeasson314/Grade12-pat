@@ -147,23 +147,6 @@ begin
   end;
 end;
 
-procedure Tfrm_Users.btnDeleteAdminClick(Sender: TObject);
-var
-  idelete: integer;
-begin
-  { idelete := MessageDlg('Do you want to delete this record', mtWarning,
-    mbOKCancel, 0);
-    if idelete = mrOK then
-    begin
-    if objUserdata.CanDelete(DBSourceAdminQuery['EmissionDate']) = true then
-    dmco2.ADOFootprint.delete
-    else
-    Showmessage(
-    'We were unable to delete the message, this may be due to it being out of deleteable time range')
-    end;
-    objUserdata.UpdateLog('Deleted record from tblUser'); }
-end;
-
 procedure Tfrm_Users.btnDeleteClick(Sender: TObject);
 var
   idelete: integer;

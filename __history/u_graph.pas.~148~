@@ -98,32 +98,31 @@ begin
     case RadioGraph.ItemIndex of
       0:
         begin
-          SeriesPie.Visible := False; // Hide the pie chart series
-          SeriesFootPrint.Visible := True; // Show the footprint chart series
+          SeriesPie.Visible := False;
+          SeriesFootPrint.Visible := True;
           UpdateQuery(
             'SELECT EmissionDate, Emission FROM tblFootPrint WHERE (UserID = '
               + objUserdata.AccessUserId + ') AND (EmissionDate BETWEEN #' +
               FormatDateTime('yyyy/mm/dd',
               DateTimeFrom.Date) + '# AND #' + FormatDateTime('yyyy/mm/dd',
-              DateTimeTo.Date) + '#);'); // Retrieve emission data for the selected user within the specified date range
-          UpdateGraphs('EmissionDate', 'Emission'); // Update the footprint chart with retrieved data
+              DateTimeTo.Date) + '#);');
+          UpdateGraphs('EmissionDate', 'Emission');
         end;
       1:
         begin
-          SeriesFootPrint.Visible := False; // Hide the footprint chart series
-          SeriesPie.Visible := True; // Show the pie chart series
+          SeriesFootPrint.Visible := False;
+          SeriesPie.Visible := True;
           UpdateQuery(
             'SELECT tblCar.Model AS Model, tblCar.[CO2 Emissions(g/km)] AS Emission FROM tblCar INNER JOIN tblCarList '
               +
-              'ON tblCar.CarID = tblCarList.CarID WHERE tblCarList.UserID = ' + objUserdata.AccessUserId + ';'); // Retrieve car model and emission data for the selected user
-          UpdatePieGraph('Model', 'Emission'); // Update the pie chart with retrieved data
+              'ON tblCar.CarID = tblCarList.CarID WHERE tblCarList.UserID = ' + objUserdata.AccessUserId + ';');
+          UpdatePieGraph('Model', 'Emission');
         end;
     end;
   except
-    ShowMessage('There was an error trying to load the graph.'); // Display an error message if an exception occurs
+    ShowMessage('There was an error trying to load the graph.');
   end;
 end;
-
 
 // Handler for the form's "Activate" event
 procedure Tfrm_Graph.FormActivate(Sender: TObject);

@@ -93,5 +93,14 @@ object frm_Login: Tfrm_Login
       TabOrder = 4
       OnClick = CHKCookieClick
     end
+    object btnGenerateFootprint: TButton
+      Left = 249
+      Top = 112
+      Width = 75
+      Height = 25
+      Caption = 'Gnerate foot print'
+      TabOrder = 5
+      OnClick = btnGenerateFootprintClick
+    end
   end
 end

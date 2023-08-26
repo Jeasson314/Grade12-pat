@@ -17,6 +17,7 @@ type
     btnSignin: TButton;
     Button1: TButton;
     CHKCookie: TCheckBox;
+    btnGenerateFootprint: TButton;
 
     procedure btnSigninClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);

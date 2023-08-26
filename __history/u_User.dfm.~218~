@@ -35,8 +35,6 @@ object frm_Users: Tfrm_Users
       Caption = 'User update'
       ExplicitLeft = 8
       ExplicitTop = 28
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object GroupBox1: TGroupBox
         Left = 271
         Top = 64
@@ -345,10 +343,6 @@ object frm_Users: Tfrm_Users
     object Admin: TTabSheet
       Caption = 'Admin'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object DBGridAdmin: TDBGrid
         AlignWithMargins = True
         Left = 0

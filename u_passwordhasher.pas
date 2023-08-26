@@ -1506,6 +1506,7 @@ implementation
 
 { Tpassword }
 
+// Function to hash a given password using a custom algorithm
 function hash(fpassword: string): string;
 var
   chrPassword: char;
@@ -1515,19 +1516,20 @@ begin
   sOrginal_password := fpassword;
   repeat
     chrPassword := sOrginal_password[1];
-    iFirst := ord(chrPassword) - 32;  //convert to ascii
+    iFirst := ord(chrPassword) - 32; // Convert the character to its ASCII value and adjust
     chrPassword := sOrginal_password[2];
     iSecond := ord(chrPassword) - 32;
     delete(sOrginal_password, 1, 2);
-    sFinal_password := sFinal_password + arrhash[iFirst, iSecond];
+    sFinal_password := sFinal_password + arrhash[iFirst, iSecond]; // Combine values from a predefined array
     if length(sOrginal_password) = 1 then
     begin
       chrPassword := sOrginal_password[1];
-      iRemainder := ord(chrPassword) - 32;
-      sFinal_password := sFinal_password + arrremainder[iRemainder]
+      iRemainder := ord(chrPassword) - 32; // Calculate a remainder value based on ASCII
+      sFinal_password := sFinal_password + arrremainder[iRemainder]; // Append the remainder value
     end;
-  until (length(sOrginal_password) <= 2);
-  result := sFinal_password;
+  until (length(sOrginal_password) <= 2); // Process until there are one or two characters left
+  result := sFinal_password; // Return the hashed password
 end;
+
 
 end.

@@ -27,16 +27,12 @@ object frm_Users: Tfrm_Users
     Top = 0
     Width = 1004
     Height = 523
-    ActivePage = Admin
+    ActivePage = tabSheetUser
     Align = alClient
     TabOrder = 0
     OnChange = PageControl1Change
     object tabSheetUser: TTabSheet
       Caption = 'User update'
-      ExplicitLeft = 8
-      ExplicitTop = 28
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object GroupBox1: TGroupBox
         Left = 271
         Top = 64
@@ -302,8 +298,8 @@ object frm_Users: Tfrm_Users
         TabOrder = 4
       end
       object pnlFirst: TPanel
-        Left = -55
-        Top = 64
+        Left = 495
+        Top = 46
         Width = 306
         Height = 379
         TabOrder = 3
@@ -345,10 +341,6 @@ object frm_Users: Tfrm_Users
     object Admin: TTabSheet
       Caption = 'Admin'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object DBGridAdmin: TDBGrid
         AlignWithMargins = True
         Left = 0

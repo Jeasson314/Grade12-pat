@@ -147,85 +147,6 @@ begin
   end;
 end;
 
-procedure Tfrm_Users.btnDeleteAdminClick(Sender: TObject);
-var
-  idelete: integer;
-begin
-  { idelete := MessageDlg('Do you want to delete this record', mtWarning,
-    mbOKCancel, 0);
-    if idelete = mrOK then
-    begin
-    if objUserdata.CanDelete(DBSourceAdminQuery['EmissionDate']) = true then
-    dmco2.ADOFootprint.delete
-    else
-    Showmessage(
-    'We were unable to delete the message, this may be due to it being out of deleteable time range')
-    end;
-    objUserdata.UpdateLog('Deleted record from tblUser'); }
-end;
-
-procedure Tfrm_Users.btnDeleteClick(Sender: TObject);
-var
-  idelete: integer;
-begin
-  try
-    // dmco2.ADOCars['CarID']
-    idelete := MessageDlg('Do you want to delete this record', mtWarning,
-      mbOKCancel, 0);
-    if idelete = mrOK then
-    begin
-      if objUserdata.CanDelete(dmco2.ADOFootprint['EmissionDate']) = true then
-      begin
-        dmco2.ADOFootprint.delete;
-        objUserdata.UpdateLog('Delete from tblFootprint');
-      end
-      else
-        showmessage(
-          'We were unable to delete the message, this may be due to it being out of deleteable time range')
-    end;
-  except
-    showmessage('Their was an error in the deletion problem');
-  end;
-end;
-
-
-procedure Tfrm_Users.btnAdminSortClick(Sender: TObject);
-begin
-  try
-    case cmbSort.itemindex of
-      0:
-        begin
-          if RadioSortAdmin.itemindex = 0 then
-            ADOAdminQuery.sort := 'Username DESC';
-          if RadioSortAdmin.itemindex = 1 then
-            ADOAdminQuery.sort := 'Username ASC';
-        end;
-      1:
-        begin
-          if RadioSortAdmin.itemindex = 0 then
-            ADOAdminQuery.sort := 'First_Name DESC';
-          if RadioSortAdmin.itemindex = 1 then
-            ADOAdminQuery.sort := 'First_Name ASC';
-        end;
-      2:
-        begin
-          if RadioSortAdmin.itemindex = 0 then
-            ADOAdminQuery.sort := 'Last_Name DESC';
-          if RadioSortAdmin.itemindex = 1 then
-            ADOAdminQuery.sort := 'Last_Name ASC';
-        end;
-      3:
-        begin
-          if RadioSortAdmin.itemindex = 0 then
-            ADOAdminQuery.sort := 'Last Updated DESC';
-          if RadioSortAdmin.itemindex = 1 then
-            ADOAdminQuery.sort := 'Last Updated ASC';
-        end;
-    end;
-  except
-    showmessage('Error sorting algorithm');
-  end;
-end;
 // Procedure to handle the event when the "Display" button is clicked.
 procedure Tfrm_Users.btnDisplayClick(Sender: TObject);
 begin
@@ -259,19 +180,17 @@ begin
   try
     with dmco2 do
     begin
-      ADOQueryfootprint.filtered := false; // Clear any existing filters
-      // Apply a date range filter to the ADOQueryfootprint based on selected date values.
+      ADOQueryfootprint.filtered := false;
       ADOQueryfootprint.filter := 'EmissionDate >= ' + quotedstr
         (FormatDateTime('yyyy/mm/dd', DateTimeFrom.Date))
         + ' and EmissionDate < ' + quotedstr(FormatDateTime('yyyy/mm/dd',
           DateTimeTo.Date));
-      ADOQueryfootprint.filtered := true; // Enable the filter
+      ADOQueryfootprint.filtered := true;
     end;
   except
     showmessage('There was an error filtering from your selected dates');
   end;
 end;
-
 
 // Procedure to handle the "Graph Admin" button click event for showing a graph (admin version).
 procedure Tfrm_Users.btnGraphAdminClick(Sender: TObject);
@@ -310,48 +229,51 @@ end;
 procedure Tfrm_Users.btnStatisticsClick(Sender: TObject);
 begin
   try
-    if RadioStatistics.itemindex = 0 then // Check if user selection is by Username
+    // Check which radio button is selected to determine if it's based on user or organization statistics.
+    if RadioStatistics.itemindex = 0 then // User-based statistics
     begin
+      // Check the selected statistic type from the combo box and execute the appropriate SQL query.
       case cmbStatistics.itemindex of
         0:
           UpdateAdmin('SELECT AVG(Emission) AS Average ' +
               'FROM tblUsers INNER JOIN tblFootprint ON tblUsers.UserID = tblFootprint.UserID '
               + 'WHERE tblUsers.Username = ' + quotedstr
-              (ADOAdminQuery['Username']) + ';'); // Query to calculate average emission for the selected user
+              (ADOAdminQuery['Username']) + ';');
         1:
           UpdateAdmin('SELECT MIN(Emission) AS Minimum ' +
               'FROM tblUsers INNER JOIN tblFootprint ON tblUsers.UserID = tblFootprint.UserID '
               + 'WHERE tblUsers.Username = ' + quotedstr
-              (ADOAdminQuery['Username']) + ';'); // Query to find minimum emission for the selected user
+              (ADOAdminQuery['Username']) + ';');
         2:
           UpdateAdmin('SELECT MAX(Emission) AS Maximum ' +
               'FROM tblUsers INNER JOIN tblFootprint ON tblUsers.UserID = tblFootprint.UserID '
               + 'WHERE tblUsers.Username = ' + quotedstr
-              (ADOAdminQuery['Username']) + ';'); // Query to find maximum emission for the selected user
+              (ADOAdminQuery['Username']) + ';')
       end;
     end;
-    if RadioStatistics.itemindex = 1 then // Check if user selection is by Organisation
+    else if RadioStatistics.itemindex = 1 then // Organization-based statistics
     begin
+      // Check the selected statistic type from the combo box and execute the appropriate SQL query.
       case cmbStatistics.itemindex of
         0:
           UpdateAdmin('SELECT AVG(Emission) AS Average ' +
               'FROM tblUsers INNER JOIN tblFootprint ON tblUsers.UserID = tblFootprint.UserID '
               + 'WHERE tblUsers.OrganisationID = ' + inttostr
-              (objUserdata.AccessOrganisationID) + ';'); // Query to calculate average emission for the selected organisation
+              (objUserdata.AccessOrganisationID) + ';');
         1:
           UpdateAdmin('SELECT MIN(Emission) AS Minimum ' +
               'FROM tblUsers INNER JOIN tblFootprint ON tblUsers.UserID = tblFootprint.UserID '
               + 'WHERE tblUsers.OrganisationID = ' + inttostr
-              (objUserdata.AccessOrganisationID) + ';'); // Query to find minimum emission for the selected organisation
+              (objUserdata.AccessOrganisationID) + ';');
         2:
           UpdateAdmin('SELECT MAX(Emission) AS Maximum ' +
               'FROM tblUsers INNER JOIN tblFootprint ON tblUsers.UserID = tblFootprint.UserID '
               + 'WHERE tblUsers.OrganisationID = ' + inttostr
-              (objUserdata.AccessOrganisationID) + ';'); // Query to find maximum emission for the selected organisation
+              (objUserdata.AccessOrganisationID) + ';')
       end;
     end;
   except
-    showmessage('There was an error displaying the statistics'); // Display an error message if an exception occurs
+    showmessage('There was an error displaying the statistics');
   end;
 end;
 
