@@ -1,0 +1,327 @@
+unit u_SignIn;
+interface
+
+uses
+  u_passwordhasher, dm_CO2, Dialogs, Forms, sysUtils, StrUtils;
+
+type
+  SignIn = class(tObject)
+  private
+    fUsername: String;
+    fPassword: string;
+    fAttempts: integer;
+  public
+    constructor create;
+    procedure SetLogin(sUsername, sPassword: string);
+    Function PasswordCheck: boolean;
+    function AccessUsername(): string;
+
+  end;
+
+  Signup = class(tObject)
+  private
+    fArraylength: integer;
+    fFirst_name: string;
+    fLast_name: string;
+    fUsername: string;
+    fPassword: string;
+    fCarsID: string;
+    fCarsModel: string;
+    fCarsMake: string;
+    fOrganisation: string;
+    fOrganisationID: integer;
+    fIsAdmin: boolean;
+    fIsMember: boolean;
+    fEmail: string;
+    fGoal: integer;
+  public
+    arrCar: Array of integer;
+    constructor create();
+    function UsernameGeneration(sFirst_name, sLast_name: string): string;
+    function passwordvalidate(sPasswordOrginal, sPasswordSecond: string)
+      : boolean;
+    procedure addPassword(sPassword: string);
+    procedure addCar(sCarsID, sCarsMake, sCarsModel: string);
+    function CarsToString(): string;
+    procedure addOrganisation(sOrgaganisationID: integer;
+      sOrganisation: string; bIsAdmin: boolean);
+    function Organisationtostring(): string;
+    procedure IsMember(bMember: boolean);
+    procedure addEmailGoal(sEmail: string; sGoal: string);
+    function addUser(): boolean;
+  end;
+
+implementation
+
+{ SignIn }
+
+function SignIn.AccessUsername: string;
+begin
+  result := fUsername;
+end;
+
+constructor SignIn.create();
+begin
+  fUsername := '';
+  fPassword := '';
+  fAttempts := 0;
+
+end;
+
+function SignIn.PasswordCheck: boolean;
+var
+  bAccountFound: boolean;
+  sPassword: string;
+begin
+  bAccountFound := false;
+  result := false;
+  if fAttempts <= 3 then
+  begin
+    with dmCO2 do
+    begin
+      sPassword := hash(fPassword);
+      ADOUsers.first;
+      while (not ADOUsers.eof) and (bAccountFound = false) do
+      begin
+        if (fUsername = ADOUsers['Username']) and
+          (sPassword = ADOUsers['Password']) then
+        begin
+          result := true;
+          bAccountFound := true;
+        end
+        else
+          ADOUsers.Next;
+      end;
+      inc(fAttempts);
+      exit;
+    end;
+
+  end
+  else
+    MessageDlg('Maxmium number of attempts reached. Terminating program.',
+      mtError, [mbOk], 0);
+  application.Terminate;
+  result := true;
+end;
+
+procedure SignIn.SetLogin(sUsername, sPassword: string);
+begin
+  fUsername := sUsername;
+  fPassword := sPassword;
+end;
+
+{ Signup }
+
+procedure Signup.addCar(sCarsID, sCarsMake, sCarsModel: string);
+begin
+  inc(fArraylength);
+  setLength(arrCar, fArraylength);
+  arrCar[fArraylength - 1] := strtoint(sCarsID);
+  fCarsModel := fCarsModel + ',' + sCarsModel;
+  fCarsMake := fCarsMake + ',' + sCarsMake;
+end;
+
+procedure Signup.addEmailGoal(sEmail, sGoal: string);
+begin
+  if ansipos('@', sEmail) > 0 then
+  begin
+    try
+      fEmail := sEmail;
+      fGoal := strtoint(sGoal);
+    except
+      showmessage('Please check that you have typed in number in the goal box');
+    end
+  end
+  else
+    showmessage('Please type in a valid email')
+
+end;
+
+procedure Signup.addOrganisation(sOrgaganisationID: integer;
+  sOrganisation: string; bIsAdmin: boolean);
+begin
+  fOrganisation := sOrganisation;
+  fOrganisationID := sOrgaganisationID;
+  fIsAdmin := bIsAdmin;
+end;
+
+procedure Signup.addPassword(sPassword: string);
+begin
+  fPassword := hash(sPassword);
+end;
+
+function Signup.addUser: boolean;
+
+var
+  sCarIDtemp: string;
+  iUserID, iloop: integer;
+  isOkay: boolean;
+
+  {
+    procedure fillInCars;
+    var
+    iloop: integer;
+    begin
+    if isOkay then
+    BEGIN
+    for iloop := 0 to Length(arrCar) - 1 do
+    begin
+    dmCO2.ADOCarList.Insert;
+    dmCO2.ADOCarList['UserID'] := dmCO2.ADOUsers.FieldByName('ID').AsInteger();
+    dmCO2.ADOCarList['CarID'] := arrCar[iloop];
+    dmCO2.ADOCarList['CurrentMileage'] := 0;
+    dmCO2.ADOCarList.Post;
+    end;
+    isOkay := true;
+    END;
+    end;
+    }
+begin
+  with dmCO2 do
+  BEGIN
+    try
+      isOkay := false;
+      if ADOUsers.Active then
+      begin
+        ADOUsers.Insert;
+        ADOUsers['First_name'] := fFirst_name;
+        ADOUsers['Last_name'] := fLast_name;
+        ADOUsers['Username'] := fUsername;
+        ADOUsers['Password'] := fPassword;
+        ADOUsers['OrganisationID'] := fOrganisationID;
+        ADOUsers['Admin'] := fIsAdmin;
+        ADOUsers['OrganisationMembership'] := fIsMember;
+        ADOUsers['Goal'] := fGoal;
+        ADOUsers['Email'] := fEmail;
+        ADOUsers.Post;
+      end;
+      ADOUsers.Last; // move to the last record = the most recent inserted
+      isOkay := true;
+    Except
+      isOkay := false;
+      showmessage('Unable to insert new user...');
+    end;
+
+    // fillInCars;
+  END;
+  result := isOkay;
+end;
+
+function Signup.CarsToString: string;
+begin
+  result := 'Make: ' + fCarsMake + #13 + 'Model: ' + fCarsModel;
+end;
+
+constructor Signup.create();
+begin
+  fFirst_name := '';
+  fLast_name := '';
+  fCarsID := '';
+  fCarsModel := '';
+  fCarsMake := '';
+  fOrganisation := '';
+  fEmail := '';
+  fUsername := '';
+  fPassword := '';
+  fArraylength := 0;
+end;
+
+procedure Signup.IsMember(bMember: boolean);
+begin
+  fIsMember := bMember;
+end;
+
+function Signup.Organisationtostring: string;
+begin
+  result := fOrganisation
+end;
+
+function Signup.passwordvalidate(sPasswordOrginal, sPasswordSecond: string)
+  : boolean;
+var
+  icharacterloop: integer;
+  chrPassword: char;
+  bSpecialchr, bNumber, bCapital: boolean;
+begin
+  result := true;
+  bNumber := false;
+  bSpecialchr := false;
+  bCapital := false;
+  if (sPasswordOrginal = '') or (sPasswordSecond = '') then
+  begin
+    result := false;
+    MessageDlg('Please type in a password or retype password', mtWarning,
+      [mbOk], 0);
+    exit;
+  end
+  else
+    result := true;
+
+  if sPasswordOrginal = sPasswordSecond then
+    result := true
+  else
+  begin
+    result := false;
+    MessageDlg('Password must match', mtWarning, [mbOk], 0);
+    exit;
+  end;
+  if Length(sPasswordOrginal) < 8 then
+  begin
+    result := false;
+    MessageDlg('Please make sure your password is more than 8 character long',
+      mtWarning, [mbOk], 0);
+    exit;
+  end
+  else
+  begin
+    result := true;
+    for icharacterloop := 1 to Length(sPasswordOrginal) do
+    begin
+      chrPassword := sPasswordOrginal[icharacterloop];
+      case ord(chrPassword) of
+        48 .. 57:
+          bNumber := true;
+        58 .. 64:
+          bSpecialchr := true;
+        92 .. 96:
+          bSpecialchr := true;
+        123, 125:
+          bSpecialchr := true;
+        65 .. 90:
+          bCapital := true;
+
+      end;
+    end;
+  end;
+  if bNumber = false then
+  begin
+    MessageDlg('Please use a number in your password', mtWarning, [mbOk], 0);
+    result := false;
+  end;
+  if bSpecialchr = false then
+  begin
+    MessageDlg('Please use a special character(Such as "@") in your password',
+      mtWarning, [mbOk], 0);
+    result := false;
+  end;
+  if bCapital = false then
+  begin
+    MessageDlg('Please use a capital letter in your password in your password',
+      mtWarning, [mbOk], 0);
+    result := false;
+  end;
+
+end;
+
+function Signup.UsernameGeneration(sFirst_name, sLast_name: string): string;
+begin
+  fFirst_name := sFirst_name;
+  fLast_name := sLast_name;
+  fUsername := fFirst_name + fLast_name + inttostr(random(100));
+  if dmCO2.ADOUsers.locate('Username', fUsername, []) = true then
+    fUsername := fFirst_name + fLast_name + inttostr(random(100));
+  result := fUsername;
+end;
+
+end.
+

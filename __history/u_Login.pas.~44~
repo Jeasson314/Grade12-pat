@@ -1,0 +1,149 @@
+unit u_Login;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, u_SignIn, StdCtrls, u_Signup, WideStrings, u_User, dm_co2,
+  u_passwordhasher,math,dateutils;
+
+type
+  Tfrm_Login = class(TForm)
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    edtUsername: TEdit;
+    edtPassword: TEdit;
+    btnSignin: TButton;
+    Button1: TButton;
+    CHKCookie: TCheckBox;
+    btnGenerateFootprint: TButton;
+
+    procedure btnSigninClick(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure CHKCookieClick(Sender: TObject);
+    procedure btnGenerateFootprintClick(Sender: TObject);
+
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_Login: Tfrm_Login;
+  objSignin: SignIn;
+  tfCookie: textfile;
+
+implementation
+
+{$R *.dfm}
+
+// Handler for the "Sign In" button click
+procedure Tfrm_Login.btnGenerateFootprintClick(Sender: TObject);
+var
+  iloop, iloop1,ifootprint: integer;
+  bfound:boolean;
+begin
+  with dmco2 do
+  begin
+    for iloop := 10 to 1000 do
+    begin
+      for iloop1 := 1 to 2 do
+      begin
+      adoCarList.Insert;
+      adoCarList['UserID']:=iloop;
+      adoCarList['CarID']:=randomrange(1,7000);
+      adoCarList['CO2 Emissions(g/km)']:=randomrange(1,7000);
+      adoCarList.Post;
+      end;
+    end;
+
+  end;
+end;
+
+procedure Tfrm_Login.btnSigninClick(Sender: TObject);
+var
+  sHashed_password, sUsername: string;
+begin
+  try
+    // Set the login credentials in the SignIn object
+    objSignin.SetLogin(edtUsername.Text, edtPassword.Text);
+
+    // Check if the provided password matches the stored password
+    if objSignin.PasswordCheck = true then
+    begin
+      frm_users.ShowModal; // Show the user profile form
+    end
+    else
+      MessageDlg('Please check your username and password.', mtWarning, [mbOk],
+        0);
+  except
+    // Handle exceptions and provide appropriate error messages
+    if edtUsername.Text = '' then
+      MessageDlg('Please type in a username or create an account.', mtWarning,
+        [mbOk], 0);
+    if edtPassword.Text = '' then
+      MessageDlg('Please type in a password.', mtWarning, [mbOk], 0);
+    edtPassword.Color := clRed;
+  end;
+end;
+
+// Handler for the "Create Account" button click
+procedure Tfrm_Login.Button1Click(Sender: TObject);
+begin
+  try
+    frm_Signup.ShowModal; // Show the signup form
+  except
+    showmessage('There was an error showing the Sign up form');
+  end;
+end;
+
+// Handler for the "Remember Me" checkbox click
+procedure Tfrm_Login.CHKCookieClick(Sender: TObject);
+begin
+  try
+    if CHKCookie.Checked then
+    begin
+      // Write the username and password to a text file for remembering
+      rewrite(tfCookie);
+      writeln(tfCookie, edtUsername.Text);
+      writeln(tfCookie, edtPassword.Text);
+      closefile(tfCookie);
+    end;
+  except
+    showmessage('There was an error adding a query');
+  end;
+end;
+
+// Handler for the form's "Activate" event
+procedure Tfrm_Login.FormActivate(Sender: TObject);
+var
+  sReadln, path: string;
+begin
+  try
+    // Set up the path to the text file for remembering user login
+    path := ExpandFileName(ExtractFileDir(Application.ExeName))
+      + '\Textfile\tfUserCookie.txt';
+
+    // Initialize the SignIn object and read saved login details from the text file
+    objSignin := SignIn.create();
+    assignfile(tfCookie, path);
+    reset(tfCookie);
+    readln(tfCookie, sReadln);
+
+    // Set the saved username
+    if sReadln <> '' then
+      edtUsername.Text := sReadln;
+
+    readln(tfCookie, sReadln);
+    edtPassword.Text := sReadln;
+    closefile(tfCookie);
+  finally
+    // Clean up resources
+  end;
+end;
+
+end.
+

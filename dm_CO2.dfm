@@ -115,4 +115,15 @@ object DMCO2: TDMCO2
     Left = 80
     Top = 376
   end
+  object ADOQueryfootprint: TADOQuery
+    Connection = con
+    Parameters = <>
+    Left = 64
+    Top = 496
+  end
+  object dbSourceQueryFootprint: TDataSource
+    DataSet = ADOQueryfootprint
+    Left = 176
+    Top = 496
+  end
 end

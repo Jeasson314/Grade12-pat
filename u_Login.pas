@@ -1,11 +1,11 @@
 unit u_Login;
-
+
 interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, u_SignIn, StdCtrls, u_Signup, WideStrings, u_User, dm_co2,
-  u_passwordhasher;
+  u_passwordhasher,math,dateutils;
 
 type
   Tfrm_Login = class(TForm)
@@ -17,12 +17,13 @@ type
     btnSignin: TButton;
     Button1: TButton;
     CHKCookie: TCheckBox;
-
+    btnGenerateFootprint: TButton;
 
     procedure btnSigninClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure CHKCookieClick(Sender: TObject);
+    procedure btnGenerateFootprintClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -54,11 +55,13 @@ begin
       frm_users.ShowModal; // Show the user profile form
     end
     else
-      MessageDlg('Please check your username and password.', mtWarning, [mbOk], 0);
+      MessageDlg('Please check your username and password.', mtWarning, [mbOk],
+        0);
   except
     // Handle exceptions and provide appropriate error messages
     if edtUsername.Text = '' then
-      MessageDlg('Please type in a username or create an account.', mtWarning, [mbOk], 0);
+      MessageDlg('Please type in a username or create an account.', mtWarning,
+        [mbOk], 0);
     if edtPassword.Text = '' then
       MessageDlg('Please type in a password.', mtWarning, [mbOk], 0);
     edtPassword.Color := clRed;
@@ -99,7 +102,8 @@ var
 begin
   try
     // Set up the path to the text file for remembering user login
-    path := ExpandFileName(ExtractFileDir(Application.ExeName)) + '\Textfile\tfUserCookie.txt';
+    path := ExpandFileName(ExtractFileDir(Application.ExeName))
+      + '\Textfile\tfUserCookie.txt';
 
     // Initialize the SignIn object and read saved login details from the text file
     objSignin := SignIn.create();
@@ -120,4 +124,4 @@ begin
 end;
 
 end.
-
+

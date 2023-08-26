@@ -24,6 +24,8 @@ type
     dbSourceQueryCar: TDataSource;
     dbSourceCarQuerAdd: TDataSource;
     ADOQueryADD: TADOQuery;
+    ADOQueryfootprint: TADOQuery;
+    dbSourceQueryFootprint: TDataSource;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
@@ -33,6 +35,7 @@ type
     procedure runSQL(sSql: string);
     procedure runCar(sSql: string);
     procedure runCarAdd(sSql: string);
+    procedure runFootprint(sSql:string);
 
   end;
 
@@ -92,6 +95,13 @@ begin
   ADOQueryCar.SQL.Add('SELECT tblCar.Make AS Make, tblCar.Model AS Model ' +
       'FROM tblCar INNER JOIN tblCarList ON tblCar.CarID = tblCarList.CarID WHERE tblCarList.UserID = ' + sSql);
   ADOQueryCar.Open;
+end;
+
+procedure TDMCO2.runFootprint(sSql: string);
+begin
+  ADOQueryfootprint.SQL.Clear;
+  ADOQueryfootprint.SQL.Add(sSql);
+  ADOQueryfootprint.Open;
 end;
 
 procedure TDMCO2.runSQL(sSql: string);
