@@ -27,7 +27,7 @@ object frm_Users: Tfrm_Users
     Top = 0
     Width = 1014
     Height = 523
-    ActivePage = tabSheetUser
+    ActivePage = Admin
     Align = alClient
     TabOrder = 0
     OnChange = PageControl1Change
@@ -299,7 +299,7 @@ object frm_Users: Tfrm_Users
       end
       object pnlFirst: TPanel
         Left = 583
-        Top = 75
+        Top = 64
         Width = 306
         Height = 379
         TabOrder = 3

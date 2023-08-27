@@ -27,7 +27,7 @@ object frm_Users: Tfrm_Users
     Top = 0
     Width = 1014
     Height = 523
-    ActivePage = tabSheetUser
+    ActivePage = Admin
     Align = alClient
     TabOrder = 0
     OnChange = PageControl1Change
@@ -299,7 +299,7 @@ object frm_Users: Tfrm_Users
       end
       object pnlFirst: TPanel
         Left = 583
-        Top = 75
+        Top = 64
         Width = 306
         Height = 379
         TabOrder = 3
@@ -554,7 +554,7 @@ object frm_Users: Tfrm_Users
     end
   end
   object DBSourceEmission: TDataSource
-    Left = 64
+    Left = 16
     Top = 312
   end
   object ADOUsersQuery: TADOQuery
@@ -571,7 +571,7 @@ object frm_Users: Tfrm_Users
   object ADOEmissionQuery: TADOQuery
     Connection = DMCO2.con
     Parameters = <>
-    Left = 48
+    Left = 24
     Top = 152
   end
   object ADOAdminQuery: TADOQuery
@@ -579,12 +579,17 @@ object frm_Users: Tfrm_Users
     Parameters = <>
     SQL.Strings = (
       'Select  * from tblUsers')
-    Left = 40
-    Top = 200
+    Left = 16
+    Top = 192
   end
   object DBSourceAdminQuery: TDataSource
     DataSet = ADOAdminQuery
-    Left = 48
+    Left = 16
+    Top = 256
+  end
+  object DataSource1: TDataSource
+    DataSet = ADOAdminQuery
+    Left = 16
     Top = 256
   end
 end

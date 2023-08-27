@@ -3,7 +3,7 @@ object frm_Graph: Tfrm_Graph
   Top = 0
   Caption = 'frm_Graph'
   ClientHeight = 422
-  ClientWidth = 688
+  ClientWidth = 673
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,15 +15,18 @@ object frm_Graph: Tfrm_Graph
   PixelsPerInch = 96
   TextHeight = 13
   object User: TPageControl
-    Left = 444
+    Left = 436
     Top = 0
-    Width = 245
+    Width = 237
     Height = 425
     ActivePage = TabSheet2
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'User'
-      ExplicitWidth = 229
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label2: TLabel
         Left = 96
         Top = 192
@@ -34,12 +37,13 @@ object frm_Graph: Tfrm_Graph
       object GroupBox1: TGroupBox
         Left = 0
         Top = 0
-        Width = 237
+        Width = 229
         Height = 397
         Align = alClient
         Caption = 'GroupBox1'
         TabOrder = 0
-        ExplicitWidth = 229
+        ExplicitLeft = -3
+        ExplicitTop = 40
         object btnUpdateGraph: TButton
           Left = 7
           Top = 175
@@ -92,17 +96,14 @@ object frm_Graph: Tfrm_Graph
     object TabSheet2: TTabSheet
       Caption = 'Admin'
       ImageIndex = 1
-      ExplicitWidth = 229
       object GroupBox2: TGroupBox
         Left = 0
         Top = 0
-        Width = 237
+        Width = 229
         Height = 397
         Align = alClient
         Caption = 'GroupBox2'
         TabOrder = 0
-        ExplicitLeft = 3
-        ExplicitWidth = 229
         object RadioAdmin: TRadioGroup
           Left = 9
           Top = 19

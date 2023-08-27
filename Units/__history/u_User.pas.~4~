@@ -61,6 +61,7 @@ type
     DBNavigator2: TDBNavigator;
     btnDeleteAdmin: TButton;
     Label6: TLabel;
+    DataSource1: TDataSource;
     imgAddCar: TImage;
     btnGraphAdmin: TButton;
     DBEdit2: TDBEdit;

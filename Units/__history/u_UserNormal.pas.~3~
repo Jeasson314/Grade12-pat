@@ -1,0 +1,162 @@
+unit u_UserNormal;
+
+interface
+
+uses dm_co2, sysutils, DateUtils, Dialogs,forms;
+
+type
+  UserData = class(tObject)
+  Private
+    fUsername: string;
+    fUserID: integer;
+    fisFirst: boolean;
+    finOrganisation: boolean;
+    fOrganisationId:integer;
+    fIsAdmin: boolean;
+     tfLog:textfile;
+  public
+    constructor UserCreate(sUsername: string);
+    function isFirstAccess: boolean;
+    function accessUserId: string;
+    function AccessOrganisationID:integer;
+    procedure CheckOrganisation;
+    function CanDelete(dRecordDate: tdate): boolean;
+    function Admin: boolean;
+    procedure UpdateLog(sLog:string);
+    function canDeleteAdmin:boolean;
+
+  end;
+implementation
+
+{ UserData }
+
+// Function to access the user's organization ID
+function UserData.AccessOrganisationID: integer;
+begin
+  result := fOrganisationId;
+end;
+
+// Function to access the user's ID as a string
+function UserData.accessUserId: string;
+begin
+  result := inttostr(fUserID);
+end;
+
+// Function to check if the user is an admin
+function UserData.Admin: boolean;
+begin
+  result := fIsAdmin;
+end;
+
+// Function to check if a record can be deleted based on the record date and user's organization membership
+function UserData.CanDelete(dRecordDate: tdate): boolean;
+begin
+  // Check if user is in an organization and the record date is within the last 3 days
+  if (finOrganisation = true) and (WithinPastDays(date, dmco2.ADOFootPrint['EmissionDate'], 3)) then
+    result := true
+  else
+    result := false;
+
+  // If user is not in an organization, they can delete the record
+  if finOrganisation = false then
+    result := true;
+end;
+function UserData.canDeleteAdmin: boolean;
+begin
+if (finOrganisation = true) and (WithinPastMonths(date, dmco2.ADOFootPrint['EmissionDate'], 6)) then
+    result := true
+  else
+    result := false;
+end;
+
+// Procedure to check and set the user's organization membership and admin status
+procedure UserData.CheckOrganisation;
+var
+  bFound: boolean;
+begin
+  try
+    with dmco2 do
+    begin
+      ADOUsers.first;
+      bFound := false;
+      while not(ADOUsers.eof) and (bFound = false) do
+      begin
+        if (ADOUsers['UserID'] = fUserID) then
+        begin
+          finOrganisation := ADOUsers['OrganisationMembership']; // Set user's organization membership status
+          fIsAdmin := ADOUsers['Admin']; // Set user's admin status
+          bFound := true;
+        end
+        else
+          ADOUsers.next;
+      end;
+    end;
+  except
+    showmessage('There was an error finding admin'); // Display an error message if an exception occurs
+  end;
+end;
+
+// Function to check if the user is accessing the system for the first time
+function UserData.isFirstAccess: boolean;
+var
+  bFound: boolean;
+begin
+  with dmco2 do
+  begin
+    ADOUsers.first;
+    result := false;
+    bFound := false;
+    while not(ADOUsers.eof) and (bFound = false) do
+    begin
+      if (ADOUsers['UserID'] = fUserID) then
+      begin
+        if ADOUsers.fieldbyname('Last Updated').isnull then
+        begin
+          result := true; // If 'Last Updated' field is null, it's the user's first access
+          bFound := true;
+        end;
+      end;
+      ADOUsers.next;
+    end;
+  end;
+end;
+
+// Procedure to update the log file with user activity information
+procedure UserData.UpdateLog(sLog: string);
+var
+  path: string;
+begin
+  //path:='';
+  assignfile(tfLog, '.\Textfile\tfLog.txt'); // Define the log file path (DB Logger)
+  reset(tfLog); // Open the log file for reading
+  showmessage(sLog + ' by: ' + fUsername + ' at ' + Datetostr(date) + Timetostr(time)); // Display a message indicating the user activity
+  writeln(tfLog, sLog + ' by ' + fUsername + ' at ' + Datetostr(date) + ' ' + Timetostr(time)); // Write the user activity to the log file
+  closefile(tfLog); // Close the log file
+end;
+
+// Constructor to create a new UserData instance with the provided username
+constructor UserData.UserCreate(sUsername: string);
+var
+  bFound: boolean;
+begin
+  with dmco2 do
+  begin
+    bFound := false;
+    fUsername := sUsername;
+    ADOUsers.first;
+    while not(ADOUsers.eof) and (bFound = false) do
+    begin
+      if ADOUsers['Username'] = fUsername then
+      begin
+        fUserID := ADOUsers['UserID']; // Set the user's ID based on the matching username
+        fOrganisationId := ADOUsers['OrganisationID']; // Set the user's organization ID
+        bFound := true;
+      end
+      else
+        ADOUsers.next;
+    end;
+  end;
+end;
+
+
+end.

@@ -44,22 +44,23 @@
     <Transaction>2023/08/16 21:03:33.707.pas,C:\Users\James\Documents\GitHub\Grade12-pat\Unit1.pas=C:\Users\James\Documents\GitHub\Grade12-pat\u_UserNormal.pas</Transaction>
   </Transactions>
 	<ProjectSortOrder AutoSort="0" SortType="0">
-    <File Path="dm_CO2.pas"/>
-    <File Path="dm_CO2.dfm"/>
-    <File Path="u_Login.pas"/>
-    <File Path="u_Login.dfm"/>
-    <File Path="u_SignIn.pas"/>
-    <File Path="u_Signup.pas"/>
-    <File Path="u_Signup.dfm"/>
-    <File Path="u_Cars.pas"/>
-    <File Path="u_Cars.dfm"/>
-    <File Path="u_organisation.pas"/>
-    <File Path="u_organisation.dfm"/>
-    <File Path="u_User.pas"/>
-    <File Path="u_User.dfm"/>
-    <File Path="u_graph.pas"/>
-    <File Path="u_graph.dfm"/>
-    <File Path="u_UserNormal.pas"/>
-    <File Path="u_passwordhasher.pas"/>
+    <File Path="Units"/>
+    <File Path="Units\dm_CO2.pas"/>
+    <File Path="Units\dm_CO2.dfm"/>
+    <File Path="Units\u_Cars.pas"/>
+    <File Path="Units\u_Cars.dfm"/>
+    <File Path="Units\u_graph.pas"/>
+    <File Path="Units\u_graph.dfm"/>
+    <File Path="Units\u_Login.pas"/>
+    <File Path="Units\u_Login.dfm"/>
+    <File Path="Units\u_organisation.pas"/>
+    <File Path="Units\u_organisation.dfm"/>
+    <File Path="Units\u_passwordhasher.pas"/>
+    <File Path="Units\u_SignIn.pas"/>
+    <File Path="Units\u_Signup.pas"/>
+    <File Path="Units\u_Signup.dfm"/>
+    <File Path="Units\u_User.pas"/>
+    <File Path="Units\u_User.dfm"/>
+    <File Path="Units\u_UserNormal.pas"/>
   </ProjectSortOrder>
 </BorlandProject>
