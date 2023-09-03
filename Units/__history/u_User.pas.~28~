@@ -57,14 +57,11 @@ type
     RadioSortAdmin: TRadioGroup;
     CmbCars: TComboBox;
     cmbCarsAdd: TComboBox;
-    btnAdminEdit: TButton;
     DBNavigator2: TDBNavigator;
     btnDeleteAdmin: TButton;
     Label6: TLabel;
-    DataSource1: TDataSource;
     imgAddCar: TImage;
     btnGraphAdmin: TButton;
-    DBEdit2: TDBEdit;
     procedure FormActivate(Sender: TObject);
     procedure btnGraphClick(Sender: TObject);
     procedure edtUpdateClick(Sender: TObject);
@@ -149,27 +146,25 @@ end;
 
 procedure Tfrm_Users.btnDeleteAdminClick(Sender: TObject);
 var
-  idelete: integer;
+  idelete, iID: integer;
 begin
-<<<<<<<< HEAD:Units/__history/u_User.pas.~5~
-   idelete := MessageDlg('Do you want to delete this record', mtWarning,
-========
-   {idelete := MessageDlg('Do you want to delete this record', mtWarning,
->>>>>>>> parent of d9295ba (updated code):Units/__history/u_User.pas.~4~
+  idelete := MessageDlg('Do you want to delete this record', mtWarning,
     mbOKCancel, 0);
-    if idelete = mrOK then
+  if idelete = mrOK then
+  begin
+    if RadioDisplay.itemindex = 1 then
     begin
-    if objUserdata.CanDelete(DBSourceAdminQuery['EmissionDate']) = true then
-    dmco2.ADOFootprint.delete
+      dmco2.ADOusers.locate('Username', ADOAdminQuery['Username'], []);
+        iID := dmco2.ADOusers['ID'];
+        if (dmco2.ADOFootprint.locate('UserID', iID, [])) and
+          (dmco2.ADOFootprint.locate('Emission', ADOAdminQuery['Emission'],
+            []) = true) then
+          ADOAdminQuery.delete;
+    end
     else
-    Showmessage(
-    'We were unable to delete the message, this may be due to it being out of deleteable time range')
-    end;
-<<<<<<<< HEAD:Units/__history/u_User.pas.~5~
-    objUserdata.UpdateLog('Deleted record from tblUser');
-========
-    objUserdata.UpdateLog('Deleted record from tblUser');}
->>>>>>>> parent of d9295ba (updated code):Units/__history/u_User.pas.~4~
+      showmessage('You can not delete record in this table');
+  end;
+  objUserdata.UpdateLog('Deleted record from tblUser');
 end;
 
 procedure Tfrm_Users.btnDeleteClick(Sender: TObject);
@@ -195,7 +190,6 @@ begin
     showmessage('Their was an error in the deletion problem');
   end;
 end;
-
 
 procedure Tfrm_Users.btnAdminSortClick(Sender: TObject);
 begin
@@ -234,6 +228,7 @@ begin
     showmessage('Error sorting algorithm');
   end;
 end;
+
 // Procedure to handle the event when the "Display" button is clicked.
 procedure Tfrm_Users.btnDisplayClick(Sender: TObject);
 begin
@@ -260,7 +255,6 @@ begin
   end;
 end;
 
-
 // Procedure to handle the "Filter" button click event to filter data within a specific date range.
 procedure Tfrm_Users.btnFilterClick(Sender: TObject);
 begin
@@ -279,7 +273,6 @@ begin
     showmessage('There was an error filtering from your selected dates');
   end;
 end;
-
 
 // Procedure to handle the "Graph Admin" button click event for showing a graph (admin version).
 procedure Tfrm_Users.btnGraphAdminClick(Sender: TObject);
@@ -359,10 +352,10 @@ begin
       end;
     end;
   except
-    showmessage('There was an error displaying the statistics'); // Display an error message if an exception occurs
+    showmessage('There was an error displaying the statistics');
+    // Display an error message if an exception occurs
   end;
 end;
-
 
 procedure Tfrm_Users.DBGridAdminCellClick(Column: TColumn);
 begin

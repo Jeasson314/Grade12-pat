@@ -2,11 +2,7 @@ object frm_Users: Tfrm_Users
   Left = 293
   Top = 165
   Caption = 'frm_Users'
-<<<<<<< HEAD
   ClientHeight = 523
-=======
-  ClientHeight = 534
->>>>>>> parent of d9295ba (updated code)
   ClientWidth = 1014
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -30,24 +26,13 @@ object frm_Users: Tfrm_Users
     Left = 0
     Top = 0
     Width = 1014
-<<<<<<< HEAD
     Height = 523
-=======
-    Height = 534
->>>>>>> parent of d9295ba (updated code)
     ActivePage = Admin
     Align = alClient
     TabOrder = 0
     OnChange = PageControl1Change
-<<<<<<< HEAD
     object tabSheetUser: TTabSheet
       Caption = 'User update'
-=======
-    ExplicitHeight = 523
-    object tabSheetUser: TTabSheet
-      Caption = 'User update'
-      ExplicitHeight = 495
->>>>>>> parent of d9295ba (updated code)
       object GroupBox1: TGroupBox
         Left = 271
         Top = 64
@@ -215,13 +200,8 @@ object frm_Users: Tfrm_Users
           TabOrder = 5
         end
         object DateTimeTo: TDateTimePicker
-<<<<<<< HEAD
           Left = 48
           Top = 313
-=======
-          Left = 272
-          Top = 316
->>>>>>> parent of d9295ba (updated code)
           Width = 225
           Height = 21
           Date = 45158.726992094900000000
@@ -252,11 +232,7 @@ object frm_Users: Tfrm_Users
           TabOrder = 8
         end
         object btnSort: TButton
-<<<<<<< HEAD
           Left = 143
-=======
-          Left = 151
->>>>>>> parent of d9295ba (updated code)
           Top = 343
           Width = 144
           Height = 39
@@ -323,7 +299,7 @@ object frm_Users: Tfrm_Users
       end
       object pnlFirst: TPanel
         Left = 583
-        Top = 64
+        Top = 75
         Width = 306
         Height = 379
         TabOrder = 3
@@ -365,10 +341,6 @@ object frm_Users: Tfrm_Users
     object Admin: TTabSheet
       Caption = 'Admin'
       ImageIndex = 1
-<<<<<<< HEAD
-=======
-      ExplicitHeight = 495
->>>>>>> parent of d9295ba (updated code)
       object DBGridAdmin: TDBGrid
         AlignWithMargins = True
         Left = 0
@@ -485,11 +457,19 @@ object frm_Users: Tfrm_Users
         ParentFont = False
         TabOrder = 3
         object Label6: TLabel
-          Left = 24
-          Top = 56
+          Left = 16
+          Top = 123
           Width = 214
           Height = 16
           Caption = 'Select a record to delete in the table:'
+        end
+        object btnAdminEdit: TButton
+          Left = 12
+          Top = 83
+          Width = 221
+          Height = 38
+          Caption = 'Edit'
+          TabOrder = 0
         end
         object DBNavigator2: TDBNavigator
           Left = 3
@@ -497,32 +477,24 @@ object frm_Users: Tfrm_Users
           Width = 240
           Height = 25
           DataSource = DBSourceAdminQuery
-          TabOrder = 0
-        end
-        object edtEdit: TEdit
-          Left = 14
-          Top = 56
-          Width = 219
-          Height = 24
-          TabOrder = 2
-          Text = 'edtEdit'
+          TabOrder = 1
         end
         object btnDeleteAdmin: TButton
-          Left = 20
-          Top = 78
+          Left = 12
+          Top = 145
           Width = 221
           Height = 40
           Caption = 'Delete'
-<<<<<<< HEAD
-<<<<<<<< HEAD:Units/__history/u_User.dfm.~13~
-=======
-<<<<<<<< HEAD:Units/__history/u_User.dfm.~17~
->>>>>>> parent of d9295ba (updated code)
-          TabOrder = 1
-========
-          TabOrder = 3
->>>>>>>> parent of d9295ba (updated code):Units/__history/u_User.dfm.~2~
+          TabOrder = 2
           OnClick = btnDeleteAdminClick
+        end
+        object DBEdit2: TDBEdit
+          Left = 14
+          Top = 56
+          Width = 121
+          Height = 24
+          DataSource = DBSourceAdminQuery
+          TabOrder = 3
         end
       end
       object Statistics: TGroupBox
@@ -582,15 +554,7 @@ object frm_Users: Tfrm_Users
     end
   end
   object DBSourceEmission: TDataSource
-<<<<<<< HEAD
-<<<<<<<< HEAD:Units/__history/u_User.dfm.~13~
-=======
-<<<<<<<< HEAD:Units/__history/u_User.dfm.~17~
->>>>>>> parent of d9295ba (updated code)
-    Left = 40
-========
-    Left = 16
->>>>>>>> parent of d9295ba (updated code):Units/__history/u_User.dfm.~2~
+    Left = 64
     Top = 312
   end
   object ADOUsersQuery: TADOQuery
@@ -607,7 +571,7 @@ object frm_Users: Tfrm_Users
   object ADOEmissionQuery: TADOQuery
     Connection = DMCO2.con
     Parameters = <>
-    Left = 24
+    Left = 48
     Top = 152
   end
   object ADOAdminQuery: TADOQuery
@@ -615,17 +579,12 @@ object frm_Users: Tfrm_Users
     Parameters = <>
     SQL.Strings = (
       'Select  * from tblUsers')
-    Left = 16
-    Top = 192
+    Left = 40
+    Top = 200
   end
   object DBSourceAdminQuery: TDataSource
     DataSet = ADOAdminQuery
-    Left = 16
-    Top = 256
-  end
-  object DataSource1: TDataSource
-    DataSet = ADOAdminQuery
-    Left = 16
+    Left = 48
     Top = 256
   end
 end

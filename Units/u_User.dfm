@@ -27,7 +27,7 @@ object frm_Users: Tfrm_Users
     Top = 0
     Width = 1014
     Height = 523
-    ActivePage = tabSheetUser
+    ActivePage = Admin
     Align = alClient
     TabOrder = 0
     OnChange = PageControl1Change
@@ -457,19 +457,11 @@ object frm_Users: Tfrm_Users
         ParentFont = False
         TabOrder = 3
         object Label6: TLabel
-          Left = 16
-          Top = 123
+          Left = 24
+          Top = 56
           Width = 214
           Height = 16
           Caption = 'Select a record to delete in the table:'
-        end
-        object btnAdminEdit: TButton
-          Left = 12
-          Top = 83
-          Width = 221
-          Height = 38
-          Caption = 'Edit'
-          TabOrder = 0
         end
         object DBNavigator2: TDBNavigator
           Left = 3
@@ -477,24 +469,16 @@ object frm_Users: Tfrm_Users
           Width = 240
           Height = 25
           DataSource = DBSourceAdminQuery
-          TabOrder = 1
+          TabOrder = 0
         end
         object btnDeleteAdmin: TButton
-          Left = 12
-          Top = 145
+          Left = 20
+          Top = 78
           Width = 221
           Height = 40
           Caption = 'Delete'
-          TabOrder = 2
+          TabOrder = 1
           OnClick = btnDeleteAdminClick
-        end
-        object DBEdit2: TDBEdit
-          Left = 14
-          Top = 56
-          Width = 121
-          Height = 21
-          DataSource = DBSourceAdminQuery
-          TabOrder = 3
         end
       end
       object Statistics: TGroupBox
@@ -554,7 +538,7 @@ object frm_Users: Tfrm_Users
     end
   end
   object DBSourceEmission: TDataSource
-    Left = 64
+    Left = 40
     Top = 312
   end
   object ADOUsersQuery: TADOQuery

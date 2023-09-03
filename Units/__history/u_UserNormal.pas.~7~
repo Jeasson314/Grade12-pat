@@ -119,7 +119,7 @@ var
 begin
   //path:='';
   assignfile(tfLog, '.\Textfile\tfLog.txt'); // Define the log file path (DB Logger)
-  append(tfLog); // Open the log file for writing
+  rewrite(tfLog); // Open the log file for reading
   showmessage(sLog + ' by: ' + fUsername + ' at ' + Datetostr(date) + Timetostr(time)); // Display a message indicating the user activity
   writeln(tfLog, sLog + ' by ' + fUsername + ' at ' + Datetostr(date) + ' ' + Timetostr(time)); // Write the user activity to the log file
   closefile(tfLog); // Close the log file

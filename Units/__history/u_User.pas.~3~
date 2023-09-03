@@ -59,6 +59,7 @@ type
     cmbCarsAdd: TComboBox;
     btnAdminEdit: TButton;
     DBNavigator2: TDBNavigator;
+    edtEdit: TEdit;
     btnDeleteAdmin: TButton;
     Label6: TLabel;
     DataSource1: TDataSource;
